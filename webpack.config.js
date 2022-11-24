@@ -2,16 +2,17 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const path = require('path');
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: resolve(__dirname, './src/index.jsx'),
+  entry: path.resolve(__dirname, './src/index.jsx'),
   output: {
     clean: true,
     environment: {
       arrowFunction: false,
     },
-    path: resolve(__dirname, './build'),
+    path: path.resolve(__dirname, './build'),
     filename: 'bundle.[contenthash].js',
   },
   performance: {
@@ -20,6 +21,11 @@ module.exports = {
     maxEntrypointSize: 512000,
   },
   resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'src/components'),
+      src: path.resolve(__dirname, 'src'),
+      store: path.resolve(__dirname, 'src/store'),
+    },
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   devtool:
