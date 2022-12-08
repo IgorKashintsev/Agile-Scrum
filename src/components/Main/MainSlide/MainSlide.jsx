@@ -13,22 +13,29 @@ export const MainSlide = () => {
   const [visible, setVisible] = useState(false);
   const [idxSlide, setIdxSlide] = useState();
   
-  const swiperRef = useRef(null)
+  const swiperRef = useRef(null);
   const mouseEnter = () => {
     swiperRef.current.swiper.autoplay.stop();
     setVisible(true);
     setIdxSlide(() => swiperRef.current.swiper.realIndex);
-  }
+  };
+
   const mouseLeave = () => {
     swiperRef.current.swiper.autoplay.start();
     setVisible(false);
-  }
+  };
+
   const changeSlide = () => {
     setIdxSlide(() => swiperRef.current.swiper.realIndex);
-  }
+  };
+
+  const imgSlide = (idItems) => {
+    return (items.find(user => user.id === idItems)).images[0]
+  };
 
   return(
     <>
+      <div className={styleSlider.header_slide}>РЕКОМЕНДУЕМОЕ</div>
       <div 
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
@@ -54,22 +61,22 @@ export const MainSlide = () => {
           className={styleSlider.swiper}
         >
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={(items.find(user => user.id === 0)).images[0]} alt="" />
+            <img src={imgSlide(0)} alt="Slide1" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={(items.find(user => user.id === 1)).images[0]} alt="" />
+            <img src={imgSlide(1)} alt="Slide2" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={(items.find(user => user.id === 2)).images[0]} alt="" />
+            <img src={imgSlide(2)} alt="Slide3" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={(items.find(user => user.id === 3)).images[0]} alt="" />
+            <img src={imgSlide(3)} alt="Slide4" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={(items.find(user => user.id === 4)).images[0]} alt="" />
+            <img src={imgSlide(4)} alt="Slide5" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={(items.find(user => user.id === 5)).images[0]} alt="" />
+            <img src={imgSlide(5)} alt="Slide6" />
           </SwiperSlide>
         </Swiper>
         <div

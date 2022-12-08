@@ -2,8 +2,8 @@
   background-color: black;
 }
 .text {
-  color: white;
-  font-family: Candara;
+  color: #ffffff;
+  font-family: 'Candara';
 }
 .container {
   max-width: 1140px;
@@ -11,4 +11,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.nav span{
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 18px;
+  color: #d6d6d6;
+  margin-left: 15px;
 }

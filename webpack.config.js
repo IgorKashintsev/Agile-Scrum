@@ -6,14 +6,15 @@ const path = require('path');
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.jsx'),
+  entry: resolve(__dirname, './src/index.jsx'),
   output: {
     clean: true,
     environment: {
       arrowFunction: false,
     },
-    path: path.resolve(__dirname, './build'),
+    path: resolve(__dirname, './build'),
     filename: 'bundle.[contenthash].js',
+    assetModuleFilename: 'assets/images/[name][contenthash][ext]',
   },
   performance: {
     hints: false,
@@ -21,11 +22,6 @@ module.exports = {
     maxEntrypointSize: 512000,
   },
   resolve: {
-    alias: {
-      components: path.resolve(__dirname, 'src/components'),
-      src: path.resolve(__dirname, 'src'),
-      store: path.resolve(__dirname, 'src/store'),
-    },
     extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   devtool:
@@ -78,7 +74,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: ['file-loader']
+        type: 'asset/resource',
       },
       {
         test: /\.mp[3|4]$/i,

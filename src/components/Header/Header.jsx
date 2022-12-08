@@ -1,7 +1,6 @@
 import logo from '../../../image/logo.jpg';
 
-import styleHeaderLeft from './Header.module.scss';
-import styleHeader from './Header.module.scss'
+import styleHeader from './Header.module.scss';
 
 export const Header = () => {
   return(
