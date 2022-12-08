@@ -8,7 +8,7 @@ import style from './global.module.scss'
 export const App = () => {
   return (
     <>
-      <div className={style.app}>
+      <div className={style.app} >
         <Header />
         <br></br>
         <Search />

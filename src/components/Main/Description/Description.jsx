@@ -1,7 +1,4 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay } from "swiper";
@@ -11,7 +8,6 @@ import { CardRating } from './CardRating/CardRating';
 import "swiper/css";
 import "swiper/css/effect-fade";
 import styleCard from './Description.module.scss';
-import { grey } from '@mui/material/colors';
 
 export const Description = ({idxSlide}) => {
 
@@ -19,7 +15,8 @@ export const Description = ({idxSlide}) => {
   const showText = () => {
     if(text.length > 440) {
       return (`${text.substring(0, 440)}...`)
-    } else return text
+    }
+    return text
   }
 
   return(
@@ -71,7 +68,7 @@ export const Description = ({idxSlide}) => {
           <CardRating idxSlide={idxSlide}/>
           <CardActions>
             <Button 
-              sx={{ color: grey[900], fontWeight: 700 }}
+              sx={{ color: 'rgba(0, 0, 0, 0.87)', fontWeight: 700 }}
               size="small"
             >
               Подробнее
