@@ -12,7 +12,7 @@ interface CardRatingProps {
 
 export const CardRating: FC<CardRatingProps> = ({idxSlide}) => {
 
-  const ratingValue = (items.find(user => user.id === idxSlide))!.rating;
+  const ratingValue = (items.get(idxSlide))!.rating;
 
   return(
     <>

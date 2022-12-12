@@ -31,7 +31,7 @@ export const MainSlide = () => {
   };
 
   const imgSlide = (idItems: number) => {
-    return (items.find(user => user.id === idItems))!.images[0]
+    return (items.get(idItems)!.images[0])
   };
   
 

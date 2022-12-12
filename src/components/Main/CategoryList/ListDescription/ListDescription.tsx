@@ -17,9 +17,9 @@ interface ListDescriptionProps {
 };
 
 export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
-  const ratingValue = (items.find(user => user.id === selectedIndex))!.rating;
+  const ratingValue = (items.get(selectedIndex))!.rating;
 
-  const name = (items.find(user => user.id === selectedIndex))!.name;
+  const name = (items.get(selectedIndex))!.name;
   const showName = () => {
     if(name.length > 35) {
       return (`${name.substring(0, 35)}...`)
@@ -28,7 +28,7 @@ export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
   };
 
   const imgDescription = (idImage: number) => {
-    return (items.find(user => user.id === selectedIndex))!.images![idImage]
+    return (items.get(selectedIndex))!.images![idImage]
   };
 
   return(

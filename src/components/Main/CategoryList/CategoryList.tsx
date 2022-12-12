@@ -25,15 +25,15 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
   };
 
   const imgList = (idItems: number) => {
-    return (items.find(user => user.id === idItems))!.images[0]
+    return (items.get(idItems))!.images[0]
   };
 
   const nameList = (idItems: number) => {
-    return (items.find(user => user.id === idItems))!.name
+    return (items.get(idItems))!.name
   };
 
   const genreList = (idItems: number) => {
-    return (items.find(user => user.id === idItems))!.genre.join(', ')
+    return (items.get(idItems))!.genre.join(', ')
   };
   
   return(
