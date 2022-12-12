@@ -79,7 +79,19 @@ import imgFallout3 from '../image/Fallout 4/3.jpg';
 import imgFallout4 from '../image/Fallout 4/4.jpg';
 import imgFallout5 from '../image/Fallout 4/5.jpg';
 
-export const labels = {
+type Image = string;
+type Genre = string;
+
+interface Items {
+  id: number;
+  images: Image[];
+  name: string;
+  text: string;
+  rating: number;
+  genre: Genre[];
+};
+
+export const labels: { [index: number]: string } = {
   0.5: 'ужасный',
   1: 'ужасный+',
   1.5: 'низкий',
@@ -92,7 +104,7 @@ export const labels = {
   5: 'превосходный+',
 };
 
-export const items = [
+export const items: Items[] = [
   {
     id: 0,
     images: 

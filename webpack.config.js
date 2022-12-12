@@ -6,7 +6,7 @@ const path = require('path');
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: resolve(__dirname, './src/index.jsx'),
+  entry: resolve(__dirname, './src/index.tsx'),
   output: {
     clean: true,
     environment: {

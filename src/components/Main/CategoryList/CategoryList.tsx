@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -8,24 +8,32 @@ import { ListDescription } from './ListDescription/ListDescription';
 import { items } from '../../../constants';
 
 import styleList from './CategoryList.module.scss';
+import { IdItems } from '../../../types';
 
-export const CategoryList = ({idItemsList}) => {
+interface CategoryListProps {
+  idItemsList: IdItems;
+};
+
+export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
   const [selectedIndex, setSelectedIndex] = useState(idItemsList[0]);
 
-  const handleListItemEnter = (event, index) => {
+  const handleListItemEnter = (
+      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      index: number,
+    ) => {
     setSelectedIndex(index);
   };
 
-  const imgList = (idItems) => {
-    return (items.find(user => user.id === idItems)).images[0]
+  const imgList = (idItems: number) => {
+    return (items.find(user => user.id === idItems))!.images[0]
   };
 
-  const nameList = (idItems) => {
-    return (items.find(user => user.id === idItems)).name
+  const nameList = (idItems: number) => {
+    return (items.find(user => user.id === idItems))!.name
   };
 
-  const genreList = (idItems) => {
-    return (items.find(user => user.id === idItems)).genre.join(', ')
+  const genreList = (idItems: number) => {
+    return (items.find(user => user.id === idItems))!.genre.join(', ')
   };
   
   return(

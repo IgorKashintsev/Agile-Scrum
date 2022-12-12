@@ -1,24 +1,18 @@
 import { Box, Rating } from '@mui/material';
-// import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import { items, labels } from '../../../../constants';
 
 import styleRating from './CardRating.module.scss';
+import { IdxSlide } from '../../../../types';
+import { FC } from 'react';
 
-export const CardRating = ({idxSlide}) => {
-  // const labels = {
-  //   0.5: 'ужасный',
-  //   1: 'ужасный+',
-  //   1.5: 'низкий',
-  //   2: 'низкий+',
-  //   2.5: 'средний',
-  //   3: 'средний+',
-  //   3.5: 'хороший',
-  //   4: 'хороший+',
-  //   4.5: 'превосходный',
-  //   5: 'превосходный+',
-  // };
-  const ratingValue = (items.find(user => user.id === idxSlide)).rating;
+interface CardRatingProps {
+  idxSlide: IdxSlide;
+};
+
+export const CardRating: FC<CardRatingProps> = ({idxSlide}) => {
+
+  const ratingValue = (items.find(user => user.id === idxSlide))!.rating;
 
   return(
     <>

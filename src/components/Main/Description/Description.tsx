@@ -8,10 +8,16 @@ import { CardRating } from './CardRating/CardRating';
 import "swiper/css";
 import "swiper/css/effect-fade";
 import styleCard from './Description.module.scss';
+import { IdxSlide } from '../../../types';
+import { FC } from 'react';
 
-export const Description = ({idxSlide}) => {
+interface DescriptionProps {
+  idxSlide: IdxSlide;
+};
 
-  const text = (items.find(user => user.id === idxSlide)).text;
+export const Description: FC<DescriptionProps> = ({idxSlide}) => {
+
+  const text = (items.find(user => user.id === idxSlide))!.text;
   const showText = () => {
     if(text.length > 440) {
       return (`${text.substring(0, 440)}...`)
@@ -37,16 +43,16 @@ export const Description = ({idxSlide}) => {
                 }}
               >
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[1]} />
+                  <img src={(items.find(user => user.id === idxSlide))!.images[1]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[2]} />
+                  <img src={(items.find(user => user.id === idxSlide))!.images[2]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[3]} />
+                  <img src={(items.find(user => user.id === idxSlide))!.images[3]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[4]} />
+                  <img src={(items.find(user => user.id === idxSlide))!.images[4]} />
                 </SwiperSlide>
               </Swiper>
             </CardMedia>
@@ -55,7 +61,7 @@ export const Description = ({idxSlide}) => {
                 fontSize={19}
                 gutterBottom variant="h5" component="div"
               >
-                {(items.find(user => user.id === idxSlide)).name}
+                {(items.find(user => user.id === idxSlide))!.name}
               </Typography>
               <Typography
                 fontSize={14}

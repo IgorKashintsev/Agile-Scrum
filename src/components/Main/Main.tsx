@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { IdItems } from '../../types';
 import style from '../../global.module.scss';
 import { CategoryList } from './CategoryList/CategoryList';
 import { MainSlide } from './MainSlide/MainSlide';
 
 export const Main = () => {
-  const idItems = [];
+  const idItems: IdItems = [];
 
   while (idItems.length < 7) {
     const randomNumber = Math.ceil(Math.random() * 15);

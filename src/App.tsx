@@ -3,7 +3,7 @@ import { Header } from './components/Header/Header';
 import { Search } from './components/Header/Search';
 import { Main } from './components/Main/Main';
 
-import style from './global.module.scss'
+import style from './global.module.scss';
 
 export const App = () => {
   return (
@@ -18,4 +18,4 @@ export const App = () => {
       </div>
     </>
   );
-}
+};
