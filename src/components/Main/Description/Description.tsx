@@ -8,17 +8,23 @@ import { CardRating } from './CardRating/CardRating';
 import "swiper/css";
 import "swiper/css/effect-fade";
 import styleCard from './Description.module.scss';
+import { IdxSlide } from '../../../types';
+import { FC, useEffect, useState } from 'react';
 
-export const Description = ({idxSlide}) => {
+interface DescriptionProps {
+  idxSlide: IdxSlide;
+};
 
-  const text = (items.find(user => user.id === idxSlide)).text;
-  const showText = () => {
-    if(text.length > 440) {
-      return (`${text.substring(0, 440)}...`)
-    }
-    return text
-  }
+export const Description: FC<DescriptionProps> = ({idxSlide}) => {
+  const [text, setText] = useState((items.get(idxSlide))!.text);
 
+  useEffect(() => {
+    if((items.get(idxSlide))!.text.length > 440) {
+      setText(`${(items.get(idxSlide))!.text.substring(0, 440)}...`)
+    } else {
+    setText((items.get(idxSlide))!.text)}
+  }, [idxSlide])
+  
   return(
     <>
       <div className={styleCard.card}>
@@ -37,16 +43,16 @@ export const Description = ({idxSlide}) => {
                 }}
               >
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[1]} />
+                  <img src={(items.get(idxSlide))!.images[1]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[2]} />
+                  <img src={(items.get(idxSlide))!.images[2]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[3]} />
+                  <img src={(items.get(idxSlide))!.images[3]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.find(user => user.id === idxSlide)).images[4]} />
+                  <img src={(items.get(idxSlide))!.images[4]} />
                 </SwiperSlide>
               </Swiper>
             </CardMedia>
@@ -55,13 +61,13 @@ export const Description = ({idxSlide}) => {
                 fontSize={19}
                 gutterBottom variant="h5" component="div"
               >
-                {(items.find(user => user.id === idxSlide)).name}
+                {(items.get(idxSlide))!.name}
               </Typography>
               <Typography
                 fontSize={14}
                 variant="body2" color="text.secondary"
               >
-                {showText()}
+                {text}
               </Typography>
             </CardContent>
           </CardActionArea>

@@ -10,22 +10,30 @@ import { items, labels } from "../../../../constants";
 import StarIcon from '@mui/icons-material/Star';
 
 import styleListCard from './ListDescription.module.scss';
+import { FC } from "react";
 
-export const ListDescription = ({selectedIndex}) => {
-  const ratingValue = (items.find(user => user.id === selectedIndex)).rating;
+interface ListDescriptionProps {
+  selectedIndex: number;
+};
 
-  const name = (items.find(user => user.id === selectedIndex)).name;
+export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
+  const ratingValue = (items.get(selectedIndex))!.rating;
+
+  const name = (items.get(selectedIndex))?.name;
   const showName = () => {
-    if(name.length > 35) {
+    if(name === undefined) {
+      return
+    }
+    else if(name.length > 35) {
       return (`${name.substring(0, 35)}...`)
     }
     return name
   };
 
-  const imgDescription = (idImage) => {
-    return (items.find(user => user.id === selectedIndex)).images[idImage]
+  const imgDescription = (idImage: number) => {
+    return (items.get(selectedIndex))?.images[idImage]
   };
-
+  
   return(
     <>
       <Card 
