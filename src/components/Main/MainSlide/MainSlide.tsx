@@ -29,12 +29,7 @@ export const MainSlide = () => {
   const changeSlide = () => {
     setIdxSlide(() => swiperRef.current.swiper.realIndex);
   };
-
-  const imgSlide = (idItems: number) => {
-    return (items.get(idItems)!.images[0])
-  };
   
-
   return(
     <>
       <div className={styleSlider.header_slide}>РЕКОМЕНДУЕМОЕ</div>
@@ -57,29 +52,28 @@ export const MainSlide = () => {
           pagination={{
             type: "progressbar",
           }}
-          onNavigationPrev={changeSlide}
-          onNavigationNext={changeSlide}
+          onActiveIndexChange={changeSlide}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className={styleSlider.swiper}
         >
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={imgSlide(0)} alt="Slide1" />
+            <img src={items.get(0)?.images[0]} alt="Slide1" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={imgSlide(1)} alt="Slide2" />
+            <img src={items.get(1)?.images[0]} alt="Slide2" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={imgSlide(2)} alt="Slide3" />
+            <img src={items.get(2)?.images[0]} alt="Slide3" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={imgSlide(3)} alt="Slide4" />
+            <img src={items.get(3)?.images[0]} alt="Slide4" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={imgSlide(4)} alt="Slide5" />
+            <img src={items.get(4)?.images[0]} alt="Slide5" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={imgSlide(5)} alt="Slide6" />
+            <img src={items.get(5)?.images[0]} alt="Slide6" />
           </SwiperSlide>
         </Swiper>
         <div

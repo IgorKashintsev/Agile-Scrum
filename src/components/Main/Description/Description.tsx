@@ -9,22 +9,22 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import styleCard from './Description.module.scss';
 import { IdxSlide } from '../../../types';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 interface DescriptionProps {
   idxSlide: IdxSlide;
 };
 
 export const Description: FC<DescriptionProps> = ({idxSlide}) => {
+  const [text, setText] = useState((items.get(idxSlide))!.text);
 
-  const text = (items.get(idxSlide))!.text;
-  const showText = () => {
-    if(text.length > 440) {
-      return (`${text.substring(0, 440)}...`)
-    }
-    return text
-  }
-
+  useEffect(() => {
+    if((items.get(idxSlide))!.text.length > 440) {
+      setText(`${(items.get(idxSlide))!.text.substring(0, 440)}...`)
+    } else {
+    setText((items.get(idxSlide))!.text)}
+  }, [idxSlide])
+  
   return(
     <>
       <div className={styleCard.card}>
@@ -67,7 +67,7 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
                 fontSize={14}
                 variant="body2" color="text.secondary"
               >
-                {showText()}
+                {text}
               </Typography>
             </CardContent>
           </CardActionArea>

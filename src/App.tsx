@@ -1,21 +1,16 @@
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
-import { Search } from './components/Header/Search';
+import { Route, Routes } from 'react-router-dom';
 import { Main } from './components/Main/Main';
+import { Wholelist } from './components/Wholelist/Wholelist';
 
 import style from './global.module.scss';
 
 export const App = () => {
+  
   return (
-    <>
-      <div className={style.app} >
-        <Header />
-        <br></br>
-        <Search />
-        <br></br>
-        <Main />
-        <Footer />
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<Main/>}/>
+      <Route path="wholelist" element={<Wholelist/>}/>
+      <Route path="*" element={<h1 className={style.page404}>404 Page</h1>}/>
+    </Routes>
   );
 };

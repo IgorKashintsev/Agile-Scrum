@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
 import { IdItems } from '../../types';
-import style from '../../global.module.scss';
 import { CategoryList } from './CategoryList/CategoryList';
 import { MainSlide } from './MainSlide/MainSlide';
+import { useState } from 'react';
+
+import style from '../../global.module.scss';
 
 export const Main = () => {
-  const idItems: IdItems = [];
+  const [idItems] = useState<IdItems>([]);
 
   while (idItems.length < 7) {
     const randomNumber = Math.ceil(Math.random() * 15);
@@ -20,7 +21,7 @@ export const Main = () => {
       idItems[idItems.length] = randomNumber;
     }
   };
-
+  
   return (
     <>
       <div className={style.container}>

@@ -19,18 +19,21 @@ interface ListDescriptionProps {
 export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
   const ratingValue = (items.get(selectedIndex))!.rating;
 
-  const name = (items.get(selectedIndex))!.name;
+  const name = (items.get(selectedIndex))?.name;
   const showName = () => {
-    if(name.length > 35) {
+    if(name === undefined) {
+      return
+    }
+    else if(name.length > 35) {
       return (`${name.substring(0, 35)}...`)
     }
     return name
   };
 
   const imgDescription = (idImage: number) => {
-    return (items.get(selectedIndex))!.images![idImage]
+    return (items.get(selectedIndex))?.images[idImage]
   };
-
+  
   return(
     <>
       <Card 
