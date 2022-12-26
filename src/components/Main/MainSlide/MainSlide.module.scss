@@ -31,15 +31,15 @@
   user-select: none;
 }
 .description {
-  @media (max-width: 1140px) {
+  @media (max-width: 1000px) {
     display: none;
   }
-  @media (min-width: 1141px) and (max-width: 1850px) {
-    margin-left: 700px;
+  @media (min-width: 1001px) and (max-width: 1725px) {
+    margin-left: 580px;
   }
   position: absolute;
-  margin-left: 1137px;
-  margin-top: -620px;
+  margin-left: 998px;
+  margin-top: -545px;
   z-index: 1;
   padding-left: 10px;
 }

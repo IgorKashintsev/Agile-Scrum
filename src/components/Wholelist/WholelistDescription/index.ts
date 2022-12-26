@@ -1,0 +1,1 @@
+export {WholelistDescription} from './WholelistDescription';

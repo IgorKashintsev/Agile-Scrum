@@ -1,83 +1,165 @@
+import imgAgeOfWonders0 from '../image/Age of Wonders Planetfall/0.jpg';
 import imgAgeOfWonders1 from '../image/Age of Wonders Planetfall/1.jpg';
 import imgAgeOfWonders2 from '../image/Age of Wonders Planetfall/2.jpg';
 import imgAgeOfWonders3 from '../image/Age of Wonders Planetfall/3.jpg';
 import imgAgeOfWonders4 from '../image/Age of Wonders Planetfall/4.jpg';
 import imgAgeOfWonders5 from '../image/Age of Wonders Planetfall/5.jpg';
+import imgDivinity0  from '../image/Divinity Original Sin 2/0.jpg';
 import imgDivinity1  from '../image/Divinity Original Sin 2/1.jpg';
 import imgDivinity2  from '../image/Divinity Original Sin 2/2.jpg';
 import imgDivinity3  from '../image/Divinity Original Sin 2/3.jpg';
 import imgDivinity4  from '../image/Divinity Original Sin 2/4.jpg';
 import imgDivinity5  from '../image/Divinity Original Sin 2/5.jpg';
+import imgETS0 from '../image/Euro Truck Simulator 2/0.jpg';
 import imgETS1 from '../image/Euro Truck Simulator 2/1.jpg';
 import imgETS2 from '../image/Euro Truck Simulator 2/2.jpg';
 import imgETS3 from '../image/Euro Truck Simulator 2/3.jpg';
 import imgETS4 from '../image/Euro Truck Simulator 2/4.jpg';
 import imgETS5 from '../image/Euro Truck Simulator 2/5.jpg';
+import imgDetroitBH0 from '../image/Detroit Become Human/0.jpg';
 import imgDetroitBH1 from '../image/Detroit Become Human/1.jpg';
 import imgDetroitBH2 from '../image/Detroit Become Human/2.jpg';
 import imgDetroitBH3 from '../image/Detroit Become Human/3.jpg';
 import imgDetroitBH4 from '../image/Detroit Become Human/4.jpg';
 import imgDetroitBH5 from '../image/Detroit Become Human/5.jpg';
+import imgCivilizationVI0 from '../image/Civilization VI/0.jpg';
 import imgCivilizationVI1 from '../image/Civilization VI/1.jpg';
 import imgCivilizationVI2 from '../image/Civilization VI/2.jpg';
 import imgCivilizationVI3 from '../image/Civilization VI/3.jpg';
 import imgCivilizationVI4 from '../image/Civilization VI/4.jpg';
 import imgCivilizationVI5 from '../image/Civilization VI/5.jpg';
+import imgMassEffectLE0 from '../image/Mass Effect Legendary Edition/0.jpg';
 import imgMassEffectLE1 from '../image/Mass Effect Legendary Edition/1.jpg';
 import imgMassEffectLE2 from '../image/Mass Effect Legendary Edition/2.jpg';
 import imgMassEffectLE3 from '../image/Mass Effect Legendary Edition/3.jpg';
 import imgMassEffectLE4 from '../image/Mass Effect Legendary Edition/4.jpg';
 import imgMassEffectLE5 from '../image/Mass Effect Legendary Edition/5.jpg';
+import imgGTA0 from '../image/Grand Theft Auto V/0.jpg';
 import imgGTA1 from '../image/Grand Theft Auto V/1.jpg';
 import imgGTA2 from '../image/Grand Theft Auto V/2.jpg';
 import imgGTA3 from '../image/Grand Theft Auto V/3.jpg';
 import imgGTA4 from '../image/Grand Theft Auto V/4.jpg';
 import imgGTA5 from '../image/Grand Theft Auto V/5.jpg';
+import imgAssassinsCreed0 from '../image/Assassins Creed Origins/0.jpg';
 import imgAssassinsCreed1 from '../image/Assassins Creed Origins/1.jpg';
 import imgAssassinsCreed2 from '../image/Assassins Creed Origins/2.jpg';
 import imgAssassinsCreed3 from '../image/Assassins Creed Origins/3.jpg';
 import imgAssassinsCreed4 from '../image/Assassins Creed Origins/4.jpg';
 import imgAssassinsCreed5 from '../image/Assassins Creed Origins/5.jpg';
+import imgMafia0 from '../image/Mafia Definitive Edition/0.jpg';
 import imgMafia1 from '../image/Mafia Definitive Edition/1.jpg';
 import imgMafia2 from '../image/Mafia Definitive Edition/2.jpg';
 import imgMafia3 from '../image/Mafia Definitive Edition/3.jpg';
 import imgMafia4 from '../image/Mafia Definitive Edition/4.jpg';
 import imgMafia5 from '../image/Mafia Definitive Edition/5.jpg';
+import imgCyberpunk0 from '../image/Cyberpunk 2077/0.jpg';
 import imgCyberpunk1 from '../image/Cyberpunk 2077/1.jpg';
 import imgCyberpunk2 from '../image/Cyberpunk 2077/2.jpg';
 import imgCyberpunk3 from '../image/Cyberpunk 2077/3.jpg';
 import imgCyberpunk4 from '../image/Cyberpunk 2077/4.jpg';
 import imgCyberpunk5 from '../image/Cyberpunk 2077/5.jpg';
+import imgRDR0 from '../image/Red Dead Redemption 2/0.jpg';
 import imgRDR1 from '../image/Red Dead Redemption 2/1.jpg';
 import imgRDR2 from '../image/Red Dead Redemption 2/2.jpg';
 import imgRDR3 from '../image/Red Dead Redemption 2/3.jpg';
 import imgRDR4 from '../image/Red Dead Redemption 2/4.jpg';
 import imgRDR5 from '../image/Red Dead Redemption 2/5.jpg';
+import imgStellaris0 from '../image/Stellaris/0.jpg';
 import imgStellaris1 from '../image/Stellaris/1.jpg';
 import imgStellaris2 from '../image/Stellaris/2.jpg';
 import imgStellaris3 from '../image/Stellaris/3.jpg';
 import imgStellaris4 from '../image/Stellaris/4.jpg';
 import imgStellaris5 from '../image/Stellaris/5.jpg';
+import imgCrusaderKings0 from '../image/Crusader Kings III/0.jpg';
 import imgCrusaderKings1 from '../image/Crusader Kings III/1.jpg';
 import imgCrusaderKings2 from '../image/Crusader Kings III/2.jpg';
 import imgCrusaderKings3 from '../image/Crusader Kings III/3.jpg';
 import imgCrusaderKings4 from '../image/Crusader Kings III/4.jpg';
 import imgCrusaderKings5 from '../image/Crusader Kings III/5.jpg';
+import imgBaldursGate0 from '../image/Baldurs Gate 3/0.jpg';
 import imgBaldursGate1 from '../image/Baldurs Gate 3/1.jpg';
 import imgBaldursGate2 from '../image/Baldurs Gate 3/2.jpg';
 import imgBaldursGate3 from '../image/Baldurs Gate 3/3.jpg';
 import imgBaldursGate4 from '../image/Baldurs Gate 3/4.jpg';
 import imgBaldursGate5 from '../image/Baldurs Gate 3/5.jpg';
+import imgXCOM0 from '../image/XCOM 2/0.jpg';
 import imgXCOM1 from '../image/XCOM 2/1.jpg';
 import imgXCOM2 from '../image/XCOM 2/2.jpg';
 import imgXCOM3 from '../image/XCOM 2/3.jpg';
 import imgXCOM4 from '../image/XCOM 2/4.jpg';
 import imgXCOM5 from '../image/XCOM 2/5.jpg';
+import imgFallout0 from '../image/Fallout 4/0.jpg';
 import imgFallout1 from '../image/Fallout 4/1.jpg';
 import imgFallout2 from '../image/Fallout 4/2.jpg';
 import imgFallout3 from '../image/Fallout 4/3.jpg';
 import imgFallout4 from '../image/Fallout 4/4.jpg';
 import imgFallout5 from '../image/Fallout 4/5.jpg';
+import imgSims0 from '../image/The Sims 4/0.jpg';
+import imgSims1 from '../image/The Sims 4/1.jpg';
+import imgSims2 from '../image/The Sims 4/2.jpg';
+import imgSims3 from '../image/The Sims 4/3.jpg';
+import imgSims4 from '../image/The Sims 4/4.jpg';
+import imgSims5 from '../image/The Sims 4/5.jpg';
+import imgWitcher0 from '../image/Witcher 3 Wild Hunt/0.jpg';
+import imgWitcher1 from '../image/Witcher 3 Wild Hunt/1.jpg';
+import imgWitcher2 from '../image/Witcher 3 Wild Hunt/2.jpg';
+import imgWitcher3 from '../image/Witcher 3 Wild Hunt/3.jpg';
+import imgWitcher4 from '../image/Witcher 3 Wild Hunt/4.jpg';
+import imgWitcher5 from '../image/Witcher 3 Wild Hunt/5.jpg';
+import imgDyingLight0 from '../image/Dying Light 2 Stay Human/0.jpg';
+import imgDyingLight1 from '../image/Dying Light 2 Stay Human/1.jpg';
+import imgDyingLight2 from '../image/Dying Light 2 Stay Human/2.jpg';
+import imgDyingLight3 from '../image/Dying Light 2 Stay Human/3.jpg';
+import imgDyingLight4 from '../image/Dying Light 2 Stay Human/4.jpg';
+import imgDyingLight5 from '../image/Dying Light 2 Stay Human/5.jpg';
+import imgDOOMEternal0 from '../image/DOOM Eternal/0.jpg';
+import imgDOOMEternal1 from '../image/DOOM Eternal/1.jpg';
+import imgDOOMEternal2 from '../image/DOOM Eternal/2.jpg';
+import imgDOOMEternal3 from '../image/DOOM Eternal/3.jpg';
+import imgDOOMEternal4 from '../image/DOOM Eternal/4.jpg';
+import imgDOOMEternal5 from '../image/DOOM Eternal/5.jpg';
+import imgAPlagueTaleRequiem0 from '../image/A Plague Tale Requiem/0.jpg';
+import imgAPlagueTaleRequiem1 from '../image/A Plague Tale Requiem/1.jpg';
+import imgAPlagueTaleRequiem2 from '../image/A Plague Tale Requiem/2.jpg';
+import imgAPlagueTaleRequiem3 from '../image/A Plague Tale Requiem/3.jpg';
+import imgAPlagueTaleRequiem4 from '../image/A Plague Tale Requiem/4.jpg';
+import imgAPlagueTaleRequiem5 from '../image/A Plague Tale Requiem/5.jpg';
+import imgAgeofEmpiresII0 from '../image/Age of Empires II Definitive Edition/0.jpg';
+import imgAgeofEmpiresII1 from '../image/Age of Empires II Definitive Edition/1.jpg';
+import imgAgeofEmpiresII2 from '../image/Age of Empires II Definitive Edition/2.jpg';
+import imgAgeofEmpiresII3 from '../image/Age of Empires II Definitive Edition/3.jpg';
+import imgAgeofEmpiresII4 from '../image/Age of Empires II Definitive Edition/4.jpg';
+import imgAgeofEmpiresII5 from '../image/Age of Empires II Definitive Edition/5.jpg';
+import imgSTARWARSJediFallenOrder0 from '../image/STAR WARS Jedi Fallen Order/0.jpg';
+import imgSTARWARSJediFallenOrder1 from '../image/STAR WARS Jedi Fallen Order/1.jpg';
+import imgSTARWARSJediFallenOrder2 from '../image/STAR WARS Jedi Fallen Order/2.jpg';
+import imgSTARWARSJediFallenOrder3 from '../image/STAR WARS Jedi Fallen Order/3.jpg';
+import imgSTARWARSJediFallenOrder4 from '../image/STAR WARS Jedi Fallen Order/4.jpg';
+import imgSTARWARSJediFallenOrder5 from '../image/STAR WARS Jedi Fallen Order/5.jpg';
+import imgFIFA230 from '../image/FIFA 23/0.jpg';
+import imgFIFA231 from '../image/FIFA 23/1.jpg';
+import imgFIFA232 from '../image/FIFA 23/2.jpg';
+import imgFIFA233 from '../image/FIFA 23/3.jpg';
+import imgFIFA234 from '../image/FIFA 23/4.jpg';
+import imgFIFA235 from '../image/FIFA 23/5.jpg';
+import imgTotalWarROMEII0 from '../image/Total War ROME II/0.jpg';
+import imgTotalWarROMEII1 from '../image/Total War ROME II/1.jpg';
+import imgTotalWarROMEII2 from '../image/Total War ROME II/2.jpg';
+import imgTotalWarROMEII3 from '../image/Total War ROME II/3.jpg';
+import imgTotalWarROMEII4 from '../image/Total War ROME II/4.jpg';
+import imgTotalWarROMEII5 from '../image/Total War ROME II/5.jpg';
+import imgDragonAgeInquisition0 from '../image/Dragon Age Inquisition/0.jpg';
+import imgDragonAgeInquisition1 from '../image/Dragon Age Inquisition/1.jpg';
+import imgDragonAgeInquisition2 from '../image/Dragon Age Inquisition/2.jpg';
+import imgDragonAgeInquisition3 from '../image/Dragon Age Inquisition/3.jpg';
+import imgDragonAgeInquisition4 from '../image/Dragon Age Inquisition/4.jpg';
+import imgDragonAgeInquisition5 from '../image/Dragon Age Inquisition/5.jpg';
+import imgKingdomComeDeliverance0 from '../image/Kingdom Come Deliverance/0.jpg';
+import imgKingdomComeDeliverance1 from '../image/Kingdom Come Deliverance/1.jpg';
+import imgKingdomComeDeliverance2 from '../image/Kingdom Come Deliverance/2.jpg';
+import imgKingdomComeDeliverance3 from '../image/Kingdom Come Deliverance/3.jpg';
+import imgKingdomComeDeliverance4 from '../image/Kingdom Come Deliverance/4.jpg';
+import imgKingdomComeDeliverance5 from '../image/Kingdom Come Deliverance/5.jpg';
 
 import { Items } from './types';
 
@@ -99,6 +181,7 @@ export const items = new Map<number, Items> (
     [0, {
       images: 
         [
+          imgAgeOfWonders0,
           imgAgeOfWonders1,
           imgAgeOfWonders2,
           imgAgeOfWonders3,
@@ -123,10 +206,12 @@ export const items = new Map<number, Items> (
       случайным образом, или состязаться с друзьями в сетевой игре.`,
       rating: 4,
       genre: ['Стратегия', 'Пошаговая'],
+      date: new Date(2019, 7, 6),
     }],
     [1, {
       images: 
         [
+          imgDivinity0,
           imgDivinity1,
           imgDivinity2,
           imgDivinity3,
@@ -139,10 +224,12 @@ export const items = new Map<number, Items> (
       помните, что только один из вас сможет стать богом.`,
       rating: 4.5,
       genre: ['Ролевая','Пошаговая'],
+      date: new Date(2017, 8, 14),
     }],
     [2, {
       images: 
         [
+          imgETS0,
           imgETS1,
           imgETS2,
           imgETS3,
@@ -157,10 +244,12 @@ export const items = new Map<number, Items> (
       частью элитного сообщества дальнобойщиков!`,
       rating: 5,
       genre: ['Автосимулятор'],
+      date: new Date(2012, 9, 18),
     }],
     [3, {
       images: 
         [
+          imgDetroitBH0,
           imgDetroitBH1,
           imgDetroitBH2,
           imgDetroitBH3,
@@ -179,10 +268,12 @@ export const items = new Map<number, Items> (
       результате тысяч принятых вами решений и десятков возможных концовок?`,
       rating: 4.5,
       genre: ['Экшен', 'Интерактивное кино'],
+      date: new Date(2020, 5, 18),
     }],
     [4, {
       images: 
         [
+          imgCivilizationVI0,
           imgCivilizationVI1,
           imgCivilizationVI2,
           imgCivilizationVI3,
@@ -208,10 +299,12 @@ export const items = new Map<number, Items> (
       материалов, а также дополнения Rise and Fall и Gathering Storm.`,
       rating: 4,
       genre: ['Стратегия', 'Пошаговая'],
+      date: new Date(2016, 9, 21),
     }],
     [5, {
       images:
         [
+          imgMassEffectLE0,
           imgMassEffectLE1,
           imgMassEffectLE2,
           imgMassEffectLE3,
@@ -229,10 +322,12 @@ export const items = new Map<number, Items> (
       решения будут иметь последствия.`,
       rating: 4.5,
       genre: ['Экшен', 'Ролевая'],
+      date: new Date(2021, 4, 14),
     }],
     [6, {
       images:
         [
+          imgGTA0,
           imgGTA1,
           imgGTA2,
           imgGTA3,
@@ -251,10 +346,12 @@ export const items = new Map<number, Items> (
       в секунду.`,
       rating: 4,
       genre: ['Экшен'],
+      date: new Date(2015, 3, 14),
     }],
     [7, {
       images:
         [
+          imgAssassinsCreed0,
           imgAssassinsCreed1,
           imgAssassinsCreed2,
           imgAssassinsCreed3,
@@ -276,10 +373,12 @@ export const items = new Map<number, Items> (
       и уникальные боссы.`,
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
+      date: new Date(2017, 9, 27),
     }],
     [8, {
       images:
         [
+          imgMafia0,
           imgMafia1,
           imgMafia2,
           imgMafia3,
@@ -295,10 +394,12 @@ export const items = new Map<number, Items> (
       отношение.`,
       rating: 4,
       genre: ['Экшен'],
+      date: new Date(2020, 8, 25),
     }],
     [9, {
       images:
         [
+          imgCyberpunk0,
           imgCyberpunk1,
           imgCyberpunk2,
           imgCyberpunk3,
@@ -316,10 +417,12 @@ export const items = new Map<number, Items> (
       и на весь город. В нём рождаются легенды. Какую сложат о вас?`,
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
+      date: new Date(2020, 11, 10),
     }],
     [10, {
       images:
         [
+          imgRDR0,
           imgRDR1,
           imgRDR2,
           imgRDR3,
@@ -336,10 +439,12 @@ export const items = new Map<number, Items> (
       же верность людям, которые его взрастили.`,
       rating: 4.5,
       genre: ['Экшен'],
+      date: new Date(2019, 11, 5),
     }],
     [11, {
       images:
         [
+          imgStellaris0,
           imgStellaris1,
           imgStellaris2,
           imgStellaris3,
@@ -362,10 +467,12 @@ export const items = new Map<number, Items> (
       сами.`,
       rating: 4.5,
       genre: ['Стратегия'],
+      date: new Date(2016, 4, 9),
     }],
     [12, {
       images:
         [
+          imgCrusaderKings0,
           imgCrusaderKings1,
           imgCrusaderKings2,
           imgCrusaderKings3,
@@ -382,10 +489,12 @@ export const items = new Map<number, Items> (
       стратегии и ролевой игры в антураже Средневековья.`,
       rating: 4.5,
       genre: ['Стратегия', 'Ролевая'],
+      date: new Date(2020, 8, 1),
     }],
     [13, {
       images:
         [
+          imgBaldursGate0,
           imgBaldursGate1,
           imgBaldursGate2,
           imgBaldursGate3,
@@ -404,10 +513,12 @@ export const items = new Map<number, Items> (
       Divinity: Original Sin 2 в мире Dungeons and Dragons.`,
       rating: 4.5,
       genre: ['Ролевая', 'Пошаговая'],
+      date: new Date(2020, 9, 6),
     }],
     [14, {
       images:
         [
+          imgXCOM0,
           imgXCOM1,
           imgXCOM2,
           imgXCOM3,
@@ -431,10 +542,12 @@ export const items = new Map<number, Items> (
       и уничтожить их раз и навсегда.`,
       rating: 4,
       genre: ['Стратегия', 'Пошаговая'],
+      date: new Date(2016, 1, 5),
     }],
     [15, {
       images:
         [
+          imgFallout0,
           imgFallout1,
           imgFallout2,
           imgFallout3,
@@ -451,6 +564,307 @@ export const items = new Map<number, Items> (
       пустошей. Добро пожаловать домой.`,
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
+      date: new Date(2015, 10, 10),
+    }],
+    [16, {
+      images:
+        [
+          imgSims0,
+          imgSims1,
+          imgSims2,
+          imgSims3,
+          imgSims4,
+          imgSims5,
+        ],
+      name: `The Sims™ 4`,
+      text: `Дайте волю воображению и создайте уникальный мир, который 
+      отражает вашу личность. Загрузите игру совершенно бесплатно и изменяйте 
+      любые детали как симов, так и их домов. И это ещё далеко не всё! 
+      Выбирайте внешность, характер и наряды симов и решайте, как они будут 
+      проводить свои дни. Проектируйте и стройте потрясающие дома для каждой 
+      семьи и выбирайте мебель и декор. Путешествуйте по различным городкам, 
+      встречайте других симов и знакомьтесь с их жизнью. Откройте для себя 
+      прекрасные места с уникальными пейзажами и находите увлекательные 
+      приключения. Следите за повседневной жизнью симов и обыгрывайте сцены из 
+      собственной жизни! Рассказывайте свои истории, а также стройте 
+      отношения, занимайтесь карьерой, достигайте жизненные цели — погрузитесь 
+      в эту необычную игру, в которой ваши возможности безграничны. 
+      Играйте с жизнью!`,
+      rating: 4,
+      genre: ['Симулятор'],
+      date: new Date(2014, 8, 2),
+    }],
+    [17, {
+      images:
+        [
+          imgWitcher0,
+          imgWitcher1,
+          imgWitcher2,
+          imgWitcher3,
+          imgWitcher4,
+          imgWitcher5,
+        ],
+      name: `The Witcher 3: Wild Hunt`,
+      text: `Вы — Геральт из Ривии, наемный убийца чудовищ. Вы путешествуете 
+      по миру, в котором бушует война и на каждом шагу подстерегают чудовища. 
+      Вам предстоит выполнить заказ и найти Цири — Дитя Предназначения, живое 
+      оружие, способное изменить облик этого мира. 
+      Ведьмаков обучают с раннего детства, и они проходят мучительные мутации, 
+      чтобы получить сверхчеловеческую силу и ловкость. Люди им не доверяют, 
+      но только они стоят между человечеством и жестокими монстрами.
+      Станьте профессиональным охотником на чудовищ, чтобы учинить над теми 
+      кровавую расправу при помощи разнообразного арсенала улучшаемого оружия, 
+      алхимических зелий и боевой магии.
+      Выслеживайте множество необычных монстров — от диких зверей на горных 
+      перевалах до жутких сверхъестественных хищников в тёмных переулках 
+      густонаселённых городов.
+      Вкладывайте заработок в улучшение оружия и покупку брони или 
+      транжирьте в разных злачных местах, делая ставки на скачках, играя 
+      в карты и принимая участие в кулачных боях.`,
+      rating: 5,
+      genre: ['Экшен', 'Ролевая'],
+      date: new Date(2015, 4, 18),
+    }],
+    [18, {
+      images:
+        [
+          imgDyingLight0,
+          imgDyingLight1,
+          imgDyingLight2,
+          imgDyingLight3,
+          imgDyingLight4,
+          imgDyingLight5,
+        ],
+      name: `Dying Light 2 Stay Human`,
+      text: `Более двадцати лет назад мы пытались побороть этот вирус в 
+      Харране... и потерпели поражение. Теперь мы проигрываем вновь. 
+      Город — последнее из крупных человеческих поселений — раздирает 
+      внутренняя вражда. Цивилизация отброшена во тьму средневековья, 
+      но надежда еще жива. Вы скиталец, которому по силам решить судьбу 
+      Города, но ваши исключительные способности имеют свою цену. 
+      Вас преследуют непонятные и странные воспоминания. В погоне за правдой 
+      вы оказываетесь в самом эпицентре боевых действий. Оттачивайте свое 
+      мастерство, побеждайте врагов и находите союзников. Для этого вам 
+      понадобятся не только кулаки, но и смекалка. Узнайте мрачные секреты 
+      сильных мира сего, выберите сторону и возьмите судьбу в собственные руки. 
+      Что бы вы ни делали, не забывайте об одном... Всегда надо оставаться 
+      человеком.`,
+      rating: 4,
+      genre: ['Экшен', 'Ролевая'],
+      date: new Date(2022, 1, 4),
+    }],
+    [19, {
+      images:
+        [
+          imgDOOMEternal0,
+          imgDOOMEternal1,
+          imgDOOMEternal2,
+          imgDOOMEternal3,
+          imgDOOMEternal4,
+          imgDOOMEternal5,
+        ],
+      name: `DOOM Eternal`,
+      text: `Армии ада вторглись на Землю. Станьте Палачом Рока и убейте 
+      демонов во всех измерениях, чтобы спасти человечество.
+      Пусть вершится месть Палача, а кровь демонов льётся рекой!
+      Улучшенные огнемёт, клинок, пушки и бронекостюм сделают вас ещё сильнее 
+      и смертоноснее.
+      Убивайте демонов, сжигайте их, кромсайте бензопилой себе на пользу.
+      Палачу Рока предстоит бескомпромиссное сражение с демонами других 
+      игроков.`,
+      rating: 4.5,
+      genre: ['Экшен'],
+      date: new Date(2020, 2, 20),
+    }],
+    [20, {
+      images:
+        [
+          imgAPlagueTaleRequiem0,
+          imgAPlagueTaleRequiem1,
+          imgAPlagueTaleRequiem2,
+          imgAPlagueTaleRequiem3,
+          imgAPlagueTaleRequiem4,
+          imgAPlagueTaleRequiem5,
+        ],
+      name: `A Plague Tale: Requiem`,
+      text: `Где-то за морем лежит таинственный остров… ты слышишь его зов?
+      Жестокий, искаженный темными силами мир снова ждет своих юных героев.
+      Амиция и Гуго отправляются на юг, чтобы начать новую жизнь вдали от чумы 
+      и помочь Гуго обуздать родовое проклятие.
+      Но силы Гуго просыпаются вновь, – и вот они, полчища крыс, несущие на 
+      серых спинах смерть и разрушение. Брат и сестра снова вынуждены бежать... 
+      На этот раз их ведет пророчество о далеком острове, который может стать 
+      ключом к спасению Гуго.
+      Узнайте вместе с героями, на что вы готовы пойти, чтобы выжить и спасти 
+      своих любимых. Нападайте скрытно или залейте свой путь кровью врагов, 
+      но что бы вы ни выбрали – к вашим услугам обширный арсенал оружия, 
+      инструментов и сверхъестественных способностей.`,
+      rating: 4.5,
+      genre: ['Экшен'],
+      date: new Date(2022, 9, 17),
+    }],
+    [21, {
+      images:
+        [
+          imgAgeofEmpiresII0,
+          imgAgeofEmpiresII1,
+          imgAgeofEmpiresII2,
+          imgAgeofEmpiresII3,
+          imgAgeofEmpiresII4,
+          imgAgeofEmpiresII5,
+        ],
+      name: `Age of Empires II: Definitive Edition`,
+      text: `Встречайте Age of Empires II: Definitive Edition — с потрясающим 
+      разрешением Ultra HD 4K и саундтреком после цифрового ремастеринга. 
+      Age of Empires II: Definitive Edition также включает в себя расширение 
+      «Последние ханы» с 3 кампаниями и 4 новыми цивилизациями. Обновления 
+      добавляют события, дополнительный контент, новые режимы игры и 
+      улучшенные возможности нового режима совместной игры!
+      Вас ждет новейшее оформление всех оригинальных кампаний и популярных 
+      дополнений, которые занимают более 200 игровых часов и охватывают 1000 
+      лет развития человечества. Сразитесь по сети с другими игроками за 
+      мировое господство, играя за 35 цивилизаций. Вас ждут новые цивилизации 
+      и кампании в расширении «Правители Запада»! Последние обновления 
+      добавили в игру режим «Королевская битва», поддержку редактора 
+      сценариев, режим «Быстрая игра», улучшения интерфейса и многое другое!
+      Выберите свой путь к величию с этим ярким и захватывающим переизданием 
+      одной из самых популярных стратегических игр в истории.`,
+      rating: 4.5,
+      genre: ['Стратегия'],
+      date: new Date(2019, 10, 14),
+    }],
+    [22, {
+      images:
+        [
+          imgSTARWARSJediFallenOrder0,
+          imgSTARWARSJediFallenOrder1,
+          imgSTARWARSJediFallenOrder2,
+          imgSTARWARSJediFallenOrder3,
+          imgSTARWARSJediFallenOrder4,
+          imgSTARWARSJediFallenOrder5,
+        ],
+      name: `STAR WARS Jedi: Fallen Order`,
+      text: `В «Звёздные Войны Джедаи: Павший Орден», боевике с видом от 
+      третьего лица от Respawn Entertainment, вас ждут приключения 
+      галактического масштаба. Действие этой сюжетной одиночной игры 
+      разворачивается после фильма «Эпизод III — Месть ситхов». Вам предстоит 
+      очутиться в роли джедая-падавана, которому едва удалось избежать 
+      уничтожения, санкционированного Приказом 66. В стремлении восстановить 
+      Орден джедаев вам придётся собрать воедино осколки прошлого, чтобы 
+      завершить обучение, обрести новые способности Силы и овладеть 
+      мастерством боя на легендарных световых мечах, а главное — оставаться 
+      при этом на шаг впереди Империи и её беспощадных инквизиторов.`,
+      rating: 4.5,
+      genre: ['Экшен'],
+      date: new Date(2019, 10, 15),
+    }],
+    [23, {
+      images:
+        [
+          imgFIFA230,
+          imgFIFA231,
+          imgFIFA232,
+          imgFIFA233,
+          imgFIFA234,
+          imgFIFA235,
+        ],
+      name: `EA SPORTS™ FIFA 23`,
+      text: `В EA SPORTS™ FIFA 23 всемирная игра становится еще лучше: 
+      технология HyperMotion2 обеспечивает еще большую реалистичность игрового 
+      процесса, после выхода в игре в виде обновлений будут представлены как 
+      мужской, так и женский FIFA World Cup™, добавлены женские команды, 
+      кроссплатформенная игра* и многое другое. Оцените непревзойденную 
+      реалистичность — в FIFA 23 19 000+ игроков, 700+ команд, 100+ стадионов 
+      и 30+ лиг. Играйте на международных турнирах высшего уровня — 
+      FIFA World Cup Qatar 2022™ и FIFA Women's World Cup Australia 
+      and New Zealand 2023™ — в FIFA 23 вы сможете оценить весь накал 
+      страстей главного футбольного турнира в мире, который появится в игре 
+      после выхода и без дополнительной платы. А в FIFA 23 Ultimate Team™ вас 
+      ждёт целый сезон контента, посвящённого FIFA World Cup Qatar 2022™, с 
+      помощью которого вы сможете добавить своей команде колорита сборных.`,
+      rating: 2.5,
+      genre: ['Симулятор', 'Спорт'],
+      date: new Date(2022, 8, 30),
+    }],
+    [24, {
+      images:
+        [
+          imgTotalWarROMEII0,
+          imgTotalWarROMEII1,
+          imgTotalWarROMEII2,
+          imgTotalWarROMEII3,
+          imgTotalWarROMEII4,
+          imgTotalWarROMEII5,
+        ],
+      name: `Total War™: ROME II - Emperor Edition`,
+      text: `Покоривший сердца игроков со всего мира сериал Total War 
+      возвращается в Рим и задает новый стандарт качества для стратегических 
+      игр. Встаньте во главе первой в мире сверхдержавы и возьмите под свое 
+      командование самую мощную военную машину древнего мира. Для победы над 
+      врагами вам доступны любые средства – боевые, экономические и 
+      политические. Но помните, ваш триумф может вызвать не только уважение, 
+      но и зависть даже самых близких союзников.
+      Станете ли вы жертвой предательства или сами первыми начнете плести 
+      заговоры против старых друзей? Будете ли вы бороться за сохранение 
+      республики или захотите единолично править империей?`,
+      rating: 4,
+      genre: ['Стратегия'],
+      date: new Date(2013, 8, 2),
+    }],
+    [25, {
+      images:
+        [
+          imgDragonAgeInquisition0,
+          imgDragonAgeInquisition1,
+          imgDragonAgeInquisition2,
+          imgDragonAgeInquisition3,
+          imgDragonAgeInquisition4,
+          imgDragonAgeInquisition5,
+        ],
+      name: `Dragon Age™ Inquisition`,
+      text: `Когда небеса разверзаются и исторгают хаос, миру нужны герои. 
+      Станьте спасителем Тедаса в издании «Dragon Age: Инквизиция» — Игра года. 
+      Вы — Инквизитор, и вам предстоит спасти мир от самого себя. Но путь 
+      вперёд вымощен сложными решениями. Тедас — это земля междоусобиц. 
+      Несмотря на начало масштабного вторжения демонов, фракции мира 
+      продолжают воевать между собой. А вы? Только вы с отрядом чемпионов 
+      можете спасти мир от распада. Ваша задача — привести их к победе... или 
+      пасть. Увлекательный сюжет, основанный на ваших выборах — в «Инквизиции» 
+      вы не просто выбираете, кого послать в бой: вы принимаете важные решения, 
+      которые определяют будущее Тедаса. Каждый выбор имеет влияние, и ваши 
+      действия могут привести к множеству различных результатов. 
+      «Инквизиция» — это очень персонализированное путешествие, в котором один 
+      неверный ход может запустить череду событий, которые изменят физические 
+      аспекты самого мира, делая ваш Тедас — и ваших героев — совершенно 
+      уникальными.`,
+      rating: 4,
+      genre: ['Экшен', 'Ролевая'],
+      date: new Date(2014, 10, 18),
+    }],
+    [26, {
+      images:
+        [
+          imgKingdomComeDeliverance0,
+          imgKingdomComeDeliverance1,
+          imgKingdomComeDeliverance2,
+          imgKingdomComeDeliverance3,
+          imgKingdomComeDeliverance4,
+          imgKingdomComeDeliverance5,
+        ],
+      name: `Kingdom Come: Deliverance`,
+      text: `Вы - Генри, сын кузнеца. Попав в водоворот событий гражданской 
+      войны, вы беспомощно наблюдаете, как захватчики штурмуют вашу деревню и 
+      вырезают ваших друзей и семью. Чудом избежав жестокой участи, вы 
+      поднимете свой меч для возмездия. Отомстите за смерть своих родителей 
+      и помогите прогнать захватчиков! 
+      Без дома, семьи и будущего вы оказываетесь на службе у лорда Радзига 
+      Кобылы, который создаёт сопротивление силам захватчиков. Судьба 
+      втягивает вас в этот кровавый конфликт и забрасывает в самое пекло 
+      бушующей гражданской войны, где вы помогаете бороться за будущее 
+      Богемии.`,
+      rating: 4,
+      genre: ['Экшен', 'Ролевая'],
+      date: new Date(2018, 1, 13),
     }],
   ],
 );
