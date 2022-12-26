@@ -58,22 +58,22 @@ export const MainSlide = () => {
           className={styleSlider.swiper}
         >
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={items.get(0)?.images[0]} alt="Slide1" />
+            <img src={items.get(0)?.images[1]} alt="Slide1" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={items.get(1)?.images[0]} alt="Slide2" />
+            <img src={items.get(1)?.images[1]} alt="Slide2" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={items.get(2)?.images[0]} alt="Slide3" />
+            <img src={items.get(2)?.images[1]} alt="Slide3" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={items.get(3)?.images[0]} alt="Slide4" />
+            <img src={items.get(3)?.images[1]} alt="Slide4" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={items.get(4)?.images[0]} alt="Slide5" />
+            <img src={items.get(4)?.images[1]} alt="Slide5" />
           </SwiperSlide>
           <SwiperSlide className={styleSlider.swiper_slide}>
-            <img src={items.get(5)?.images[0]} alt="Slide6" />
+            <img src={items.get(5)?.images[1]} alt="Slide6" />
           </SwiperSlide>
         </Swiper>
         <div

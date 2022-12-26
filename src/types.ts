@@ -5,6 +5,7 @@ export interface Items {
   text: string;
   rating: number;
   genre: string[];
+  date: Date;
 };
 
 export type IdItems = number[];

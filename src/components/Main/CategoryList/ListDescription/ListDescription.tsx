@@ -24,8 +24,8 @@ export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
     if(name === undefined) {
       return
     }
-    else if(name.length > 35) {
-      return (`${name.substring(0, 35)}...`)
+    else if(name.length > 30) {
+      return (`${name.substring(0, 30)}...`)
     }
     return name
   };
@@ -36,13 +36,15 @@ export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
   
   return(
     <>
+      <div className={styleListCard.card}>
       <Card 
         sx={{
           borderTopLeftRadius: 0,
           borderBottomLeftRadius: 0,
           maxWidth: 345,
-          Height: 916.5,
+          height: '100%',
           boxShadow: 'none',
+          bgcolor: '#d6d6d6',
         }}
         >
         <CardContent>
@@ -72,14 +74,17 @@ export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
               <Box sx={{ ml: 1 }}>{labels[ratingValue]}</Box>
             </Box>
           </div>
+          <Typography
+            sx={{ 
+              fontSize: '12px',
+              marginTop: '5px',
+            }}
+          >Дата выпуска: {(items.get(selectedIndex))?.date.toLocaleDateString()}
+          </Typography>
         </CardContent>
         <CardMedia
           sx={{width: '100%'}}
         >
-          <img
-            className={styleListCard.img}
-            src={imgDescription(1)}
-          />
           <img
             className={styleListCard.img}
             src={imgDescription(2)}
@@ -92,8 +97,13 @@ export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
             className={styleListCard.img}
             src={imgDescription(4)}
           />
+          <img
+            className={styleListCard.img}
+            src={imgDescription(5)}
+          />
         </CardMedia>
       </Card>
+      </div>
     </>
   );
 };

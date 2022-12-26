@@ -42,7 +42,7 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
               sx={{
                 '&& .Mui-selected, && .Mui-selected:hover': {
                   color: 'rgba(0, 0, 0, 0.87)',
-                  bgcolor: '#fff',
+                  bgcolor: '#d6d6d6',
                   '& .MuiListItemText-secondary': {
                     color: 'rgba(31, 31, 31, 0.87)',
                   },
@@ -59,7 +59,7 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
                 >
                   <img src={(items.get(itemList))?.images[0]}></img>
                   <ListItemText 
-                    sx={{ marginLeft: '20px'}}
+                    sx={{ marginLeft: '20px', maxWidth: '295px'}}
                     primary={(items.get(itemList))?.name} 
                     secondary={(items.get(itemList))?.genre.join(', ')}
                   />

@@ -16,11 +16,11 @@ interface DescriptionProps {
 };
 
 export const Description: FC<DescriptionProps> = ({idxSlide}) => {
-  const [text, setText] = useState((items.get(idxSlide))!.text);
+  const [text, setText] = useState('');
 
   useEffect(() => {
-    if((items.get(idxSlide))!.text.length > 440) {
-      setText(`${(items.get(idxSlide))!.text.substring(0, 440)}...`)
+    if((items.get(idxSlide))!.text.length > 325) {
+      setText(`${(items.get(idxSlide))!.text.substring(0, 325)}...`)
     } else {
     setText((items.get(idxSlide))!.text)}
   }, [idxSlide])
@@ -29,7 +29,7 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
     <>
       <div className={styleCard.card}>
         <Card
-          sx={{ maxWidth: 345, maxHeight: 595 }}
+          sx={{ maxWidth: 345, maxHeight: 525, bgcolor: '#d6d6d6' }}
         >
           <CardActionArea>
             <CardMedia
@@ -43,16 +43,16 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
                 }}
               >
                 <SwiperSlide>
-                  <img src={(items.get(idxSlide))!.images[1]} />
+                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[2]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.get(idxSlide))!.images[2]} />
+                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[3]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.get(idxSlide))!.images[3]} />
+                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[4]} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={(items.get(idxSlide))!.images[4]} />
+                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[5]} />
                 </SwiperSlide>
               </Swiper>
             </CardMedia>
