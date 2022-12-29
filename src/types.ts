@@ -2,7 +2,7 @@
 export interface Items {
   images: string[];
   name: string;
-  text: string;
+  text: string[];
   rating: number;
   genre: string[];
   date: Date;

@@ -1,3 +1,5 @@
+import { FC, useEffect, useState } from 'react';
+import { useNavigate   } from 'react-router-dom';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,7 +11,6 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import styleCard from './Description.module.scss';
 import { IdxSlide } from '../../../types';
-import { FC, useEffect, useState } from 'react';
 
 interface DescriptionProps {
   idxSlide: IdxSlide;
@@ -17,19 +18,29 @@ interface DescriptionProps {
 
 export const Description: FC<DescriptionProps> = ({idxSlide}) => {
   const [text, setText] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if((items.get(idxSlide))!.text.length > 325) {
-      setText(`${(items.get(idxSlide))!.text.substring(0, 325)}...`)
+    if((items.get(idxSlide))!.text[0].length > 325) {
+      setText(`${(items.get(idxSlide))!.text[0].substring(0, 325)}...`)
     } else {
-    setText((items.get(idxSlide))!.text)}
+    setText((items.get(idxSlide))!.text[0])}
   }, [idxSlide])
+
+  const HandleClick = () => {
+    for (let [key] of items.entries()) {
+      if (key === idxSlide) {
+        navigate(`/${key.toString()}`)
+      }
+    }
+  };
   
   return(
     <>
       <div className={styleCard.card}>
         <Card
           sx={{ maxWidth: 345, maxHeight: 525, bgcolor: '#d6d6d6' }}
+          onClick={HandleClick}
         >
           <CardActionArea>
             <CardMedia

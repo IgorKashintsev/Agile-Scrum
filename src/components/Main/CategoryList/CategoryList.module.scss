@@ -3,11 +3,12 @@
   margin-top: 10px;
   margin-bottom: 25px;
 }
-.img img {
-  width: 200px;
+.img img{
+  max-width: 200px;
+  box-shadow: 5px 5px 12px rgb(43, 17, 0);
+  width: 100%;
 }
 .header_list {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
   letter-spacing: 2px;
   margin-top: 55px;
   margin-left: 18px;

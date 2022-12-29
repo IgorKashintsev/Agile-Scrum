@@ -1,6 +1,7 @@
 import { Box, List, ListItemButton, ListItemText, Pagination, Rating, Stack } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import { useEffect, useRef, useState } from "react";
+import { useNavigate   } from 'react-router-dom';
 import { items } from "../../constants";
 import { WholelistDescription } from "./WholelistDescription/WholelistDescription";
 
@@ -18,6 +19,8 @@ export const Wholelist = () => {
   const [listPageArr, setListPageArr] = useState<ListPageArr>([]);
   const [active, setActive] = useState(false);
   const [cordinatSelected, setCordinatSelected] = useState<number>();
+  
+  const navigate = useNavigate();
 
   const bestRef = useRef<HTMLDivElement | any>(null);
   const newRef = useRef<HTMLDivElement | any>(null);
@@ -28,20 +31,32 @@ export const Wholelist = () => {
     newRef.current.classList.remove(`${styleWholelist.active}`);
     setActive(true);
     setCurrentPage(1);
-  }
+  };
 
   const handleClickNew = () => {
     newRef.current.classList.add(`${styleWholelist.active}`);
     bestRef.current.classList.remove(`${styleWholelist.active}`);
     setActive(true);
     setCurrentPage(1);
-  }
+  };
+
+  const HandleClick = (itemList: number) => {
+    for (let [key] of items.entries()) {
+      if (key === itemList) {
+        navigate(`/${key.toString()}`)
+      }
+    }
+  };
 
   useEffect(() => {
     for(let i = 0; i < items.size; i++) {
       setMapList(mapList.set(Array.from(items.keys())[i], {rating: items.get(i)?.rating, date: items.get(i)?.date}));
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [currentPage])
 
   useEffect(() => {
     setActive(false)
@@ -62,18 +77,34 @@ export const Wholelist = () => {
   useEffect(() => {
     if(selectedRef.current !== null) {
       let upLine = selectedRef.current.getBoundingClientRect().top;
-      if(upLine > 500 && upLine < 641) {
-        setCordinatSelected((selectedRef.current.offsetTop) - 56);
-      } else if (upLine > 640 && upLine < 771) {
-        setCordinatSelected((selectedRef.current.offsetTop) - 184);
-      } else if (upLine > 770 && upLine < 901) {
-        setCordinatSelected((selectedRef.current.offsetTop) - 312);
-      } else if(upLine > 900 && upLine < 1030) {
-        setCordinatSelected((selectedRef.current.offsetTop) - 440);
+      let screenRes = window.screen.availHeight;
+      if(screenRes < 1081) {
+        if(upLine > 510 && upLine < 641) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 60);
+        } else if (upLine > 640 && upLine < 771) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 192);
+        } else if (upLine > 770 && upLine < 901) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 324);
+        } else if(upLine > 900 && upLine < 1030) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 456);
+        } else {
+          setCordinatSelected((selectedRef.current.offsetTop) + 72);
+        }
+      } else if (screenRes > 1080 && screenRes < 1441) {
+        if(upLine > 850 && upLine < 981) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 60);
+        } else if (upLine > 980 && upLine < 1111) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 192);
+        } else if (upLine > 1110 && upLine < 1241) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 324);
+        } else if(upLine > 1240 && upLine < 1371) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 456);
+        } else {
+          setCordinatSelected((selectedRef.current.offsetTop) + 72);
+        }
       } else {
         setCordinatSelected((selectedRef.current.offsetTop) + 72);
       }
-      
     }
     return
   }, [selectedIndex])
@@ -135,13 +166,15 @@ export const Wholelist = () => {
                 >
                   {listPageArr.map((item) => (
                     <ListItemButton
+                      className={styleWholelist.img}
                       ref={(selectedIndex === item[0])? selectedRef: null}
                       selected={selectedIndex === item[0]}
                       onMouseEnter ={() => setSelectedIndex(item[0])}
                       onMouseLeave ={() => setSelectedIndex(-1)}
+                      onClick={() => HandleClick(item[0])}
                       key={item[0]}
                     >
-                      <div className={styleWholelist.img}>
+                      <div>
                         <img src={(items.get(item[0]))?.images[0]}></img>
                       </div>
                       <ListItemText

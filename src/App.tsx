@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { GamePage } from './components/GamePage/GamePage';
 import { Main } from './components/Main/Main';
 import { Wholelist } from './components/Wholelist/Wholelist';
 
@@ -10,6 +11,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<Main/>}/>
       <Route path="wholelist" element={<Wholelist/>}/>
+      <Route path=":gameId" element={<GamePage/>}/>
       <Route path="*" element={<h1 className={style.page404}>404 Page</h1>}/>
     </Routes>
   );
