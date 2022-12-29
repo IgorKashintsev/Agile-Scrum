@@ -9,7 +9,6 @@ import style from './global.module.scss';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <div className={style.app}>
-    {/* basename="/Agile-Scrum" */}
     <BrowserRouter basename="/Agile-Scrum">
       <Header/>
       <Search/>
