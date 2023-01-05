@@ -1,0 +1,18 @@
+.changePass {
+  max-width: 400px;
+  max-height: 375px;
+  padding: 100px;
+  margin: 130px auto;
+  color: #d6d6d6;
+  background-color: #4b4b4b;
+  border-radius: 4px;
+  & h2 {
+    text-align: center;
+  }
+}
+.error {
+  color: #d6d6d6;
+  text-align: center;
+  padding-top: 20px;
+  text-shadow: 1px 1px 2px rgb(150, 0, 0);
+}

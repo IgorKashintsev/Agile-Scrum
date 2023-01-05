@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useNavigate   } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -15,9 +16,18 @@ interface CategoryListProps {
 
 export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
   const [selectedIndex, setSelectedIndex] = useState(idItemsList[0]);
+  const navigate = useNavigate();
   
   const handleListItemEnter = (index: number,) => {
     setSelectedIndex(index);
+  };
+
+  const HandleClick = (itemList: number) => {
+    for (let [key] of items.entries()) {
+      if (key === itemList) {
+        navigate(`/${key.toString()}`)
+      }
+    }
   };
 
   return(
@@ -37,40 +47,42 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
             },
           }}
         >
-          <div className={styleList.img}>
-            <List
-              sx={{
-                '&& .Mui-selected, && .Mui-selected:hover': {
-                  color: 'rgba(0, 0, 0, 0.87)',
-                  bgcolor: '#d6d6d6',
-                  '& .MuiListItemText-secondary': {
-                    color: 'rgba(31, 31, 31, 0.87)',
-                  },
-                }
-              }}
-              component="nav"
-              aria-label="secondary mailbox folder"
-            >
-              {idItemsList.map((itemList, id) => (
-                <ListItemButton
-                  key={id}
-                  selected={selectedIndex === itemList}
-                  onMouseEnter ={() => handleListItemEnter(itemList)}
-                >
+          <List
+            sx={{
+              '&& .Mui-selected, && .Mui-selected:hover': {
+                color: 'rgba(0, 0, 0, 0.87)',
+                bgcolor: '#d6d6d6',
+                '& .MuiListItemText-secondary': {
+                  color: 'rgba(31, 31, 31, 0.87)',
+                },
+              }
+            }}
+            component="nav"
+            aria-label="secondary mailbox folder"
+          >
+            {idItemsList.map((itemList, id) => (
+              <ListItemButton
+                className={styleList.img}
+                key={id}
+                selected={selectedIndex === itemList}
+                onMouseEnter ={() => handleListItemEnter(itemList)}
+                onClick={() => HandleClick(itemList)}
+              >
+                <div>
                   <img src={(items.get(itemList))?.images[0]}></img>
-                  <ListItemText 
-                    sx={{ marginLeft: '20px', maxWidth: '295px'}}
-                    primary={(items.get(itemList))?.name} 
-                    secondary={(items.get(itemList))?.genre.join(', ')}
-                  />
-                  <ListItemText 
-                    sx={{ textAlign: 'right'}}
-                    primary="Бесплатно"
-                  />
-                </ListItemButton>
-              ))}
-            </List>
-          </div>
+                </div>
+                <ListItemText 
+                  sx={{ marginLeft: '20px', maxWidth: '295px'}}
+                  primary={(items.get(itemList))?.name} 
+                  secondary={(items.get(itemList))?.genre.join(', ')}
+                />
+                <ListItemText 
+                  sx={{ textAlign: 'right'}}
+                  primary="Бесплатно"
+                />
+              </ListItemButton>
+            ))}
+          </List>
         </Box>
         <ListDescription selectedIndex={selectedIndex}/>
       </div>

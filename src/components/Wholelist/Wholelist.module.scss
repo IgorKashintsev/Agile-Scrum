@@ -1,11 +1,9 @@
-.img {
+.img img{
   max-width: 200px;
-  & img {
-    width: 100%;
-  }
+  box-shadow: 5px 5px 12px rgb(43, 17, 0);
+  width: 100%;
 }
 .list_header {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-size: 16px;
   display: flex;
   justify-content: space-around;
@@ -19,7 +17,6 @@
   &_group {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(99, 99, 99);
     width: 83px;
     height: 30px;
     padding-left: 21px;
@@ -41,5 +38,5 @@
   padding-left: 10px;
 }
 .wholelist {
-  margin-bottom: 105px;
+  margin-bottom: 155px;
 }

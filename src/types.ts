@@ -2,7 +2,7 @@
 export interface Items {
   images: string[];
   name: string;
-  text: string;
+  text: string[];
   rating: number;
   genre: string[];
   date: Date;
@@ -15,3 +15,7 @@ export type IdxSlide = number;
 export type ListSortArr = number[][];
 export type PageCount = number;
 export type ListPageArr = number[][];
+
+export type IsAuth = boolean;
+export type Login = string;
+export type Password = string;

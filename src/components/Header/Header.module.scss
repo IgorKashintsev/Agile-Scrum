@@ -1,9 +1,22 @@
 .header {
+  font-size: 18px;
   background-color: black;
-}
-.text {
   color: #ffffff;
-  font-family: 'Candara';
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.login {
+  min-width: 146px;
+  text-align: right;
+  & img {
+    width: 21px;
+    height: 21px;
+  }
+  & span {
+    vertical-align: text-bottom;
+  }
 }
 .display {
   display: flex;
@@ -11,7 +24,6 @@
   align-items: center;
 }
 .nav {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-size: 18px;
   margin-top: 10px;
   &_active {
@@ -22,5 +34,18 @@
     color: #d6d6d6;
     text-decoration: none;
     margin-left: 10px;
+  }
+}
+.login_menu {
+  min-width: 146px;
+  color: #d6d6d6;
+  background-color: #4b4b4b;
+  position: absolute;
+  height: 70px;
+  border-radius: 4px;
+  & div {
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }

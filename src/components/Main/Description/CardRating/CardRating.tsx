@@ -19,7 +19,6 @@ export const CardRating: FC<CardRatingProps> = ({idxSlide}) => {
       <div className={styleRating.rating}>
         <Box
           sx={{
-            width: 200,
             display: 'flex',
             alignItems: 'center',
           }}

@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import { CardActionArea } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/material';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay } from "swiper";
 import { items } from '../../../constants';
@@ -8,7 +7,7 @@ import { CardRating } from '../../../components/Main/Description/CardRating/Card
 
 import "swiper/css";
 import "swiper/css/effect-fade";
-import styleCard from './Description.module.scss';
+import styleCard from './WholelistDescription.module.scss';
 import { IdxSlide } from '../../../types';
 
 interface WholelistDescriptionProps {
@@ -19,10 +18,10 @@ export const WholelistDescription: FC<WholelistDescriptionProps> = ({idxSlide}) 
   const [text, setText] = useState('');
 
   useEffect(() => {
-    if((items.get(idxSlide))!.text.length > 370) {
-      setText(`${(items.get(idxSlide))!.text.substring(0, 370)}...`)
+    if((items.get(idxSlide))!.text[0].length > 370) {
+      setText(`${(items.get(idxSlide))!.text[0].substring(0, 370)}...`)
     } else {
-    setText((items.get(idxSlide))!.text)}
+    setText((items.get(idxSlide))!.text[0])}
   }, [idxSlide])
   
   return(
