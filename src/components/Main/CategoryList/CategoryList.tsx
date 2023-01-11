@@ -30,6 +30,8 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
     }
   };
 
+  console.log('CategoryList');
+
   return(
     <>
       <div className={styleList.header_list}>Популярное</div>
@@ -78,7 +80,7 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
                 />
                 <ListItemText 
                   sx={{ textAlign: 'right'}}
-                  primary="Бесплатно"
+                  primary={`${(items.get(itemList))?.price.toFixed(2)} ₽`}
                 />
               </ListItemButton>
             ))}

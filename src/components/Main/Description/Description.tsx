@@ -34,6 +34,8 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
       }
     }
   };
+
+  console.log('Description');
   
   return(
     <>

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IsAuth, Login } from '../../types';
 import userLogo from '../../../image/user2.png';
@@ -13,8 +13,9 @@ interface IsAuthProps {
 }
 
 export const Profile: FC<IsAuthProps> = ({isAuth, loginAuth, onIsAuth}) => {
-  const [activeClassPass, setActiveClassPass] = useState('');
-  const [activeClassLogout, setActiveClassLogout] = useState('');
+  const changePassRef = useRef<HTMLDivElement | any>(null);
+  const logoutRef = useRef<HTMLDivElement | any>(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,14 +24,9 @@ export const Profile: FC<IsAuthProps> = ({isAuth, loginAuth, onIsAuth}) => {
     }
     return
   }, [isAuth]);
-  
-  const handleClickLogout = () => {
-    onIsAuth(false);
-  };
 
-  const handleClickChangPass = () => {
-    navigate('/changepass');
-  }
+  console.log('Profile');
+  
 
   return(
     <>
@@ -40,19 +36,21 @@ export const Profile: FC<IsAuthProps> = ({isAuth, loginAuth, onIsAuth}) => {
           <h1>{loginAuth}</h1>
         </div>
         <p
-          className={`${styleProfile.p_pass} ${activeClassPass}`}
+          ref={changePassRef}
+          className={styleProfile.p_pass}
           style={{cursor: 'pointer'}}
-          onClick={handleClickChangPass}
-          onMouseEnter={() => setActiveClassPass(styleProfile.active)}
-          onMouseLeave={() => setActiveClassPass('')}
+          onClick={() => navigate('/changepass')}
+          onMouseEnter={() => changePassRef.current.classList.add(styleProfile.active)}
+          onMouseLeave={() => changePassRef.current.classList.remove(styleProfile.active)}
         >Изменить пароль
         </p>
         <p
-          className={`${styleProfile.p_logout} ${activeClassLogout}`}
+          ref={logoutRef}
+          className={styleProfile.p_logout}
           style={{cursor: 'pointer'}} 
-          onClick={handleClickLogout}
-          onMouseEnter={() => setActiveClassLogout(styleProfile.active)}
-          onMouseLeave={() => setActiveClassLogout('')}
+          onClick={() => onIsAuth(false)}
+          onMouseEnter={() => logoutRef.current.classList.add(styleProfile.active)}
+          onMouseLeave={() => logoutRef.current.classList.remove(styleProfile.active)}
         >Выйти
         </p>
       </div>

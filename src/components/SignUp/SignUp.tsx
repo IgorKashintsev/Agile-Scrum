@@ -38,6 +38,8 @@ export const SignUp: FC<SignInProps> = ({loginAuth, onIsAuth, setName, setPasswo
     }
   };
 
+  console.log('SignUp');
+
   return(
     <>
       <div className={`${style.container} ${styleSignUp.signUp}`}>

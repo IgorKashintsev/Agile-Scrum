@@ -42,6 +42,8 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, passwordAuth, setPasswo
     }
   };
 
+  console.log('ChangePass');
+
   return(
     <>
       <div className={`${style.container} ${styleChangePass.changePass}`}>
