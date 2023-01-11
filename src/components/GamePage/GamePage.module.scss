@@ -22,18 +22,19 @@
 
   &_secondary {
     width: 320px;
-    max-height: 300px;
+    max-height: 245px;
     margin-left: auto;
-    padding: 10px;
+    padding: 35px 15px;
     color: #a8a8a8;
     background-color: #4b4b4b;
     border-radius: 4px;
     &_div {
-      margin-bottom: 25px;
+      margin-bottom: 50px;
     }
   }
   &_primary {
     max-width: 650px;
+    padding-right: 10px;
     & p {
       margin-bottom: 15px;
       color: #d6d6d6;
@@ -42,7 +43,24 @@
   }
 }
 .span {
-  padding: 3px;
+  margin-left: 5px;
+  padding: 4px;
   border-radius: 4px;
   background-color: #313131;
+}
+.price {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  &_info {
+    color: #d6d6d6;
+  }
+  &_basket {
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #313131;
+  }
+}
+.active {
+  color: #ffffff;
 }

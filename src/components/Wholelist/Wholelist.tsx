@@ -27,15 +27,15 @@ export const Wholelist = () => {
   const selectedRef = useRef<HTMLDivElement | any>(null);
 
   const handleClickBest = () => {
-    bestRef.current.classList.add(`${styleWholelist.active}`);
-    newRef.current.classList.remove(`${styleWholelist.active}`);
+    bestRef.current.classList.add(styleWholelist.active);
+    newRef.current.classList.remove(styleWholelist.active);
     setActive(true);
     setCurrentPage(1);
   };
 
   const handleClickNew = () => {
-    newRef.current.classList.add(`${styleWholelist.active}`);
-    bestRef.current.classList.remove(`${styleWholelist.active}`);
+    newRef.current.classList.add(styleWholelist.active);
+    bestRef.current.classList.remove(styleWholelist.active);
     setActive(true);
     setCurrentPage(1);
   };
@@ -107,7 +107,9 @@ export const Wholelist = () => {
       }
     }
     return
-  }, [selectedIndex])
+  }, [selectedIndex]);
+
+  console.log('wholelist');
 
   return(
     <>
@@ -150,61 +152,59 @@ export const Wholelist = () => {
                 },
               }}
             >
-              <div >
-                <List
-                  sx={{
-                    '&& .Mui-selected, && .Mui-selected:hover': {
-                      color: 'rgba(0, 0, 0, 0.87)',
-                      bgcolor: '#d6d6d6',
-                      '& .MuiListItemText-secondary': {
-                        color: 'rgba(31, 31, 31, 0.87)',
-                      },
-                    }
-                  }}
-                  component="nav"
-                  aria-label="secondary mailbox folder"
-                >
-                  {listPageArr.map((item) => (
-                    <ListItemButton
-                      className={styleWholelist.img}
-                      ref={(selectedIndex === item[0])? selectedRef: null}
-                      selected={selectedIndex === item[0]}
-                      onMouseEnter ={() => setSelectedIndex(item[0])}
-                      onMouseLeave ={() => setSelectedIndex(-1)}
-                      onClick={() => HandleClick(item[0])}
-                      key={item[0]}
-                    >
-                      <div>
-                        <img src={(items.get(item[0]))?.images[0]}></img>
-                      </div>
-                      <ListItemText
-                        sx={{ marginLeft: '20px', maxWidth: '330px' }}
-                        primary={(items.get(item[0]))?.name} 
-                        secondary={(items.get(item[0]))?.genre.join(', ')}
-                      />
-                      <ListItemText
-                        sx={{ textAlign: 'right', mr: '50px'}}
-                        secondary={(items.get(item[0]))?.date.toLocaleDateString()}
-                      />
-                      <Rating
-                        name="text-feedback"
-                        value={(items.get(item[0]))?.rating}
-                        readOnly
-                        precision={0.5}
-                        sx={{ maxWidth: '100px', fontSize: '15px'}}
-                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                      />
-                      <ListItemText
-                        sx={{ 
-                          textAlign: 'right',
-                          maxWidth: '150px',
-                        }}
-                        primary="Бесплатно"
-                      />
-                    </ListItemButton>
-                  ))}
-                </List>
-              </div>
+              <List
+                sx={{
+                  '&& .Mui-selected, && .Mui-selected:hover': {
+                    color: 'rgba(0, 0, 0, 0.87)',
+                    bgcolor: '#d6d6d6',
+                    '& .MuiListItemText-secondary': {
+                      color: 'rgba(31, 31, 31, 0.87)',
+                    },
+                  }
+                }}
+                component="nav"
+                aria-label="secondary mailbox folder"
+              >
+                {listPageArr.map((item) => (
+                  <ListItemButton
+                    className={styleWholelist.img}
+                    ref={(selectedIndex === item[0])? selectedRef: null}
+                    selected={selectedIndex === item[0]}
+                    onMouseEnter ={() => setSelectedIndex(item[0])}
+                    onMouseLeave ={() => setSelectedIndex(-1)}
+                    onClick={() => HandleClick(item[0])}
+                    key={item[0]}
+                  >
+                    <div>
+                      <img src={(items.get(item[0]))?.images[0]}></img>
+                    </div>
+                    <ListItemText
+                      sx={{ marginLeft: '20px', maxWidth: '330px' }}
+                      primary={(items.get(item[0]))?.name} 
+                      secondary={(items.get(item[0]))?.genre.join(', ')}
+                    />
+                    <ListItemText
+                      sx={{ textAlign: 'right', mr: '50px'}}
+                      secondary={(items.get(item[0]))?.date.toLocaleDateString()}
+                    />
+                    <Rating
+                      name="text-feedback"
+                      value={(items.get(item[0]))?.rating}
+                      readOnly
+                      precision={0.5}
+                      sx={{ maxWidth: '100px', fontSize: '15px'}}
+                      emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                    />
+                    <ListItemText
+                      sx={{ 
+                        textAlign: 'right',
+                        maxWidth: '110px',
+                      }}
+                      primary={`${(items.get(item[0]))?.price.toFixed(2)} ₽`}
+                    />
+                  </ListItemButton>
+                ))}
+              </List>
             </Box>
             <Pagination 
               sx={{

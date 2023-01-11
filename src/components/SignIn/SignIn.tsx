@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Login, Password } from "../../types";
 
@@ -29,6 +29,8 @@ export const SignIn: FC<SignInProps> = ({loginAuth, passwordAuth, onIsAuth}) => 
       setError(true);
     }
   };
+
+  console.log('signIn');
 
   return(
     <>
