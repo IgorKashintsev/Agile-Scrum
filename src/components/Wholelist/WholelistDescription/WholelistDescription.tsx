@@ -24,9 +24,6 @@ export const WholelistDescription: FC<WholelistDescriptionProps> = ({idxSlide}) 
     setText((items.get(idxSlide))!.text[0])}
   }, [idxSlide]);
 
-  console.log('WholelistDescription');
-
-  
   return(
     <>
       <div className={styleCard.card}>

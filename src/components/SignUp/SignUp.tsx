@@ -38,8 +38,6 @@ export const SignUp: FC<SignInProps> = ({users, setUser, onIsAuth, setLoginAuth}
     }
   };
 
-  console.log('SignUp');
-
   return(
     <>
       <div className={`${style.container} ${styleSignUp.signUp}`}>
@@ -108,6 +106,7 @@ export const SignUp: FC<SignInProps> = ({users, setUser, onIsAuth, setLoginAuth}
               },
             }}
             value={newPassword}
+            type="password"
             onChange={(e) => setNewPassword(e.target.value)}
             label="Введите свой пароль"
             variant="outlined"
@@ -142,6 +141,7 @@ export const SignUp: FC<SignInProps> = ({users, setUser, onIsAuth, setLoginAuth}
               },
             }}
             value={confirmPass}
+            type="password"
             onChange={(e) => setConfirmPass(e.target.value)}
             label="Подтверждение пароля"
             variant="outlined"

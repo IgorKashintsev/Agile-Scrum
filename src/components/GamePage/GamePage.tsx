@@ -72,8 +72,6 @@ export const GamePage: FC<GamePageProps> = (
     return <Navigate to="/" replace />
   }
   
-  console.log('game');
-  
   return(
     <>
       <div className={style.container}>

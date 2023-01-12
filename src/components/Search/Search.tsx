@@ -47,8 +47,6 @@ export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFilt
     navigate(`/${gameId}`);
     setInputValue('');
   };
-
-  console.log('search');
   
   return(
     <div className={style.container}>

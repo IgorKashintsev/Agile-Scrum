@@ -51,9 +51,6 @@ export const Favorites: FC<FavoritesProps> = (
     }
   };
 
-  console.log('favorite');
-  
-
   return(
     <div className={`${style.container} ${styleFavorites.favorites}`}>
       <div className={styleFavorites.favorites_header}>ВАШЕ ИЗБРАННОЕ</div>

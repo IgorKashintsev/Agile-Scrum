@@ -25,9 +25,6 @@ export const Profile: FC<IsAuthProps> = ({isAuth, loginAuth, onIsAuth}) => {
     return
   }, [isAuth]);
 
-  console.log('Profile');
-  
-
   return(
     <>
       <div className={`${style.container} ${styleProfile.profile}`}>

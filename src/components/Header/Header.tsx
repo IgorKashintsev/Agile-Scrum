@@ -78,8 +78,6 @@ export const Header: FC<IsAuthProps> = ({
     setVisible(false);
   };
 
-  console.log('Header');
-
   return(
     <>
       <div className={styleHeader.header}>

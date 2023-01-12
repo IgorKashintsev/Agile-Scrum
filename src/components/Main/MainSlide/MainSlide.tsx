@@ -29,8 +29,6 @@ export const MainSlide = () => {
   const changeSlide = () => {
     setIdxSlide(() => swiperRef.current.swiper.realIndex);
   };
-
-  console.log('MainSlide');
   
   return(
     <>

@@ -30,8 +30,6 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
     }
   };
 
-  console.log('CategoryList');
-
   return(
     <>
       <div className={styleList.header_list}>Популярное</div>

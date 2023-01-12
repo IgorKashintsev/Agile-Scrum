@@ -43,8 +43,6 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUs
     }
   };
 
-  console.log('ChangePass');
-
   return(
     <>
       <div className={`${style.container} ${styleChangePass.changePass}`}>
@@ -78,6 +76,7 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUs
               },
             }}
             value={password}
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             label="Введите свой пароль"
             variant="outlined"
@@ -112,6 +111,7 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUs
               },
             }}
             value={newPassword}
+            type="password"
             onChange={(e) => setNewPassword(e.target.value)}
             label="Введите новый пароль"
             variant="outlined"
@@ -146,6 +146,7 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUs
               },
             }}
             value={confirmPass}
+            type="password"
             onChange={(e) => setConfirmPass(e.target.value)}
             label="Подтверждение нового пароля"
             variant="outlined"

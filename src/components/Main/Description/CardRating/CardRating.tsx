@@ -11,10 +11,7 @@ interface CardRatingProps {
 };
 
 export const CardRating: FC<CardRatingProps> = ({idxSlide}) => {
-
   const ratingValue = (items.get(idxSlide))!.rating;
-
-  console.log('CardRating');
 
   return(
     <>

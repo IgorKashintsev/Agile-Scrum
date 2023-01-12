@@ -26,9 +26,6 @@ export const Review: FC<ReviewProps> = ({onAddReviewArr, gameId, loginAuth}) => 
     setTextReview('');
   };
 
-  console.log('Review');
-
-
   return(
     <>
       <form 

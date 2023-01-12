@@ -109,8 +109,6 @@ export const Wholelist = () => {
     return
   }, [selectedIndex]);
 
-  // console.log('wholelist');
-
   return(
     <>
       <div className={style.container}>

@@ -51,8 +51,6 @@ export const App = () => {
   const onAddReviewArr = (newReview: ReviewObj) => {
     setReviewArr([...reviewArr, newReview]);
   };
-  
-  console.log('app');
 
   return (
     <div onClick={handleClick}>

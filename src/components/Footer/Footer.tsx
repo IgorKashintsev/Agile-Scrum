@@ -6,8 +6,6 @@ import styleHrTop from './Footer.module.scss';
 import styleHrBottom from './Footer.module.scss';
 
 export const Footer = () => {
-
-  console.log('Footer');
   return(
     <>
       <div className={styleFooter.footer}>

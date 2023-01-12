@@ -33,8 +33,6 @@ export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
   const imgDescription = (idImage: number) => {
     return (items.get(selectedIndex))?.images[idImage]
   };
-
-  console.log('ListDescription');
   
   return(
     <>

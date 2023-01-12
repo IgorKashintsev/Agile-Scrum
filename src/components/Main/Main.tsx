@@ -26,8 +26,6 @@ export const Main = () => {
       idItems[idItems.length] = randomNumber;
     }
   };
-
-  console.log('Main');
   
   return (
     <>

@@ -41,8 +41,6 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
     }
   }, [basketArr]);
 
-  console.log('Basket');
-
   return(
     <>
       <div className={`${style.container} ${styleBasket.list}`}>

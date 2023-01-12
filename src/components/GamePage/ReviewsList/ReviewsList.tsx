@@ -17,8 +17,6 @@ export const ReviewsList: FC<ReviewsListProps> = ({reviewArr, gameId}) => {
     setReviewList(reviewArr.filter(item => item.id === Number(gameId)))
   }, [reviewArr]);
 
-  console.log('ReviewsList');
-
   return(
     <List>
       <hr className={styleReviewsList.hr}></hr>
