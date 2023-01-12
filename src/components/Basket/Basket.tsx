@@ -78,8 +78,7 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
                     ></img>
                   </div>
                   <ListItemText
-                    sx={{ marginLeft: '20px', cursor: 'pointer',}}
-                    onClick={() => handleClickGame(item)}
+                    sx={{ marginLeft: '20px', }}
                     primary={(items.get(item))?.name} 
                   />
                   <div>

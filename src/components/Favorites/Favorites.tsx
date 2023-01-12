@@ -92,8 +92,7 @@ export const Favorites: FC<FavoritesProps> = (
                   ></img>
                 </div>
                 <ListItemText
-                  sx={{ marginLeft: '20px', maxWidth: '330px', cursor: 'pointer', }}
-                  onClick={() => handleClickGame(item)}
+                  sx={{ marginLeft: '20px', maxWidth: '330px', }}
                   primary={(items.get(item))?.name} 
                   secondary={(items.get(item))?.genre.join(', ')}
                 />
