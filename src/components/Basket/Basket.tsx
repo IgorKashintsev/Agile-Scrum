@@ -15,21 +15,20 @@ interface BasketProps {
 }
 
 export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) => {
-  const [selected, setSelected] = useState<number>(-1)
-  const [sumTotal, setSumTotal] = useState(0)
+  const [selected, setSelected] = useState<number>(-1);
+  const [sumTotal, setSumTotal] = useState(0);
   const deleteRef = useRef<HTMLDivElement | any>(null);
 
   const navigate = useNavigate();
 
   const handleClickDelete = (item: number) => {
     onDelBasketItem(basketArr.filter((el) => el !== item))
-  }
+  };
 
   useEffect(() => {
     if(!isAuth) {
       navigate('/');
     }
-    return
   }, [isAuth]);
 
   useEffect(() => {
@@ -58,6 +57,9 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
               '& .MuiListItemButton-root': {
                 cursor: "default",
               },
+              '& .MuiListItemButton-root:hover': {
+                backgroundColor: '#3b3b3b',
+              }
             }}
           >
             <List
@@ -80,19 +82,29 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
                   <div>
                     <ListItemText
                       sx={{ 
+                        textAlign: "right",
                         maxWidth: '150px',
                       }}
                       primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
                     />
-                    <p 
-                      id={item.toString()}
-                      ref={selected === item ? deleteRef : null}
-                      className={styleBasket.list_delete}
-                      onMouseEnter={() => deleteRef.current.classList.add(styleBasket.active)}
-                      onMouseLeave={() => deleteRef.current.classList.remove(styleBasket.active)}
-                      onClick={() => handleClickDelete(item)}
-                    >Удалить
-                    </p>
+                    <Button 
+                    type="button"
+                    sx={{
+                      width: "90px",
+                      height: "26px",
+                      fontSize: "11px",
+                      color: "#a8a8a8",
+                      float: 'right',
+                      backgroundColor: "#3b3b3b",
+                      border: "1px solid #757575",
+                      "&:hover":{
+                        color: "rgba(0, 0, 0, 0.87)",
+                        backgroundColor: "#d6d6d6",
+                      },
+                    }}
+                    onClick={() => handleClickDelete(item)}
+                    >удалить
+                  </Button>
                   </div>
                 </ListItemButton>
               ))}
@@ -114,7 +126,7 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
                 border: "1px solid #757575",
                 "&:hover":{
                   color: "rgba(0, 0, 0, 0.87)",
-                  backgroundColor: "#a8a8a8",
+                  backgroundColor: "#d6d6d6",
                 },
               }}
               disabled={basketArr.length < 1}

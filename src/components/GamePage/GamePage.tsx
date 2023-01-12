@@ -1,14 +1,14 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { items, labels } from "../../constants";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { Box, Rating } from "@mui/material";
+import { Box, Button, Rating } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 
 import style from '../../global.module.scss';
 import styleGamePage from './GamePage.module.scss';
-import { BasketArr, IsAuth, ReviewObj, Login } from "../../types";
+import { BasketArr, IsAuth, ReviewObj, Login, UsersMap } from "../../types";
 import { Review } from "./Review/Review";
 import { ReviewsList } from "./ReviewsList/ReviewsList";
 
@@ -19,6 +19,8 @@ interface GamePageProps {
   onAddReviewArr: (newReview: ReviewObj) => void;
   loginAuth: Login;
   reviewArr: ReviewObj[];
+  users: UsersMap,
+  onAddFavorites: (favorite: number) => void;
 }
 
 export const GamePage: FC<GamePageProps> = (
@@ -29,29 +31,31 @@ export const GamePage: FC<GamePageProps> = (
       onAddReviewArr,
       loginAuth,
       reviewArr,
+      users,
+      onAddFavorites,
     }
   ) => {
-  const [inBasket, setInBasket] = useState(false)
-  
+  const [visible, setVisible] = useState(false);
   const {gameId} = useParams();
   const ratingValue = (items.get(Number(gameId)))?.rating;
-
-  const addBasketRef = useRef<HTMLDivElement | any>(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0,0);
-  }, [])
+  }, []);
 
-  useEffect(() => {
-    const basketItemIdx = basketArr.findIndex(item => item === Number(gameId));
-    if(basketItemIdx !== -1) {
-      setInBasket(true);
+  const handleClickFavorites = (gameId: number) => {
+    const favoriteIdx = users.get(loginAuth)?.favorites?.indexOf(gameId);
+    if(!isAuth) {
+      navigate('/signin')
+    } else if(favoriteIdx === -1) {
+      onAddFavorites(users.get(loginAuth)!.favorites!.push(gameId));
+      setVisible(visible => !visible);
     } else {
-      setInBasket(false);
+      return
     }
-  }, [basketArr])
+  };
 
   const handleClickBasket = (gameId: number) => {
     if(isAuth) {
@@ -115,6 +119,28 @@ export const GamePage: FC<GamePageProps> = (
               ))}
           </div>
           <div className={styleGamePage.info_secondary}>
+            <Button 
+              type="button"
+              sx={{
+                width: "120px",
+                height: "25px",
+                fontSize: "13px",
+                color: "#a8a8a8",
+                float: 'right',
+                backgroundColor: "#3b3b3b",
+                border: "1px solid #757575",
+                "&:hover":{
+                  color: "rgba(0, 0, 0, 0.87)",
+                  backgroundColor: "#d6d6d6",
+                },
+              }}
+              onClick={() => handleClickFavorites(Number(gameId))}
+            >{isAuth && 
+              users.get(loginAuth)?.favorites?.indexOf(Number(gameId)) !== -1 ? 
+              'В избранном' : 
+              'В избранное'
+            }
+            </Button>
             <div className={styleGamePage.info_secondary_div}>
               Дата выпуска: 
               <span 
@@ -127,7 +153,7 @@ export const GamePage: FC<GamePageProps> = (
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: '50px',
+                marginBottom: '25px',
               }}
             >Рейтинг:
               <Rating
@@ -147,20 +173,30 @@ export const GamePage: FC<GamePageProps> = (
               >{(items.get(Number(gameId)))?.genre.join(', ')}
               </span>
             </div>
+            
             <div className={styleGamePage.price}>
               <p 
                 className={styleGamePage.price_info}
               >{(items.get(Number(gameId)))?.price.toFixed(2)} &#8381;
               </p>
-              <p 
-                ref={addBasketRef}
-                style={{cursor: 'pointer'}} 
-                className={styleGamePage.price_basket}
-                onMouseEnter={() => addBasketRef.current.classList.add(styleGamePage.active)}
-                onMouseLeave={() => addBasketRef.current.classList.remove(styleGamePage.active)}
+              <Button 
+                type="button"
+                sx={{
+                  width: "120px",
+                  height: "25px",
+                  fontSize: "13px",
+                  color: "#a8a8a8",
+                  float: 'right',
+                  backgroundColor: "#3b3b3b",
+                  border: "1px solid #757575",
+                  "&:hover":{
+                    color: "rgba(0, 0, 0, 0.87)",
+                    backgroundColor: "#d6d6d6",
+                  },
+                }}
                 onClick={() => handleClickBasket(Number(gameId))}
-              >{inBasket ? 'В корзине' : 'В корзину'}
-              </p>
+                >{basketArr.indexOf(Number(gameId)) !== -1 ? 'В корзине' : 'В корзину'}
+              </Button>
             </div>
           </div>
         </div>

@@ -29,6 +29,7 @@ export const Header: FC<IsAuthProps> = ({
 
   const loginRef = useRef<HTMLDivElement | any>(null);
   const storeRef = useRef<HTMLDivElement | any>(null);
+  const favoritesRef = useRef<HTMLDivElement | any>(null);
   const basketRef = useRef<HTMLDivElement | any>(null);
   const profileRef = useRef<HTMLDivElement | any>(null);
   const logoutRef = useRef<HTMLDivElement | any>(null);
@@ -56,17 +57,18 @@ export const Header: FC<IsAuthProps> = ({
     loginRef.current.classList.remove(styleHeader.active)
     setVisible(false);
   };
+
+  const handleClickFavorites = () => {
+    if(!isAuth) {
+      navigate('/signin')
+    } else {
+      navigate('/favorites')
+    }
+  };
   
   const handleClickSignIn = () => {
     if (!isAuth) {
       navigate('/signin')
-    }
-    return
-  };
-
-  const handleClickBasket = () => {
-    if (basketArr.length > 0) {
-      navigate('/basket')
     }
     return
   };
@@ -92,13 +94,21 @@ export const Header: FC<IsAuthProps> = ({
               onClick={() => navigate('/')}
             >Магазин
             </p>
+            <p
+              ref={favoritesRef}
+              style={{cursor: 'pointer'}}
+              onMouseEnter={() => favoritesRef.current.classList.add(styleHeader.active)}
+              onMouseLeave={() => favoritesRef.current.classList.remove(styleHeader.active)}
+              onClick={handleClickFavorites}
+            >Избранное
+            </p>
             {basketArr.length > 0 &&
               <p
                 ref={basketRef}
                 style={{cursor: 'pointer'}}
                 onMouseEnter={() => basketRef.current.classList.add(styleHeader.active)}
                 onMouseLeave={() => basketRef.current.classList.remove(styleHeader.active)}
-                onClick={handleClickBasket}
+                onClick={() => navigate('/basket')}
               >Корзина ({basketArr.length})
               </p>
             }

@@ -103,7 +103,7 @@ export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFilt
                 color: '#a8a8a8',
                 fontSize: '13px',
               },
-              '& .MuiButtonBase-root:hover': {
+              '& .MuiListItemButton-root:hover': {
                 backgroundColor: '#313131',
               }
             }}

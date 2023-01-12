@@ -1,18 +1,18 @@
 import { Button, TextField } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Login, Password } from "../../types";
+import { UsersMap } from "../../types";
 
 import style from '../../global.module.scss';
 import styleSignIn from './SignIn.module.scss';
 
 interface SignInProps {
-  loginAuth: Login;
-  passwordAuth: Password;
+  users: UsersMap;
+  setLoginAuth: (loginAuth: string) => void;
   onIsAuth: (param: boolean) => void;
 }
 
-export const SignIn: FC<SignInProps> = ({loginAuth, passwordAuth, onIsAuth}) => {
+export const SignIn: FC<SignInProps> = ({users, setLoginAuth, onIsAuth}) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -22,8 +22,9 @@ export const SignIn: FC<SignInProps> = ({loginAuth, passwordAuth, onIsAuth}) => 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     setError(false);
-    if(login === loginAuth && password === passwordAuth) {
+    if(users.has(login) && users.get(login)?.password === password) {
       onIsAuth(true);
+      setLoginAuth(login);
       navigate('/');
     } else {
       setError(true);
@@ -116,7 +117,7 @@ export const SignIn: FC<SignInProps> = ({loginAuth, passwordAuth, onIsAuth}) => 
               border: "1px solid #757575",
               "&:hover":{
                 color: "rgba(0, 0, 0, 0.87)",
-                backgroundColor: "#a8a8a8",
+                backgroundColor: "#d6d6d6",
               },
             }}
             disabled={!(login && password)}

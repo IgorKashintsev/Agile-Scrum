@@ -1,19 +1,19 @@
 import { Button, TextField } from "@mui/material";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Login, Password } from "../../types";
+import { Login, UsersMap } from "../../types";
 
 import style from '../../global.module.scss';
 import styleSignUp from './SignUp.module.scss';
 
 interface SignInProps {
-  loginAuth: Login;
+  users: UsersMap;
+  setUser: (newUser: UsersMap) => void;
   onIsAuth: (param: boolean) => void;
-  setName: (param: Login) => void;
-  setPasswordAuth: (param: Password) => void;
+  setLoginAuth: (param: Login) => void;
 }
 
-export const SignUp: FC<SignInProps> = ({loginAuth, onIsAuth, setName, setPasswordAuth}) => {
+export const SignUp: FC<SignInProps> = ({users, setUser, onIsAuth, setLoginAuth}) => {
   const [newLogin, setNewLogin] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
@@ -26,12 +26,12 @@ export const SignUp: FC<SignInProps> = ({loginAuth, onIsAuth, setName, setPasswo
     ev.preventDefault();
     setErrorLog(false);
     setErrorPass(false);
-    if(newLogin !== loginAuth && newPassword === confirmPass) {
-      setName(newLogin);
-      setPasswordAuth(confirmPass);
+    if(!users.has(newLogin) && newPassword === confirmPass) {
+      setLoginAuth(newLogin);
+      setUser(users.set(newLogin, {password: confirmPass, favorites: []}))
       onIsAuth(true);
       navigate('/');
-    } else if(newLogin === loginAuth) {
+    } else if(users.has(newLogin)) {
       setErrorLog(true);
     } else if(newPassword !== confirmPass) {
       setErrorPass(true);
@@ -158,7 +158,7 @@ export const SignUp: FC<SignInProps> = ({loginAuth, onIsAuth, setName, setPasswo
               border: "1px solid #757575",
               "&:hover":{
                 color: "rgba(0, 0, 0, 0.87)",
-                backgroundColor: "#a8a8a8",
+                backgroundColor: "#d6d6d6",
               },
             }}
             disabled={!(newLogin && newPassword && confirmPass)}

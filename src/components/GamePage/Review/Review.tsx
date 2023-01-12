@@ -60,7 +60,7 @@ export const Review: FC<ReviewProps> = ({onAddReviewArr, gameId, loginAuth}) => 
               border: "1px solid #757575",
               "&:hover":{
                 color: "rgba(0, 0, 0, 0.87)",
-                backgroundColor: "#a8a8a8",
+                backgroundColor: "#d6d6d6",
               },
             }}
             disabled={!textReview}

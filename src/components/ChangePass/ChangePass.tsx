@@ -4,15 +4,16 @@ import { Button, TextField } from '@mui/material';
 
 import style from '../../global.module.scss';
 import styleChangePass from './ChangePass.module.scss';
-import { IsAuth, Password } from '../../types';
+import { IsAuth, UsersMap } from '../../types';
 
 interface ChangePassProps {
   isAuth: IsAuth;
-  passwordAuth: Password;
-  setPasswordAuth: (param: Password) => void;
+  loginAuth: string;
+  users: UsersMap;
+  setUser: (newPass: string) => void;
 }
 
-export const ChangePass: FC<ChangePassProps> = ({isAuth, passwordAuth, setPasswordAuth}) => {
+export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUser}) => {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
@@ -32,10 +33,10 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, passwordAuth, setPasswo
     ev.preventDefault();
     setErrorPass(false);
     setErrorNewPass(false);
-    if(password === passwordAuth && newPassword === confirmPass) {
-      setPasswordAuth(confirmPass)
+    if(password === users.get(loginAuth)?.password && newPassword === confirmPass) {
+      setUser(users.get(loginAuth)!.password = confirmPass);
       navigate(-1);
-    } else if(password !== passwordAuth) {
+    } else if(password !== users.get(loginAuth)?.password) {
       setErrorPass(true);
     } else if(newPassword !== confirmPass) {
       setErrorNewPass(true);

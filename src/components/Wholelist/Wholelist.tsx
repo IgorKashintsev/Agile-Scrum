@@ -79,25 +79,25 @@ export const Wholelist = () => {
       let upLine = selectedRef.current.getBoundingClientRect().top;
       let screenRes = window.screen.availHeight;
       if(screenRes < 1081) {
-        if(upLine > 510 && upLine < 641) {
+        if(upLine > 510 && upLine < 642) {
           setCordinatSelected((selectedRef.current.offsetTop) - 60);
-        } else if (upLine > 640 && upLine < 771) {
+        } else if (upLine > 641 && upLine < 773) {
           setCordinatSelected((selectedRef.current.offsetTop) - 192);
-        } else if (upLine > 770 && upLine < 901) {
+        } else if (upLine > 772 && upLine < 904) {
           setCordinatSelected((selectedRef.current.offsetTop) - 324);
-        } else if(upLine > 900 && upLine < 1030) {
+        } else if(upLine > 903 && upLine < 1035) {
           setCordinatSelected((selectedRef.current.offsetTop) - 456);
         } else {
           setCordinatSelected((selectedRef.current.offsetTop) + 72);
         }
       } else if (screenRes > 1080 && screenRes < 1441) {
-        if(upLine > 850 && upLine < 981) {
+        if(upLine > 850 && upLine < 982) {
           setCordinatSelected((selectedRef.current.offsetTop) - 60);
-        } else if (upLine > 980 && upLine < 1111) {
+        } else if (upLine > 981 && upLine < 1113) {
           setCordinatSelected((selectedRef.current.offsetTop) - 192);
-        } else if (upLine > 1110 && upLine < 1241) {
+        } else if (upLine > 1112 && upLine < 1244) {
           setCordinatSelected((selectedRef.current.offsetTop) - 324);
-        } else if(upLine > 1240 && upLine < 1371) {
+        } else if(upLine > 1243 && upLine < 1375) {
           setCordinatSelected((selectedRef.current.offsetTop) - 456);
         } else {
           setCordinatSelected((selectedRef.current.offsetTop) + 72);
@@ -109,7 +109,7 @@ export const Wholelist = () => {
     return
   }, [selectedIndex]);
 
-  console.log('wholelist');
+  // console.log('wholelist');
 
   return(
     <>

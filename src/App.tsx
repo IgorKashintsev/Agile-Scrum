@@ -11,13 +11,29 @@ import { Profile } from './components/Profile/Profile';
 import { SignIn } from './components/SignIn/SignIn';
 import { SignUp } from './components/SignUp/SignUp';
 import { Wholelist } from './components/Wholelist/Wholelist';
+import { Favorites } from './components/Favorites';
+import { 
+  IsAuth, 
+  Login, 
+  BasketArr, 
+  ReviewObj, 
+  Items, 
+  UsersMap,
+} from './types';
 
 import style from './global.module.scss';
-import { IsAuth, Login, Password, BasketArr, ReviewObj, Items } from './types';
+
+const defaultUser = new Map([
+  ['Igor', {
+      password: '123',
+      favorites: [0, 5, 25]
+    },
+  ],
+]);
 
 export const App = () => {
-  const [loginAuth, setName] = useState<Login>('Igor');
-  const [passwordAuth, setPasswordAuth] = useState<Password>('1234');
+  const [users, setUser] = useState<UsersMap>(defaultUser);
+  const [loginAuth, setLoginAuth] = useState<Login>('');
   const [isAuth, setIsAuth] = useState<IsAuth>(false);
   const [basketArr, setBasketArr] = useState<BasketArr>([]);
   const [reviewArr, setReviewArr] = useState<ReviewObj[]>([]);
@@ -33,8 +49,8 @@ export const App = () => {
   };
 
   const onAddReviewArr = (newReview: ReviewObj) => {
-    setReviewArr([...reviewArr, newReview])
-  }
+    setReviewArr([...reviewArr, newReview]);
+  };
   
   console.log('app');
 
@@ -65,6 +81,8 @@ export const App = () => {
               onAddReviewArr={onAddReviewArr}
               loginAuth={loginAuth}
               reviewArr={reviewArr}
+              users={users}
+              onAddFavorites={() => setUser}
             />
           }
         />
@@ -72,8 +90,8 @@ export const App = () => {
           path="signin" 
           element={
             <SignIn 
-              loginAuth={loginAuth} 
-              passwordAuth={passwordAuth} 
+              users={users}
+              setLoginAuth={setLoginAuth} 
               onIsAuth={setIsAuth}
             />
           }
@@ -82,10 +100,10 @@ export const App = () => {
           path="signup" 
           element={
             <SignUp 
-              loginAuth={loginAuth} 
+              users={users}
+              setUser={setUser}
               onIsAuth={setIsAuth}
-              setName={setName}
-              setPasswordAuth={setPasswordAuth}
+              setLoginAuth={setLoginAuth}
             />
           }
         />
@@ -104,8 +122,9 @@ export const App = () => {
           element={
             <ChangePass
               isAuth={isAuth}
-              passwordAuth={passwordAuth}
-              setPasswordAuth={setPasswordAuth}
+              loginAuth={loginAuth}
+              users={users}
+              setUser={() => setUser}
             />
           }
         />
@@ -116,6 +135,19 @@ export const App = () => {
               basketArr={basketArr} 
               onDelBasketItem={setBasketArr}
               isAuth={isAuth}
+            />
+          }
+        />
+        <Route
+          path="favorites" 
+          element={
+            <Favorites 
+              users={users}
+              loginAuth={loginAuth}
+              isAuth={isAuth}
+              basketArr={basketArr} 
+              onAddBasketArr={setBasketArr}
+              onDeleteFavorite={() => setUser}
             />
           }
         />

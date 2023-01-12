@@ -22,13 +22,14 @@
 
   &_secondary {
     width: 320px;
-    max-height: 245px;
+    max-height: 285px;
     margin-left: auto;
-    padding: 35px 15px;
+    padding: 15px 15px;
     color: #a8a8a8;
     background-color: #4b4b4b;
     border-radius: 4px;
     &_div {
+      margin-top: 50px;
       margin-bottom: 50px;
     }
   }
@@ -46,7 +47,7 @@
   margin-left: 5px;
   padding: 4px;
   border-radius: 4px;
-  background-color: #313131;
+  background-color: #3b3b3b;
 }
 .price {
   display: flex;
@@ -55,12 +56,4 @@
   &_info {
     color: #d6d6d6;
   }
-  &_basket {
-    padding: 4px;
-    border-radius: 4px;
-    background-color: #313131;
-  }
-}
-.active {
-  color: #ffffff;
 }
