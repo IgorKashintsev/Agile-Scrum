@@ -17,8 +17,14 @@
     max-width: 200px;
     box-shadow: 5px 5px 12px rgb(43, 17, 0);
     width: 100%;
+    cursor: pointer;
   }
   &_price {
     min-width: 110px;
+  }
+  &_empty {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 50px;
   }
 }

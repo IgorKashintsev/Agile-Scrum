@@ -36,6 +36,10 @@ export const Favorites: FC<FavoritesProps> = (
     }
   }, [isAuth]);
 
+  const handleClickGame = (gameId: number) => {
+    navigate(`/${gameId.toString()}`)
+  };
+
   const handleClickDelete = (gameId: number) => {
     const favoriteIdx = users.get(loginAuth)?.favorites?.indexOf(gameId);
     if(favoriteIdx !== -1 && favoriteIdx !== undefined) {
@@ -56,7 +60,7 @@ export const Favorites: FC<FavoritesProps> = (
       <div className={styleFavorites.favorites_header}>ВАШЕ ИЗБРАННОЕ</div>
       {users.get(loginAuth)?.favorites === undefined ||
         users.get(loginAuth)!.favorites!.length < 1 ?
-        <p>Список избранного пуст</p> :
+        <p className={styleFavorites.favorites_empty}>Список избранного пуст</p> :
         <Box
           className={styleFavorites.favorites_list}
           sx={{
@@ -82,10 +86,14 @@ export const Favorites: FC<FavoritesProps> = (
                 key={item}
               >
                 <div>
-                  <img src={(items.get(item))?.images[0]}></img>
+                  <img 
+                    src={(items.get(item))?.images[0]}
+                    onClick={() => handleClickGame(item)}
+                  ></img>
                 </div>
                 <ListItemText
-                  sx={{ marginLeft: '20px', maxWidth: '330px' }}
+                  sx={{ marginLeft: '20px', maxWidth: '330px', cursor: 'pointer', }}
+                  onClick={() => handleClickGame(item)}
                   primary={(items.get(item))?.name} 
                   secondary={(items.get(item))?.genre.join(', ')}
                 />

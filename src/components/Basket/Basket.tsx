@@ -15,14 +15,16 @@ interface BasketProps {
 }
 
 export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) => {
-  const [selected, setSelected] = useState<number>(-1);
   const [sumTotal, setSumTotal] = useState(0);
-  const deleteRef = useRef<HTMLDivElement | any>(null);
 
   const navigate = useNavigate();
 
   const handleClickDelete = (item: number) => {
     onDelBasketItem(basketArr.filter((el) => el !== item))
+  };
+
+  const handleClickGame = (gameId: number) => {
+    navigate(`/${gameId.toString()}`)
   };
 
   useEffect(() => {
@@ -67,14 +69,17 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
               {basketArr.map((item) => (
                 <ListItemButton
                   className={styleBasket.img}
-                  onMouseEnter={() => setSelected(item)}
                   key={item}
                 >
                   <div>
-                    <img src={(items.get(item))?.images[0]}></img>
+                    <img
+                      src={(items.get(item))?.images[0]}
+                      onClick={() => handleClickGame(item)}
+                    ></img>
                   </div>
                   <ListItemText
-                    sx={{ marginLeft: '20px', }}
+                    sx={{ marginLeft: '20px', cursor: 'pointer',}}
+                    onClick={() => handleClickGame(item)}
                     primary={(items.get(item))?.name} 
                   />
                   <div>
