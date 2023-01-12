@@ -22,8 +22,8 @@ export const WholelistDescription: FC<WholelistDescriptionProps> = ({idxSlide}) 
       setText(`${(items.get(idxSlide))!.text[0].substring(0, 370)}...`)
     } else {
     setText((items.get(idxSlide))!.text[0])}
-  }, [idxSlide])
-  
+  }, [idxSlide]);
+
   return(
     <>
       <div className={styleCard.card}>

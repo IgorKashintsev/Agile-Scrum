@@ -179,6 +179,7 @@ export const labels: { [index: number]: string } = {
 export const items = new Map<number, Items> (
   [
     [0, {
+      id: 0,
       images: 
         [
           imgAgeOfWonders0,
@@ -229,8 +230,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Стратегия', 'Пошаговая'],
       date: new Date(2019, 7, 6),
+      price: 1799,
     }],
     [1, {
+      id: 1,
       images: 
         [
           imgDivinity0,
@@ -264,8 +267,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Ролевая','Пошаговая'],
       date: new Date(2017, 8, 14),
+      price: 1899,
     }],
     [2, {
+      id: 2,
       images: 
         [
           imgETS0,
@@ -299,8 +304,10 @@ export const items = new Map<number, Items> (
       rating: 5,
       genre: ['Автосимулятор'],
       date: new Date(2012, 9, 18),
+      price: 995,
     }],
     [3, {
+      id: 3,
       images: 
         [
           imgDetroitBH0,
@@ -338,8 +345,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Экшен', 'Интерактивное кино'],
       date: new Date(2020, 5, 18),
+      price: 1959,
     }],
     [4, {
+      id: 4,
       images: 
         [
           imgCivilizationVI0,
@@ -372,8 +381,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Стратегия', 'Пошаговая'],
       date: new Date(2016, 9, 21),
+      price: 2929,
     }],
     [5, {
+      id: 5,
       images:
         [
           imgMassEffectLE0,
@@ -409,8 +420,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2021, 4, 14),
+      price: 1989,
     }],
     [6, {
+      id: 6,
       images:
         [
           imgGTA0,
@@ -452,8 +465,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен'],
       date: new Date(2015, 3, 14),
+      price: 1890,
     }],
     [7, {
+      id: 7,
       images:
         [
           imgAssassinsCreed0,
@@ -479,8 +494,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2017, 9, 27),
+      price: 1500,
     }],
     [8, {
+      id: 8,
       images:
         [
           imgMafia0,
@@ -510,8 +527,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен'],
       date: new Date(2020, 8, 25),
+      price: 1950,
     }],
     [9, {
+      id: 9,
       images:
         [
           imgCyberpunk0,
@@ -545,8 +564,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2020, 11, 10),
+      price: 1999,
     }],
     [10, {
+      id: 10,
       images:
         [
           imgRDR0,
@@ -587,8 +608,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Экшен'],
       date: new Date(2019, 11, 5),
+      price: 2199,
     }],
     [11, {
+      id: 11,
       images:
         [
           imgStellaris0,
@@ -630,8 +653,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Стратегия'],
       date: new Date(2016, 4, 9),
+      price: 1639,
     }],
     [12, {
+      id: 12,
       images:
         [
           imgCrusaderKings0,
@@ -670,8 +695,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Стратегия', 'Ролевая'],
       date: new Date(2020, 8, 1),
+      price: 1545,
     }],
     [13, {
+      id: 13,
       images:
         [
           imgBaldursGate0,
@@ -708,8 +735,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Ролевая', 'Пошаговая'],
       date: new Date(2020, 9, 6),
+      price: 1399,
     }],
     [14, {
+      id: 14,
       images:
         [
           imgXCOM0,
@@ -740,8 +769,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Стратегия', 'Пошаговая'],
       date: new Date(2016, 1, 5),
+      price: 1999,
     }],
     [15, {
+      id: 15,
       images:
         [
           imgFallout0,
@@ -778,8 +809,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2015, 10, 10),
+      price: 1909,
     }],
     [16, {
+      id: 16,
       images:
         [
           imgSims0,
@@ -812,8 +845,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Симулятор'],
       date: new Date(2014, 8, 2),
+      price: 2995,
     }],
     [17, {
+      id: 17,
       images:
         [
           imgWitcher0,
@@ -846,8 +881,10 @@ export const items = new Map<number, Items> (
       rating: 5,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2015, 4, 18),
+      price: 1890,
     }],
     [18, {
+      id: 18,
       images:
         [
           imgDyingLight0,
@@ -877,8 +914,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2022, 1, 4),
+      price: 1999,
     }],
     [19, {
+      id: 19,
       images:
         [
           imgDOOMEternal0,
@@ -903,8 +942,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Экшен'],
       date: new Date(2020, 2, 20),
+      price: 1955,
     }],
     [20, {
+      id: 20,
       images:
         [
           imgAPlagueTaleRequiem0,
@@ -933,8 +974,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Экшен'],
       date: new Date(2022, 9, 17),
+      price: 1999,
     }],
     [21, {
+      id: 21,
       images:
         [
           imgAgeofEmpiresII0,
@@ -966,8 +1009,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Стратегия'],
       date: new Date(2019, 10, 14),
+      price: 945,
     }],
     [22, {
+      id: 22,
       images:
         [
           imgSTARWARSJediFallenOrder0,
@@ -1001,8 +1046,10 @@ export const items = new Map<number, Items> (
       rating: 4.5,
       genre: ['Экшен'],
       date: new Date(2019, 10, 15),
+      price: 1975,
     }],
     [23, {
+      id: 23,
       images:
         [
           imgFIFA230,
@@ -1040,8 +1087,10 @@ export const items = new Map<number, Items> (
       rating: 2.5,
       genre: ['Симулятор', 'Спорт'],
       date: new Date(2022, 8, 30),
+      price: 2905,
     }],
     [24, {
+      id: 24,
       images:
         [
           imgTotalWarROMEII0,
@@ -1076,8 +1125,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Стратегия'],
       date: new Date(2013, 8, 2),
+      price: 899,
     }],
     [25, {
+      id: 25,
       images:
         [
           imgDragonAgeInquisition0,
@@ -1117,8 +1168,10 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2014, 10, 18),
+      price: 1969,
     }],
     [26, {
+      id: 26,
       images:
         [
           imgKingdomComeDeliverance0,
@@ -1156,6 +1209,7 @@ export const items = new Map<number, Items> (
       rating: 4,
       genre: ['Экшен', 'Ролевая'],
       date: new Date(2018, 1, 13),
+      price: 1999,
     }],
   ],
 );

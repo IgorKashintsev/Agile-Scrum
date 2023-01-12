@@ -1,0 +1,31 @@
+.listItem {
+  max-width: 650px;
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 4px;
+  color: #d6d6d6;
+  background-color: #4b4b4b;
+  overflow-x: hidden;
+  & img {
+    width: 100px;
+    height: 100px;
+  }
+  &_review {
+    margin-left: 25px;
+  }
+  & p {
+    margin-top: 10px;
+  }
+  &_date {
+    font-size: 13px;
+    color: #a8a8a8;
+  }
+}
+.hr {
+  border: 1px solid #ffffffa6;
+  border-bottom-width: 0;
+}
+.header {
+  color: #d6d6d6;
+  margin-top: 25px;
+}

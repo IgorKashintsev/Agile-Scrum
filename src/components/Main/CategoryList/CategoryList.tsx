@@ -78,7 +78,7 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
                 />
                 <ListItemText 
                   sx={{ textAlign: 'right'}}
-                  primary="Бесплатно"
+                  primary={`${(items.get(itemList))?.price.toFixed(2)} ₽`}
                 />
               </ListItemButton>
             ))}
