@@ -13,7 +13,7 @@ interface SearchProps {
   setFilteredArr: (param: Items[]) => void;
   openedFiltered: boolean;
   setOpenedFiltered: (param: boolean) => void;
-}
+};
 
 export const Search: FC<SearchProps> = (
     {

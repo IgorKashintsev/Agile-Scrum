@@ -11,7 +11,7 @@ interface ChangePassProps {
   loginAuth: string;
   users: UsersMap;
   setUser: (newPass: string) => void;
-}
+};
 
 export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUser}) => {
   const [password, setPassword] = useState('');

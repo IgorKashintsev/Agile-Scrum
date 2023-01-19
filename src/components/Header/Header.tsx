@@ -13,7 +13,7 @@ interface IsAuthProps {
   onIsAuth: (param: boolean) => void;
   basketArr: BasketArr;
   setBasketArr: (newItemBasket: BasketArr) => void;
-}
+};
 
 export const Header: FC<IsAuthProps> = (
     {

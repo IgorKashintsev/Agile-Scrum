@@ -9,7 +9,7 @@ import styleReviewsList from './ReviewsList.module.scss'
 interface ReviewsListProps {
   reviewArr: ReviewObj[];
   gameId: string;
-}
+};
 
 export const ReviewsList: FC<ReviewsListProps> = ({reviewArr, gameId}) => {
   const [reviewListArr, setReviewListArr] = useState<ReviewObj[]>([]);

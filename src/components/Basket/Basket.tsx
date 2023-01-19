@@ -1,4 +1,4 @@
-import { Box, Button, List, ListItemButton, ListItemText, useTheme } from "@mui/material"
+import { Box, Button, List, ListItemButton, ListItemText, useTheme } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BasketArr, IsAuth } from "../../types";
@@ -12,7 +12,7 @@ interface BasketProps {
   basketArr: BasketArr;
   onDelBasketItem: (param: BasketArr) => void;
   isAuth: IsAuth;
-}
+};
 
 export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) => {
   const [sumTotal, setSumTotal] = useState(0);

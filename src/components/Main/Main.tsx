@@ -8,14 +8,14 @@ import style from '../../global.module.scss';
 
 interface MainProps {
   reviewArr: ReviewObj[];
-}
+};
 
 export const Main: FC<MainProps> = ({reviewArr}) => {
   const [idItems] = useState<IdItems>([]);
 
   useEffect(() => {
     window.scrollTo(0,0);
-  }, [])
+  }, []);
 
   while (idItems.length < 7) {
     const randomNumber = Math.ceil(Math.random() * (items.size - 1));

@@ -21,7 +21,7 @@ interface GamePageProps {
   reviewArr: ReviewObj[];
   users: UsersMap,
   onAddFavorites: (favorite: number) => void;
-}
+};
 
 export const GamePage: FC<GamePageProps> = (
     {

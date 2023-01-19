@@ -20,7 +20,7 @@ import style from '../../global.module.scss';
 
 interface MainProps {
   reviewArr: ReviewObj[];
-}
+};
 
 export const Wholelist: FC<MainProps> = ({reviewArr}) => {
   const [mapList, setMapList] = useState(new Map());

@@ -10,7 +10,7 @@ interface IsAuthProps {
   isAuth: IsAuth;
   loginAuth: Login;
   onIsAuth: (param: boolean) => void;
-}
+};
 
 export const Profile: FC<IsAuthProps> = ({isAuth, loginAuth, onIsAuth}) => {
   const changePassRef = useRef<HTMLDivElement | any>(null);

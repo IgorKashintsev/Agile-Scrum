@@ -13,7 +13,7 @@ import styleSlider from './MainSlide.module.scss';
 
 interface MainProps {
   reviewArr: ReviewObj[];
-}
+};
 
 export const MainSlide: FC<MainProps> = ({reviewArr}) => {
   const [visible, setVisible] = useState(false);

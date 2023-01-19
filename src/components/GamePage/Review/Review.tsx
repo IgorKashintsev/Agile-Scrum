@@ -11,7 +11,7 @@ interface ReviewProps {
   onAddReviewArr: (newReview: ReviewObj) => void;
   gameId: string;
   loginAuth: Login;
-}
+};
 
 export const Review: FC<ReviewProps> = ({onAddReviewArr, gameId, loginAuth}) => {
   const [textReview, setTextReview] = useState('');

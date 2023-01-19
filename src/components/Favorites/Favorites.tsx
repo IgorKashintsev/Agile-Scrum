@@ -16,7 +16,7 @@ interface FavoritesProps {
   onAddBasketArr: (newItemBasket: BasketArr) => void;
   onDeleteFavorite: (param: number[]) => void;
   reviewArr: ReviewObj[];
-}
+};
 
 export const Favorites: FC<FavoritesProps> = (
     {
