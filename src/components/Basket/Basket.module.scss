@@ -30,9 +30,10 @@
   &_order {
     width: 350px;
     margin-left: 25px;
-    @media (max-width: 599px) {
+    @media (max-width: 899px) {
       width: 100%;
       margin-left: 0;
+      margin-top: 25px;
     }
     & h3 {
       font-weight: 500;
@@ -41,7 +42,6 @@
   &_price {
     @media (max-width: 599px) {
       margin-left: auto;
-      margin-top: 25px;
     }
   }
   &_delete {

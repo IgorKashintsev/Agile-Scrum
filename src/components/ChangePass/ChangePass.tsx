@@ -81,6 +81,7 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUs
             label="Введите свой пароль"
             variant="outlined"
             autoComplete="off"
+            autoFocus
           />
           <br/>
           <TextField

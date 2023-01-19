@@ -1,4 +1,5 @@
 import { useState, useRef, FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { items } from '../../../constants';
@@ -18,6 +19,8 @@ export const MainSlide: FC<MainProps> = ({reviewArr}) => {
   const [visible, setVisible] = useState(false);
   const [idxSlide, setIdxSlide] = useState<IdxSlide>();
   const [sizeNavigation, setSizeNavigation] = useState(44);
+
+  const navigate = useNavigate();
   
   const swiperRef = useRef<HTMLDivElement | any>(null);
   const mouseEnter = () => {
@@ -74,6 +77,7 @@ export const MainSlide: FC<MainProps> = ({reviewArr}) => {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className={styleSlider.swiper}
+          onClick={() => navigate(`/${idxSlide}`)}
         >
           <SwiperSlide className={styleSlider.swiper_slide}>
             <img src={items.get(0)?.images[1]} alt="Slide1" />

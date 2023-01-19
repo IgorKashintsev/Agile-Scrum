@@ -51,6 +51,11 @@
       flex-direction: column;
       margin-left: 12px;
     }
+    & a {
+      @media (max-width: 599px) {
+        margin-top: 10px;
+      }
+    }
   }
 }
 .filteredList {
@@ -59,7 +64,13 @@
   border-radius: 4px;
   position: absolute;
   z-index: 2;
+  @media (max-width: 599px) {
+    width: 300px;
+  }
   & img {
     max-width: 100px;
+    @media (max-width: 599px) {
+      max-width: 85px;
+    }
   }
 }
