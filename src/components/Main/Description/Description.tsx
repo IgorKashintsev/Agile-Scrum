@@ -1,28 +1,29 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate   } from 'react-router-dom';
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay } from "swiper";
 import { items } from '../../../constants';
 import { CardRating } from './CardRating/CardRating';
+import { IdxSlide, ReviewObj } from '../../../types';
 
 import "swiper/css";
 import "swiper/css/effect-fade";
 import styleCard from './Description.module.scss';
-import { IdxSlide } from '../../../types';
 
 interface DescriptionProps {
   idxSlide: IdxSlide;
+  reviewArr: ReviewObj[];
 };
 
-export const Description: FC<DescriptionProps> = ({idxSlide}) => {
+export const Description: FC<DescriptionProps> = ({idxSlide, reviewArr}) => {
   const [text, setText] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    if((items.get(idxSlide))!.text[0].length > 325) {
-      setText(`${(items.get(idxSlide))!.text[0].substring(0, 325)}...`)
+    if((items.get(idxSlide))!.text[0].length > 370) {
+      setText(`${(items.get(idxSlide))!.text[0].substring(0, 370)}...`)
     } else {
     setText((items.get(idxSlide))!.text[0])}
   }, [idxSlide])
@@ -34,7 +35,7 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
       }
     }
   };
-  
+
   return(
     <>
       <div className={styleCard.card}>
@@ -54,16 +55,28 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
                 }}
               >
                 <SwiperSlide>
-                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[2]} />
+                  <img 
+                    className={styleCard.image} 
+                    src={(items.get(idxSlide))!.images[2]} 
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[3]} />
+                  <img 
+                    className={styleCard.image} 
+                    src={(items.get(idxSlide))!.images[3]} 
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[4]} />
+                  <img 
+                    className={styleCard.image} 
+                    src={(items.get(idxSlide))!.images[4]} 
+                  />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img className={styleCard.image} src={(items.get(idxSlide))!.images[5]} />
+                  <img 
+                    className={styleCard.image} 
+                    src={(items.get(idxSlide))!.images[5]} 
+                  />
                 </SwiperSlide>
               </Swiper>
             </CardMedia>
@@ -82,15 +95,9 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardRating idxSlide={idxSlide}/>
-          <CardActions>
-            <Button 
-              sx={{ color: 'rgba(0, 0, 0, 0.87)', fontWeight: 700 }}
-              size="small"
-            >
-              Подробнее
-            </Button>
-          </CardActions>
+          <div className={styleCard.card_rating}>
+            <CardRating idxSlide={idxSlide} reviewArr={reviewArr}/>
+          </div>
         </Card>
       </div>
     </>

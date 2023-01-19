@@ -2,6 +2,9 @@
   font-size: 18px;
   margin-top: 10px;
   display: flex;
+  @media (max-width: 599px) {
+    flex-direction: column;
+  }
   &_search {
     display: flex;
     & input {
@@ -27,15 +30,32 @@
   &_active {
     color: #ffffff;
     margin-left: 10px;
+    @media (max-width: 599px) {
+      margin-left: 0;
+    }
   }
   &_noactive {
     color: #d6d6d6;
     text-decoration: none;
     margin-left: 10px;
+    @media (max-width: 599px) {
+      margin-left: 0;
+    }
   }
   &_link {
     margin-top: 4px;
     margin-left: 20px;
+    @media (max-width: 599px) {
+      max-width: 80px;
+      display: flex;
+      flex-direction: column;
+      margin-left: 12px;
+    }
+    & a {
+      @media (max-width: 599px) {
+        margin-top: 10px;
+      }
+    }
   }
 }
 .filteredList {
@@ -44,7 +64,13 @@
   border-radius: 4px;
   position: absolute;
   z-index: 2;
+  @media (max-width: 599px) {
+    width: 300px;
+  }
   & img {
     max-width: 100px;
+    @media (max-width: 599px) {
+      max-width: 85px;
+    }
   }
 }

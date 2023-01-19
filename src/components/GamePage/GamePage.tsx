@@ -1,6 +1,6 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { FC, useEffect, useState } from "react";
-import { items, labels } from "../../constants";
+import { items } from "../../constants";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Box, Button, Rating } from "@mui/material";
@@ -21,7 +21,7 @@ interface GamePageProps {
   reviewArr: ReviewObj[];
   users: UsersMap,
   onAddFavorites: (favorite: number) => void;
-}
+};
 
 export const GamePage: FC<GamePageProps> = (
     {
@@ -37,13 +37,29 @@ export const GamePage: FC<GamePageProps> = (
   ) => {
   const [visible, setVisible] = useState(false);
   const {gameId} = useParams();
-  const ratingValue = (items.get(Number(gameId)))?.rating;
+  const [ratingValue, setRatingValue] = useState((items.get(Number(gameId)))?.rating);
+  const [sizeNavigation, setSizeNavigation] = useState(44);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0,0);
   }, []);
+
+  useEffect(() => {
+    if(reviewArr.findIndex(item => item.id === Number(gameId)) !== -1) {
+      let arrFiltered = reviewArr
+        .filter(item => item.id === Number(gameId))
+        .map(item => item.rating);
+      setRatingValue(
+        Number((((items.get(Number(gameId)))!.rating + 
+        arrFiltered.reduce((sum, current) => sum! + 
+        current!, 0)!) / (arrFiltered.length + 1)).toFixed(1))
+      );
+    }else {
+      setRatingValue((items.get(Number(gameId)))?.rating);
+    }
+  }, [reviewArr]);
 
   const handleClickFavorites = (gameId: number) => {
     const favoriteIdx = users.get(loginAuth)?.favorites?.indexOf(gameId);
@@ -68,9 +84,17 @@ export const GamePage: FC<GamePageProps> = (
     }
   };
   
+  useEffect(() => {
+    if(window.screen.availWidth < 600) {
+      setSizeNavigation(22);
+    } else {
+      setSizeNavigation(44);
+    }
+  }, []);
+
   if (gameId && !items.get(Number(gameId))) {
     return <Navigate to="/" replace />
-  }
+  };
   
   return(
     <>
@@ -82,6 +106,7 @@ export const GamePage: FC<GamePageProps> = (
             // @ts-ignore
             "--swiper-navigation-color": "#fff",
             "--swiper-pagination-color": "#fff",
+            "--swiper-navigation-size": `${sizeNavigation}px`,
           }}
           autoplay={{
             delay: 4500,
@@ -123,7 +148,7 @@ export const GamePage: FC<GamePageProps> = (
                 width: "120px",
                 height: "25px",
                 fontSize: "13px",
-                color: "#a8a8a8",
+                color: "#d6d6d6",
                 float: 'right',
                 backgroundColor: "#3b3b3b",
                 border: "1px solid #757575",
@@ -158,11 +183,11 @@ export const GamePage: FC<GamePageProps> = (
                 name="text-feedback"
                 value={ratingValue}
                 readOnly
-                precision={0.5}
+                precision={0.1}
                 sx={{ ml: 0.5 }}
                 emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
               />
-              <Box sx={{ ml: 1 }}>{ratingValue ? labels[ratingValue] : 0}</Box>
+              <p className={styleGamePage.info_secondary_rating}>{ratingValue} из 5</p>
             </Box>
             <div className={styleGamePage.info_secondary_div}>
               Жанр: 
@@ -183,7 +208,7 @@ export const GamePage: FC<GamePageProps> = (
                   width: "120px",
                   height: "25px",
                   fontSize: "13px",
-                  color: "#a8a8a8",
+                  color: "#d6d6d6",
                   float: 'right',
                   backgroundColor: "#3b3b3b",
                   border: "1px solid #757575",

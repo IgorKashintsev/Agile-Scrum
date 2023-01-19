@@ -11,7 +11,7 @@ interface SignInProps {
   setUser: (newUser: UsersMap) => void;
   onIsAuth: (param: boolean) => void;
   setLoginAuth: (param: Login) => void;
-}
+};
 
 export const SignUp: FC<SignInProps> = ({users, setUser, onIsAuth, setLoginAuth}) => {
   const [newLogin, setNewLogin] = useState('');

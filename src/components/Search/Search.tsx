@@ -6,19 +6,28 @@ import { Items } from '../../types';
 
 import style from '../../global.module.scss';
 import styleSearch from './Search.module.scss';
-import { Box, List, ListItemButton, ListItemText } from '@mui/material';
+import { Box, List, ListItemButton, ListItemText, useTheme } from '@mui/material';
 
 interface SearchProps {
   filteredArr: Items[];
   setFilteredArr: (param: Items[]) => void;
   openedFiltered: boolean;
   setOpenedFiltered: (param: boolean) => void;
-}
+};
 
-export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFiltered, setOpenedFiltered}) => {
+export const Search: FC<SearchProps> = (
+    {
+      filteredArr, 
+      setFilteredArr, 
+      openedFiltered, 
+      setOpenedFiltered,
+    }
+  ) => {
   const [inputValue, setInputValue] = useState('');
 
   const navigate = useNavigate();
+  const theme = useTheme();
+  
   const filteredList = useRef<HTMLDivElement | any>(null);
   const inputRef = useRef<HTMLDivElement | any>(null);
 
@@ -29,7 +38,7 @@ export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFilt
       setOpenedFiltered(true);
     } else {
       setFilteredArr([]);
-      setOpenedFiltered(false);
+      // setOpenedFiltered(false);
     }
   }, [inputValue]);
 
@@ -96,10 +105,16 @@ export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFilt
               '& .MuiListItemText-primary': {
                 color: '#d6d6d6',
                 fontSize: '14px',
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '11px',
+                },
               },
               '& .MuiListItemText-secondary': {
                 color: '#a8a8a8',
                 fontSize: '13px',
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '10px',
+                },
               },
               '& .MuiListItemButton-root:hover': {
                 backgroundColor: '#313131',
@@ -119,7 +134,12 @@ export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFilt
                     <img src={item.images[0]}></img>
                   </div>
                   <ListItemText
-                    sx={{ marginLeft: '20px', }}
+                    sx={{ 
+                      marginLeft: '20px',
+                      [theme.breakpoints.down('sm')]: {
+                        marginLeft: '10px', 
+                      },
+                    }}
                     primary={item.name}
                     secondary={`${item.price.toFixed(2)} ₽`}
                   />

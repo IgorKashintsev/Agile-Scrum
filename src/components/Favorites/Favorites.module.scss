@@ -1,7 +1,10 @@
 .favorites {
-  min-height: 685px;
+  min-height: 680px;
   margin-top: 36px;
   color: #d6d6d6;
+  @media (max-width: 899px) {
+    min-height: 550px;
+  }
   &_header {
     font-size: 22px;
     letter-spacing: 2px;
@@ -18,13 +21,26 @@
     box-shadow: 5px 5px 12px rgb(43, 17, 0);
     width: 100%;
     cursor: pointer;
+    @media (max-width: 599px) {
+      max-width: 100px;
+    }
   }
   &_price {
     min-width: 110px;
+    @media (max-width: 899px) {
+      margin-left: auto;
+      min-width: auto;
+    }
   }
   &_empty {
     font-size: 22px;
     text-align: center;
     margin-top: 50px;
+  }
+  &_name {
+    max-width: 290px;
+    @media (max-width: 450px) {
+      max-width: 120px;
+    }
   }
 }

@@ -163,19 +163,6 @@ import imgKingdomComeDeliverance5 from '../image/Kingdom Come Deliverance/5.jpg'
 
 import { Items } from './types';
 
-export const labels: { [index: number]: string } = {
-  0.5: 'ужасный',
-  1: 'ужасный+',
-  1.5: 'низкий',
-  2: 'низкий+',
-  2.5: 'средний',
-  3: 'средний+',
-  3.5: 'хороший',
-  4: 'хороший+',
-  4.5: 'превосходный',
-  5: 'превосходный+',
-};
-
 export const items = new Map<number, Items> (
   [
     [0, {

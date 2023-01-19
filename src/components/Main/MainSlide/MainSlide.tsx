@@ -1,24 +1,36 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { items } from '../../../constants';
 import { Description } from "../Description/Description";
+import { IdxSlide, ReviewObj } from '../../../types';
 
 import "swiper/scss";
 import "swiper/scss/pagination";
 import "swiper/scss/navigation";
 import styleSlider from './MainSlide.module.scss';
-import { IdxSlide } from '../../../types';
 
-export const MainSlide = () => {
+interface MainProps {
+  reviewArr: ReviewObj[];
+};
+
+export const MainSlide: FC<MainProps> = ({reviewArr}) => {
   const [visible, setVisible] = useState(false);
   const [idxSlide, setIdxSlide] = useState<IdxSlide>();
+  const [sizeNavigation, setSizeNavigation] = useState(44);
+
+  const navigate = useNavigate();
   
   const swiperRef = useRef<HTMLDivElement | any>(null);
   const mouseEnter = () => {
     swiperRef.current.swiper.autoplay.stop();
-    setVisible(true);
     setIdxSlide(() => swiperRef.current.swiper.realIndex);
+    if(window.screen.availWidth > 1000) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
   };
 
   const mouseLeave = () => {
@@ -29,7 +41,15 @@ export const MainSlide = () => {
   const changeSlide = () => {
     setIdxSlide(() => swiperRef.current.swiper.realIndex);
   };
-  
+
+  useEffect(() => {
+    if(window.screen.availWidth < 600) {
+      setSizeNavigation(22);
+    } else {
+      setSizeNavigation(44);
+    }
+  }, []);
+
   return(
     <>
       <div className={styleSlider.header_slide}>РЕКОМЕНДУЕМОЕ</div>
@@ -44,6 +64,7 @@ export const MainSlide = () => {
             // @ts-ignore
             "--swiper-navigation-color": "#fff",
             "--swiper-pagination-color": "#fff",
+            "--swiper-navigation-size": `${sizeNavigation}px`,
           }}
           autoplay={{
             delay: 4500,
@@ -56,6 +77,7 @@ export const MainSlide = () => {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className={styleSlider.swiper}
+          onClick={() => navigate(`/${idxSlide}`)}
         >
           <SwiperSlide className={styleSlider.swiper_slide}>
             <img src={items.get(0)?.images[1]} alt="Slide1" />
@@ -79,7 +101,7 @@ export const MainSlide = () => {
         <div
           className={styleSlider.description}
         >
-          {visible && <Description idxSlide={idxSlide? idxSlide: 0}/>}
+          {visible && <Description idxSlide={idxSlide? idxSlide: 0} reviewArr={reviewArr}/>}
         </div>
       </div>
     </>

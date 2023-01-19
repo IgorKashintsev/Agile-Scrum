@@ -1,8 +1,8 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, List, ListItemButton, ListItemText, Rating } from "@mui/material";
+import { Box, Button, List, ListItemButton, ListItemText, Rating, useTheme } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
-import { BasketArr, UsersMap } from "../../types";
+import { BasketArr, ReviewObj, UsersMap } from "../../types";
 import { items } from "../../constants";
 
 import styleFavorites from './Favorites.module.scss';
@@ -15,7 +15,8 @@ interface FavoritesProps {
   basketArr: BasketArr;
   onAddBasketArr: (newItemBasket: BasketArr) => void;
   onDeleteFavorite: (param: number[]) => void;
-}
+  reviewArr: ReviewObj[];
+};
 
 export const Favorites: FC<FavoritesProps> = (
     {
@@ -25,16 +26,27 @@ export const Favorites: FC<FavoritesProps> = (
       basketArr,
       onAddBasketArr,
       onDeleteFavorite,
+      reviewArr,
     }
   ) => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
+  const theme = useTheme();
 
   useEffect(() => {
     if(!isAuth) {
       navigate('/');
     }
   }, [isAuth]);
+
+  const changeRating = (gameId: number) => {
+    let arrFiltered = reviewArr
+      .filter(item => item.id === gameId)
+      .map(item => item.rating);
+    return Number((((items.get(gameId))!.rating + 
+      arrFiltered.reduce((sum, current) => sum! + 
+      current!, 0)!) / (arrFiltered.length + 1)).toFixed(1));
+  };
 
   const handleClickGame = (gameId: number) => {
     navigate(`/${gameId.toString()}`)
@@ -68,9 +80,17 @@ export const Favorites: FC<FavoritesProps> = (
             '& .MuiListItemButton-root': {
               cursor: "default",
             },
+            '& .MuiListItemText-primary': {
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '11px',
+              },
+            },
             '& .MuiListItemText-secondary': {
               color: '#a8a8a8',
               fontSize: '13px',
+              [theme.breakpoints.down('sm')]: {
+                display: 'none',
+              },
             },
             '& .MuiListItemButton-root:hover': {
               backgroundColor: '#3b3b3b',
@@ -91,21 +111,44 @@ export const Favorites: FC<FavoritesProps> = (
                     onClick={() => handleClickGame(item)}
                   ></img>
                 </div>
+                <div className={styleFavorites.favorites_name}>
+                  <ListItemText
+                    sx={{ 
+                      marginLeft: '20px',
+                      [theme.breakpoints.down('sm')]: {
+                        marginLeft: '10px', 
+                      },
+                    }}
+                    primary={(items.get(item))?.name} 
+                    secondary={(items.get(item))?.genre.join(', ')}
+                  />
+                </div>
                 <ListItemText
-                  sx={{ marginLeft: '20px', maxWidth: '330px', }}
-                  primary={(items.get(item))?.name} 
-                  secondary={(items.get(item))?.genre.join(', ')}
-                />
-                <ListItemText
-                  sx={{ textAlign: 'right', mr: '50px'}}
+                  sx={{ 
+                    textAlign: 'right', 
+                    mr: '50px',
+                    [theme.breakpoints.down('md')]: {
+                      display: 'none',
+                    },
+                  }}
                   secondary={(items.get(item))?.date.toLocaleDateString()}
                 />
                 <Rating
                   name="text-feedback"
-                  value={(items.get(item))?.rating}
+                  value={
+                    reviewArr.findIndex(el => el.id === item) !== -1 ?
+                    changeRating(item) :
+                    (items.get(item))?.rating
+                  }
                   readOnly
                   precision={0.5}
-                  sx={{ maxWidth: '100px', fontSize: '15px'}}
+                  sx={{ 
+                    maxWidth: '100px', 
+                    fontSize: '15px',
+                    [theme.breakpoints.down('md')]: {
+                      display: 'none',
+                    },
+                  }}
                   emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                 />
                 <div className={styleFavorites.favorites_price}>
@@ -115,7 +158,7 @@ export const Favorites: FC<FavoritesProps> = (
                       width: "90px",
                       height: "25px",
                       fontSize: "11px",
-                      color: "#a8a8a8",
+                      color: "#d6d6d6",
                       float: 'right',
                       top: "-5px",
                       backgroundColor: "#3b3b3b",
@@ -123,6 +166,12 @@ export const Favorites: FC<FavoritesProps> = (
                       "&:hover":{
                         color: "rgba(0, 0, 0, 0.87)",
                         backgroundColor: "#d6d6d6",
+                      },
+                      [theme.breakpoints.down('sm')]: {
+                        width: "64px",
+                        height: "18px",
+                        fontSize: "7px",
+                        top: "-5px",
                       },
                     }}
                     onClick={() => handleClickDelete(item)}
@@ -132,6 +181,10 @@ export const Favorites: FC<FavoritesProps> = (
                     sx={{ 
                       textAlign: "right",
                       paddingTop: "25px",
+                      [theme.breakpoints.down('sm')]: {
+                        paddingTop: "0px",
+                        height: "26px",
+                      },
                     }}
                     primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
                   />
@@ -141,7 +194,7 @@ export const Favorites: FC<FavoritesProps> = (
                       width: "90px",
                       height: "25px",
                       fontSize: "11px",
-                      color: "#a8a8a8",
+                      color: "#d6d6d6",
                       float: 'right',
                       bottom: "-5px",
                       backgroundColor: "#3b3b3b",
@@ -149,6 +202,12 @@ export const Favorites: FC<FavoritesProps> = (
                       "&:hover":{
                         color: "rgba(0, 0, 0, 0.87)",
                         backgroundColor: "#d6d6d6",
+                      },
+                      [theme.breakpoints.down('sm')]: {
+                        width: "64px",
+                        height: "18px",
+                        fontSize: "7px",
+                        top: "5px",
                       },
                     }}
                     onClick={() => handleClickBasket(item)}

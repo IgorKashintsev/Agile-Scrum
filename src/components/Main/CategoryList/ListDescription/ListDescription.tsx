@@ -3,20 +3,25 @@ import {
   CardMedia,
   Card,
   Typography,
-  Box,
-  Rating
 } from "@mui/material";
-import { items, labels } from "../../../../constants";
-import StarIcon from '@mui/icons-material/Star';
+import { FC } from "react";
+import { CardRating } from "../../Description/CardRating/CardRating";
+import { ReviewObj } from "../../../../types";
+import { items } from "../../../../constants";
 
 import styleListCard from './ListDescription.module.scss';
-import { FC } from "react";
 
 interface ListDescriptionProps {
   selectedIndex: number;
+  reviewArr: ReviewObj[];
 };
 
-export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
+export const ListDescription: FC<ListDescriptionProps> = (
+    {
+      selectedIndex, 
+      reviewArr
+    }
+  ) => {
   const ratingValue = (items.get(selectedIndex))!.rating;
 
   const name = (items.get(selectedIndex))?.name;
@@ -55,25 +60,7 @@ export const ListDescription: FC<ListDescriptionProps> = ({selectedIndex}) => {
             >
               {showName()}
             </Typography>
-            <div className={styleListCard.rating}>
-              <Box
-                sx={{
-                  width: 200,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >Рейтинг:
-                <Rating
-                  name="text-feedback"
-                  value={ratingValue}
-                  readOnly
-                  precision={0.5}
-                  sx={{ ml: 0.5 }}
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                />
-                <Box sx={{ ml: 1 }}>{labels[ratingValue]}</Box>
-              </Box>
-            </div>
+            <CardRating idxSlide={selectedIndex} reviewArr={reviewArr}/>
             <Typography
               sx={{ 
                 fontSize: '12px',

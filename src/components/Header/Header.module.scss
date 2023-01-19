@@ -6,13 +6,24 @@
 .logo {
   display: flex;
   align-items: center;
+  @media (max-width: 599px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   & p {
     margin-left: 25px;
+    @media (max-width: 599px) {
+      margin-left: 12px;
+      margin-bottom: 10px;
+    }
   }
 }
 .login {
-  min-width: 146px;
+  min-width: 160px;
   text-align: right;
+  @media (max-width: 1000px) {
+    margin-right: 10px;
+  }
   & span {
     vertical-align: text-bottom;
   }
@@ -23,7 +34,7 @@
   align-items: center;
 }
 .login_menu {
-  min-width: 146px;
+  min-width: 160px;
   color: #d6d6d6;
   background-color: #4b4b4b;
   position: absolute;
