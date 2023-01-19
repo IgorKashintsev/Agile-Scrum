@@ -1,22 +1,21 @@
 import { FC, useState } from 'react';
 import { useNavigate   } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import { Box, List, ListItemButton, ListItemText, useTheme } from '@mui/material';
 import { ListDescription } from './ListDescription/ListDescription';
 import { items } from '../../../constants';
+import { IdItems, ReviewObj } from '../../../types';
 
 import styleList from './CategoryList.module.scss';
-import { IdItems } from '../../../types';
 
 interface CategoryListProps {
   idItemsList: IdItems;
+  reviewArr: ReviewObj[];
 };
 
-export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
+export const CategoryList: FC<CategoryListProps> = ({idItemsList, reviewArr}) => {
   const [selectedIndex, setSelectedIndex] = useState(idItemsList[0]);
   const navigate = useNavigate();
+  const theme = useTheme();
   
   const handleListItemEnter = (index: number,) => {
     setSelectedIndex(index);
@@ -32,8 +31,9 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
 
   return(
     <>
+      
       <div className={styleList.header_list}>Популярное</div>
-      <div className={styleList.list_display}>
+      <div className={styleList.list}>
         <Box
           sx={{
             width: '100%',
@@ -41,9 +41,17 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
             bgcolor: '#4b4b4b',
             borderTopLeftRadius: '4px',
             borderBottomLeftRadius: '4px',
+            '& .MuiListItemText-primary': {
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '11px',
+              },
+            },
             '& .MuiListItemText-secondary': {
               color: '#a8a8a8',
               fontSize: '13px',
+              [theme.breakpoints.down('sm')]: {
+                display: 'none',
+              },
             },
           }}
         >
@@ -62,20 +70,30 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
           >
             {idItemsList.map((itemList, id) => (
               <ListItemButton
-                className={styleList.img}
                 key={id}
                 selected={selectedIndex === itemList}
                 onMouseEnter ={() => handleListItemEnter(itemList)}
                 onClick={() => HandleClick(itemList)}
               >
                 <div>
-                  <img src={(items.get(itemList))?.images[0]}></img>
+                  <img 
+                    src={(items.get(itemList))?.images[0]}
+                    className={styleList.list_img}
+                  ></img>
                 </div>
-                <ListItemText 
-                  sx={{ marginLeft: '20px', maxWidth: '295px'}}
-                  primary={(items.get(itemList))?.name} 
-                  secondary={(items.get(itemList))?.genre.join(', ')}
-                />
+                <div className={styleList.list_text}>
+                  <ListItemText 
+                    sx={{ 
+                      marginLeft: '20px', 
+                      maxWidth: '225px', 
+                      [theme.breakpoints.down('sm')]: {
+                        marginLeft: '10px', 
+                      },
+                    }}
+                    primary={(items.get(itemList))?.name} 
+                    secondary={(items.get(itemList))?.genre.join(', ')}
+                  />
+                </div>
                 <ListItemText 
                   sx={{ textAlign: 'right'}}
                   primary={`${(items.get(itemList))?.price.toFixed(2)} ₽`}
@@ -84,7 +102,7 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
             ))}
           </List>
         </Box>
-        <ListDescription selectedIndex={selectedIndex}/>
+        <ListDescription selectedIndex={selectedIndex} reviewArr={reviewArr}/>
       </div>
     </>
   );

@@ -1,1 +1,0 @@
-export {WholelistDescription} from './WholelistDescription';

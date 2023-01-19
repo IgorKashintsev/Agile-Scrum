@@ -1,5 +1,5 @@
-import { Box, Button, List, ListItemButton, ListItemText } from "@mui/material"
-import { FC, useEffect, useRef, useState } from "react";
+import { Box, Button, List, ListItemButton, ListItemText, useTheme } from "@mui/material"
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BasketArr, IsAuth } from "../../types";
 
@@ -18,6 +18,7 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
   const [sumTotal, setSumTotal] = useState(0);
 
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleClickDelete = (item: number) => {
     onDelBasketItem(basketArr.filter((el) => el !== item))
@@ -57,6 +58,11 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
               '& .MuiListItemButton-root': {
                 cursor: "default",
               },
+              '& .MuiListItemText-primary': {
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '11px',
+                },
+              },
               '& .MuiListItemButton-root:hover': {
                 backgroundColor: '#3b3b3b',
               }
@@ -78,10 +84,16 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
                     ></img>
                   </div>
                   <ListItemText
-                    sx={{ marginLeft: '20px', }}
+                    sx={{ 
+                      marginLeft: '20px',
+                      [theme.breakpoints.down('sm')]: {
+                        marginLeft: '10px',
+                        maxWidth: '110px',
+                      },
+                    }}
                     primary={(items.get(item))?.name} 
                   />
-                  <div>
+                  <div className={styleBasket.list_price}>
                     <ListItemText
                       sx={{ 
                         textAlign: "right",
@@ -95,13 +107,18 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
                       width: "90px",
                       height: "26px",
                       fontSize: "11px",
-                      color: "#a8a8a8",
+                      color: "#d6d6d6",
                       float: 'right',
                       backgroundColor: "#3b3b3b",
                       border: "1px solid #757575",
                       "&:hover":{
                         color: "rgba(0, 0, 0, 0.87)",
                         backgroundColor: "#d6d6d6",
+                      },
+                      [theme.breakpoints.down('sm')]: {
+                        width: "64px",
+                        height: "18px",
+                        fontSize: "7px",
                       },
                     }}
                     onClick={() => handleClickDelete(item)}
@@ -138,5 +155,5 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
         </div>
       </div>
     </>
-  )
-}
+  );
+};

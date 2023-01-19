@@ -4,6 +4,11 @@
   border-radius: 4px;
   color: #d6d6d6;
   background-color: #4b4b4b;
+  & h3 {
+    @media (max-width: 599px) {
+      font-size: 16px;
+    }
+  }
   &_review {
     display: flex;
   }
@@ -11,11 +16,19 @@
     font-size: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 20px;
     color: #a8a8a8;
+    @media (max-width: 599px) {
+      font-size: 13px;
+    }
   }
   & img {
     width: 100px;
     height: 100px;
+    @media (max-width: 500px) {
+      width: 50px;
+      height: 50px;
+    }
   }
   &_text {
     width: 100%;
@@ -30,5 +43,25 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    @media (max-width: 500px) {
+      display: block;
+    }
+    &_rating {
+      display: flex;
+      & p {
+        margin-left: 10px;
+        padding-top: 4px;
+        @media (max-width: 599px) {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  &_rating {
+    display: flex;
+    align-items: center;
+    @media (max-width: 700px) {
+      flex-direction: column;
+    }
   }
 }

@@ -28,11 +28,11 @@ export interface ReviewObj {
   login: string;
   review: string;
   date: Date;
+  rating: number | null;
 };
 
 export interface User {
   password: string;
   favorites: number[];
 }
-
 export type UsersMap = Map<string, User>;

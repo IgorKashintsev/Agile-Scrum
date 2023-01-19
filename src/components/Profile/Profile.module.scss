@@ -2,12 +2,28 @@
   margin-top: 80px;
   min-height: 600px;
   color: #d6d6d6;
+  @media (max-width: 600px) {
+    min-height: 400px;
+  }
   &_name {
     display: flex;
+    & img {
+      @media (max-width: 600px) {
+        width: 175px;
+        height: 175px;
+      }
+      @media (max-width: 320px) {
+        width: 100px;
+        height: 100px;
+      }
+    }
   }
   & h1 {
     margin-left: 100px;
     text-shadow: 1px 1px 2px rgb(43, 17, 0);
+    @media (max-width: 600px) {
+      margin-left: 50px;
+    }
   }
 }
 .active {

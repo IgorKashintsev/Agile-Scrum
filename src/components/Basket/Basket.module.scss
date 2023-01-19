@@ -3,11 +3,17 @@
   box-shadow: 5px 5px 12px rgb(43, 17, 0);
   width: 100%;
   cursor: pointer;
+  @media (max-width: 599px) {
+    max-width: 100px;
+  }
 }
 .list {
   min-height: 680px;
   margin-top: 36px;
   color: #d6d6d6;
+  @media (max-width: 599px) {
+    min-height: 550px;
+  }
   &_header {
     font-size: 22px;
     letter-spacing: 2px;
@@ -17,12 +23,25 @@
   }
   &_box {
     display: flex;
+    @media (max-width: 899px) {
+      flex-direction: column;
+    }
   }
   &_order {
     width: 350px;
     margin-left: 25px;
+    @media (max-width: 599px) {
+      width: 100%;
+      margin-left: 0;
+    }
     & h3 {
       font-weight: 500;
+    }
+  }
+  &_price {
+    @media (max-width: 599px) {
+      margin-left: auto;
+      margin-top: 25px;
     }
   }
   &_delete {

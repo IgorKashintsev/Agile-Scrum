@@ -15,13 +15,15 @@ interface IsAuthProps {
   setBasketArr: (newItemBasket: BasketArr) => void;
 }
 
-export const Header: FC<IsAuthProps> = ({
-    isAuth, 
-    loginAuth, 
-    onIsAuth, 
-    basketArr,
-    setBasketArr,
-  }) => {
+export const Header: FC<IsAuthProps> = (
+    {
+      isAuth, 
+      loginAuth, 
+      onIsAuth, 
+      basketArr,
+      setBasketArr,
+    }
+  ) => {
   const [visible, setVisible] = useState(false);
   const [innerLogin, setInnerLogin] = useState(null);
 

@@ -1,15 +1,28 @@
-import { Box, List, ListItemButton, ListItemText, Pagination, Rating, Stack } from "@mui/material";
+import { 
+  Box, 
+  List, 
+  ListItemButton, 
+  ListItemText, 
+  Pagination, 
+  Rating, 
+  Stack, 
+  useTheme
+} from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
-import { useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate   } from 'react-router-dom';
 import { items } from "../../constants";
-import { WholelistDescription } from "./WholelistDescription/WholelistDescription";
+import { Description } from "../Main/Description/Description";
+import { ListPageArr, ListSortArr, PageCount, ReviewObj } from "../../types";
 
 import styleWholelist from './Wholelist.module.scss';
 import style from '../../global.module.scss';
-import { ListPageArr, ListSortArr, PageCount } from "../../types";
 
-export const Wholelist = () => {
+interface MainProps {
+  reviewArr: ReviewObj[];
+}
+
+export const Wholelist: FC<MainProps> = ({reviewArr}) => {
   const [mapList, setMapList] = useState(new Map());
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -21,6 +34,7 @@ export const Wholelist = () => {
   const [cordinatSelected, setCordinatSelected] = useState<number>();
   
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const bestRef = useRef<HTMLDivElement | any>(null);
   const newRef = useRef<HTMLDivElement | any>(null);
@@ -50,9 +64,27 @@ export const Wholelist = () => {
 
   useEffect(() => {
     for(let i = 0; i < items.size; i++) {
-      setMapList(mapList.set(Array.from(items.keys())[i], {rating: items.get(i)?.rating, date: items.get(i)?.date}));
+      if(reviewArr.findIndex(item => item.id === i) !== -1) {
+        let arrFiltered = reviewArr
+          .filter(item => item.id === i)
+          .map(item => item.rating);
+        setMapList(mapList.set
+          (
+            Array.from(items.keys())[i], {rating: Number(((items.get(i)?.rating! + 
+            arrFiltered.reduce((sum, current) => sum! + current!, 0)!) / 
+            (arrFiltered.length + 1)).toFixed(1)), date: items.get(i)?.date}
+          )
+        );
+      } else {
+        setMapList(mapList.set
+          (
+            Array.from(items.keys())[i], 
+            {rating: items.get(i)?.rating, date: items.get(i)?.date}
+          )
+        );
+      }
     }
-  }, []);
+  }, [reviewArr]);
 
   useEffect(() => {
     window.scrollTo(0,0);
@@ -114,27 +146,32 @@ export const Wholelist = () => {
       <div className={style.container}>
         <div className={styleWholelist.wholelist}>
           <div
-            className={styleWholelist.description}
+            className={styleWholelist.wholelist_description}
             style={{ 
               marginTop: `${cordinatSelected}px`,
             }}
           >
-            {(selectedIndex !==-1) && <WholelistDescription idxSlide={selectedIndex? selectedIndex: 0}/>}
+            {(selectedIndex !==-1 && window.screen.availWidth > 1710) && 
+              <Description 
+                idxSlide={selectedIndex? selectedIndex: 0}
+                reviewArr={reviewArr}
+              />
+            }
           </div>
           <Stack spacing={2}>
-            <div className={styleWholelist.list_header}>
+            <div className={styleWholelist.wholelist_header}>
               <div
                 ref={bestRef}
                 onClick={handleClickBest}
                 style={{cursor: 'pointer'}}
-                className={`${styleWholelist.list_header_group} ${styleWholelist.active}`}
+                className={`${styleWholelist.wholelist_header_group} ${styleWholelist.active}`}
               >Лучшее
               </div>
               <div
                 ref={newRef}
                 onClick={handleClickNew}
                 style={{cursor: 'pointer'}}
-                className={styleWholelist.list_header_group}
+                className={styleWholelist.wholelist_header_group}
               >Новинки
               </div>
             </div>
@@ -144,9 +181,17 @@ export const Wholelist = () => {
                 color: '#d6d6d6',
                 bgcolor: '#4b4b4b',
                 borderRadius: '4px',
+                '& .MuiListItemText-primary': {
+                  [theme.breakpoints.down('sm')]: {
+                    fontSize: '11px',
+                  },
+                },
                 '& .MuiListItemText-secondary': {
                   color: '#a8a8a8',
                   fontSize: '13px',
+                  [theme.breakpoints.down('sm')]: {
+                    display: 'none',
+                  },
                 },
               }}
             >
@@ -165,7 +210,6 @@ export const Wholelist = () => {
               >
                 {listPageArr.map((item) => (
                   <ListItemButton
-                    className={styleWholelist.img}
                     ref={(selectedIndex === item[0])? selectedRef: null}
                     selected={selectedIndex === item[0]}
                     onMouseEnter ={() => setSelectedIndex(item[0])}
@@ -174,29 +218,54 @@ export const Wholelist = () => {
                     key={item[0]}
                   >
                     <div>
-                      <img src={(items.get(item[0]))?.images[0]}></img>
+                      <img 
+                        src={(items.get(item[0]))?.images[0]}
+                        className={styleWholelist.wholelist_img}
+                      ></img>
+                    </div>
+                    <div className={styleWholelist.wholelist_name}>
+                      <ListItemText
+                        sx={{ 
+                          marginLeft: '20px',
+                          [theme.breakpoints.down('sm')]: {
+                            marginLeft: '10px', 
+                          },
+                        }}
+                        primary={(items.get(item[0]))?.name} 
+                        secondary={(items.get(item[0]))?.genre.join(', ')}
+                      />
                     </div>
                     <ListItemText
-                      sx={{ marginLeft: '20px', maxWidth: '330px' }}
-                      primary={(items.get(item[0]))?.name} 
-                      secondary={(items.get(item[0]))?.genre.join(', ')}
-                    />
-                    <ListItemText
-                      sx={{ textAlign: 'right', mr: '50px'}}
+                      sx={{ 
+                        textAlign: 'right', 
+                        mr: '50px',
+                        [theme.breakpoints.down('md')]: {
+                          display: 'none',
+                        },
+                      }}
                       secondary={(items.get(item[0]))?.date.toLocaleDateString()}
                     />
                     <Rating
                       name="text-feedback"
-                      value={(items.get(item[0]))?.rating}
+                      value={(mapList.get(item[0]))?.rating}
                       readOnly
-                      precision={0.5}
-                      sx={{ maxWidth: '100px', fontSize: '15px'}}
+                      precision={0.1}
+                      sx={{ 
+                        maxWidth: '100px', 
+                        fontSize: '15px',
+                        [theme.breakpoints.down('md')]: {
+                          display: 'none',
+                        },
+                      }}
                       emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                     <ListItemText
                       sx={{ 
                         textAlign: 'right',
                         maxWidth: '110px',
+                        [theme.breakpoints.down('md')]: {
+                          maxWidth: 'none',
+                        },
                       }}
                       primary={`${(items.get(item[0]))?.price.toFixed(2)} ₽`}
                     />

@@ -1,12 +1,16 @@
-import { IdItems } from '../../types';
+import { IdItems, ReviewObj } from '../../types';
 import { CategoryList } from './CategoryList/CategoryList';
 import { MainSlide } from './MainSlide/MainSlide';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { items } from '../../constants';
 
 import style from '../../global.module.scss';
 
-export const Main = () => {
+interface MainProps {
+  reviewArr: ReviewObj[];
+}
+
+export const Main: FC<MainProps> = ({reviewArr}) => {
   const [idItems] = useState<IdItems>([]);
 
   useEffect(() => {
@@ -30,8 +34,8 @@ export const Main = () => {
   return (
     <>
       <div className={style.container}>
-        <MainSlide />
-        <CategoryList idItemsList={idItems} />
+        <MainSlide reviewArr={reviewArr}/>
+        <CategoryList idItemsList={idItems} reviewArr={reviewArr}/>
       </div>
     </>
   );

@@ -13,12 +13,17 @@
   &_review {
     margin-left: 25px;
   }
-  & p {
+  &_text {
     margin-top: 10px;
   }
   &_date {
     font-size: 13px;
+    margin-top: 10px;
     color: #a8a8a8;
+    margin-bottom: 10px;
+  }
+  &_rating {
+    margin-left: 10px;
   }
 }
 .hr {

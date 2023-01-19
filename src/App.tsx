@@ -31,18 +31,29 @@ const defaultUser = new Map([
   ],
 ]);
 
+const reviewObj: ReviewObj = {
+  id: 0,
+  login: 'Igor',
+  review: `Age of Wonders - Отлично сбитая, глобальная, пошаговая стратегия с 
+  тактическими боями, персонализацией юнитов, большим количеством рас и 
+  технологий, интересным миром, и щепоткой юмора. Процесс залипателен, графоний 
+  приятен, музыка не мешает медитативному процессу, а тактикам и стратегам есть 
+  где разгуляться. Как по мне, это отличный представитель своего жанра.`,
+  date: new Date(),
+  rating: 5,
+};
+
 export const App = () => {
   const [users, setUser] = useState<UsersMap>(defaultUser);
   const [loginAuth, setLoginAuth] = useState<Login>('');
   const [isAuth, setIsAuth] = useState<IsAuth>(false);
   const [basketArr, setBasketArr] = useState<BasketArr>([]);
-  const [reviewArr, setReviewArr] = useState<ReviewObj[]>([]);
+  const [reviewArr, setReviewArr] = useState<ReviewObj[]>([reviewObj]);
   const [openedFiltered, setOpenedFiltered] = useState(false);
   const [filteredArr, setFilteredArr] = useState<Items[]>([]);
 
   const handleClick = () => {
     if(filteredArr.length > 0) {
-    console.log(123);
     setFilteredArr([])
     setOpenedFiltered(false)
     }
@@ -67,8 +78,8 @@ export const App = () => {
         openedFiltered={openedFiltered} 
         setOpenedFiltered={setOpenedFiltered}/>
       <Routes>
-        <Route path="/" element={<Main/>}/>
-        <Route path="wholelist" element={<Wholelist/>}/>
+        <Route path="/" element={<Main reviewArr={reviewArr}/>}/>
+        <Route path="wholelist" element={<Wholelist reviewArr={reviewArr}/>}/>
         <Route 
           path=":gameId" 
           element={
@@ -146,6 +157,7 @@ export const App = () => {
               basketArr={basketArr} 
               onAddBasketArr={setBasketArr}
               onDeleteFavorite={() => setUser}
+              reviewArr={reviewArr}
             />
           }
         />

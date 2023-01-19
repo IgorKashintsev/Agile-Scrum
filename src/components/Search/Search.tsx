@@ -15,7 +15,14 @@ interface SearchProps {
   setOpenedFiltered: (param: boolean) => void;
 }
 
-export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFiltered, setOpenedFiltered}) => {
+export const Search: FC<SearchProps> = (
+    {
+      filteredArr, 
+      setFilteredArr, 
+      openedFiltered, 
+      setOpenedFiltered,
+    }
+  ) => {
   const [inputValue, setInputValue] = useState('');
 
   const navigate = useNavigate();
@@ -29,7 +36,7 @@ export const Search: FC<SearchProps> = ({filteredArr, setFilteredArr, openedFilt
       setOpenedFiltered(true);
     } else {
       setFilteredArr([]);
-      setOpenedFiltered(false);
+      // setOpenedFiltered(false);
     }
   }, [inputValue]);
 

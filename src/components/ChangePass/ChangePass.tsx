@@ -171,7 +171,9 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUs
           </Button>
         </form>
         {errorPass && <p className={styleChangePass.error}>Пароль не верный</p>}
-        {errorNewPass && <p className={styleChangePass.error}>Не правильно введен подтверждающий пароль</p>}
+        {errorNewPass && <p 
+          className={styleChangePass.error}>Не правильно введен подтверждающий пароль
+        </p>}
       </div>
     </>  
   )
