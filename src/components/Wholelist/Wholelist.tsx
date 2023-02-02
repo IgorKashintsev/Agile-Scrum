@@ -13,16 +13,13 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate   } from 'react-router-dom';
 import { items } from "../../constants";
 import { Description } from "../Main/Description/Description";
-import { ListPageArr, ListSortArr, PageCount, ReviewObj } from "../../types";
-
+import { ListPageArr, ListSortArr, PageCount } from "../../types";
 import styleWholelist from './Wholelist.module.scss';
 import style from '../../global.module.scss';
+import { useSelector } from "react-redux";
+import { StoreState } from "../../store";
 
-interface MainProps {
-  reviewArr: ReviewObj[];
-};
-
-export const Wholelist: FC<MainProps> = ({reviewArr}) => {
+export const Wholelist: FC = () => {
   const [mapList, setMapList] = useState(new Map());
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -32,7 +29,8 @@ export const Wholelist: FC<MainProps> = ({reviewArr}) => {
   const [listPageArr, setListPageArr] = useState<ListPageArr>([]);
   const [active, setActive] = useState(false);
   const [cordinatSelected, setCordinatSelected] = useState<number>();
-  
+
+  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -154,7 +152,6 @@ export const Wholelist: FC<MainProps> = ({reviewArr}) => {
             {(selectedIndex !==-1 && window.screen.availWidth > 1710) && 
               <Description 
                 idxSlide={selectedIndex? selectedIndex: 0}
-                reviewArr={reviewArr}
               />
             }
           </div>

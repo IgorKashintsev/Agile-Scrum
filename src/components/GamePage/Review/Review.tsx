@@ -1,34 +1,37 @@
 import { Button, Rating, useTheme } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import { FC, useState } from "react";
-import { ReviewObj, Login } from "../../../types";
 import userLogo from '../../../../image/user2.png';
-
 import styleReview from './Review.module.scss'
 import { items } from "../../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { StoreState } from "../../../store";
+import { addReview } from "../../../store/reviews/actions";
 
 interface ReviewProps {
-  onAddReviewArr: (newReview: ReviewObj) => void;
   gameId: string;
-  loginAuth: Login;
 };
 
-export const Review: FC<ReviewProps> = ({onAddReviewArr, gameId, loginAuth}) => {
+export const Review: FC<ReviewProps> = ({gameId}) => {
   const [textReview, setTextReview] = useState('');
   const [value, setValue] = useState<number | null>(0);
   const [hover, setHover] = useState(-1);
 
+  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const dispatch = useDispatch();
   const theme = useTheme();
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    onAddReviewArr({
-      id: Number(gameId), 
-      login: loginAuth, 
-      review: textReview,
-      date: new Date(),
-      rating: value,
-    });
+    dispatch(addReview(
+      {
+        id: Number(gameId), 
+        login: loginAuth, 
+        review: textReview,
+        date: new Date(),
+        rating: value,
+      }
+    ));
     setTextReview('');
   };
   

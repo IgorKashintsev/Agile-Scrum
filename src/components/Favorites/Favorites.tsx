@@ -1,37 +1,31 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, List, ListItemButton, ListItemText, Rating, useTheme } from "@mui/material";
+import { 
+  Box, 
+  Button, 
+  List, 
+  ListItemButton, 
+  ListItemText, 
+  Rating, 
+  useTheme,
+} from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
-import { BasketArr, ReviewObj, UsersMap } from "../../types";
 import { items } from "../../constants";
-
 import styleFavorites from './Favorites.module.scss';
 import style from '../../global.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { addBasket, deleteFavorites } from "../../store/users/actions";
+import { StoreState } from "../../store";
 
-interface FavoritesProps {
-  users: UsersMap;
-  loginAuth: string;
-  isAuth: boolean;
-  basketArr: BasketArr;
-  onAddBasketArr: (newItemBasket: BasketArr) => void;
-  onDeleteFavorite: (param: number[]) => void;
-  reviewArr: ReviewObj[];
-};
-
-export const Favorites: FC<FavoritesProps> = (
-    {
-      users, 
-      loginAuth, 
-      isAuth, 
-      basketArr,
-      onAddBasketArr,
-      onDeleteFavorite,
-      reviewArr,
-    }
-  ) => {
-  const [visible, setVisible] = useState(false);
+export const Favorites: FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
+
+  const users = useSelector((state: StoreState) => state.users.users);
+  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
+  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if(!isAuth) {
@@ -53,17 +47,18 @@ export const Favorites: FC<FavoritesProps> = (
   };
 
   const handleClickDelete = (gameId: number) => {
+    const favoritesArr = users.get(loginAuth)?.favorites;
     const favoriteIdx = users.get(loginAuth)?.favorites?.indexOf(gameId);
     if(favoriteIdx !== -1 && favoriteIdx !== undefined) {
-      onDeleteFavorite(users.get(loginAuth)!.favorites!.splice(favoriteIdx, 1));
-      setVisible(visible => !visible);
+      favoritesArr?.splice(favoriteIdx, 1);
+      dispatch(deleteFavorites(loginAuth, favoritesArr!));
     }
   };
 
   const handleClickBasket = (gameId: number) => {
-    const basketItemIdx = basketArr.findIndex(item => item === gameId);
+    const basketItemIdx = users.get(loginAuth)?.basket?.indexOf(gameId);
     if(basketItemIdx === -1) {
-      onAddBasketArr([...basketArr, (Array.from(items.keys())[gameId])])
+      dispatch(addBasket(loginAuth, gameId));
     }
   };
 
@@ -141,7 +136,7 @@ export const Favorites: FC<FavoritesProps> = (
                     (items.get(item))?.rating
                   }
                   readOnly
-                  precision={0.5}
+                  precision={0.1}
                   sx={{ 
                     maxWidth: '100px', 
                     fontSize: '15px',
@@ -211,7 +206,10 @@ export const Favorites: FC<FavoritesProps> = (
                       },
                     }}
                     onClick={() => handleClickBasket(item)}
-                    >{basketArr.indexOf(item) !== -1 ? 'В корзине' : 'В корзину'}
+                    >{users.get(loginAuth)?.basket?.indexOf(item) !== -1 ?
+                      'В корзине' : 
+                      'В корзину'
+                    }
                   </Button>
                 </div>
               </ListItemButton>

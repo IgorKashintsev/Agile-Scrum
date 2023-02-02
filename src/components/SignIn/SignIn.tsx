@@ -1,30 +1,27 @@
 import { Button, TextField } from "@mui/material";
 import { FC, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { UsersMap } from "../../types";
-
 import style from '../../global.module.scss';
 import styleSignIn from './SignIn.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { onIsAuth, onLoginAuth } from "../../store/auth/actions";
+import { StoreState } from "../../store";
 
-interface SignInProps {
-  users: UsersMap;
-  setLoginAuth: (loginAuth: string) => void;
-  onIsAuth: (param: boolean) => void;
-};
-
-export const SignIn: FC<SignInProps> = ({users, setLoginAuth, onIsAuth}) => {
+export const SignIn: FC = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
+  const users = useSelector((state: StoreState) => state.users.users);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     setError(false);
     if(users.has(login) && users.get(login)?.password === password) {
-      onIsAuth(true);
-      setLoginAuth(login);
+      dispatch(onIsAuth(true));
+      dispatch(onLoginAuth(login));
       navigate('/');
     } else {
       setError(true);

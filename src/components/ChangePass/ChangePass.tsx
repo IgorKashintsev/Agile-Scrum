@@ -1,25 +1,23 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField } from '@mui/material';
-
 import style from '../../global.module.scss';
 import styleChangePass from './ChangePass.module.scss';
-import { IsAuth, UsersMap } from '../../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { changePass } from '../../store/users/actions';
+import { StoreState } from '../../store';
 
-interface ChangePassProps {
-  isAuth: IsAuth;
-  loginAuth: string;
-  users: UsersMap;
-  setUser: (newPass: string) => void;
-};
-
-export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUser}) => {
+export const ChangePass: FC = () => {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [errorPass, setErrorPass] = useState(false);
   const [errorNewPass, setErrorNewPass] = useState(false);
 
+  const users = useSelector((state: StoreState) => state.users.users);
+  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
+  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +32,7 @@ export const ChangePass: FC<ChangePassProps> = ({isAuth, loginAuth, users, setUs
     setErrorPass(false);
     setErrorNewPass(false);
     if(password === users.get(loginAuth)?.password && newPassword === confirmPass) {
-      setUser(users.get(loginAuth)!.password = confirmPass);
+      dispatch(changePass(loginAuth, confirmPass));
       navigate(-1);
     } else if(password !== users.get(loginAuth)?.password) {
       setErrorPass(true);

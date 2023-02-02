@@ -3,16 +3,15 @@ import { useNavigate   } from 'react-router-dom';
 import { Box, List, ListItemButton, ListItemText, useTheme } from '@mui/material';
 import { ListDescription } from './ListDescription/ListDescription';
 import { items } from '../../../constants';
-import { IdItems, ReviewObj } from '../../../types';
+import { IdItems } from '../../../types';
 
 import styleList from './CategoryList.module.scss';
 
 interface CategoryListProps {
   idItemsList: IdItems;
-  reviewArr: ReviewObj[];
 };
 
-export const CategoryList: FC<CategoryListProps> = ({idItemsList, reviewArr}) => {
+export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
   const [selectedIndex, setSelectedIndex] = useState(idItemsList[0]);
   const navigate = useNavigate();
   const theme = useTheme();
@@ -102,7 +101,7 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList, reviewArr}) =>
             ))}
           </List>
         </Box>
-        <ListDescription selectedIndex={selectedIndex} reviewArr={reviewArr}/>
+        <ListDescription selectedIndex={selectedIndex}/>
       </div>
     </>
   );

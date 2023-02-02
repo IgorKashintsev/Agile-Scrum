@@ -21,8 +21,6 @@ export type ListPageArr = number[][];
 export type IsAuth = boolean;
 export type Login = string;
 
-export type BasketArr = number[];
-
 export interface ReviewObj {
   id: number;
   login: string;
@@ -31,8 +29,22 @@ export interface ReviewObj {
   rating: number | null;
 };
 
+export interface StateReviews {
+  reviews: ReviewObj[];
+};
+
 export interface User {
   password: string;
   favorites: number[];
-}
+  basket: number[];
+};
 export type UsersMap = Map<string, User>;
+
+export interface StateUsers {
+  users: UsersMap;
+};
+
+export interface AuthState {
+  loginAuth: string;
+  isAuth: boolean;
+};

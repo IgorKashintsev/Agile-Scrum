@@ -1,25 +1,22 @@
 import { Button, TextField } from "@mui/material";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Login, UsersMap } from "../../types";
-
 import style from '../../global.module.scss';
 import styleSignUp from './SignUp.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { addNewUser } from "../../store/users/actions";
+import { onIsAuth, onLoginAuth } from "../../store/auth/actions";
+import { StoreState } from "../../store";
 
-interface SignInProps {
-  users: UsersMap;
-  setUser: (newUser: UsersMap) => void;
-  onIsAuth: (param: boolean) => void;
-  setLoginAuth: (param: Login) => void;
-};
-
-export const SignUp: FC<SignInProps> = ({users, setUser, onIsAuth, setLoginAuth}) => {
+export const SignUp: FC = () => {
   const [newLogin, setNewLogin] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [errorLog, setErrorLog] = useState(false);
   const [errorPass, setErrorPass] = useState(false);
 
+  const users = useSelector((state: StoreState) => state.users.users);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
@@ -27,9 +24,12 @@ export const SignUp: FC<SignInProps> = ({users, setUser, onIsAuth, setLoginAuth}
     setErrorLog(false);
     setErrorPass(false);
     if(!users.has(newLogin) && newPassword === confirmPass) {
-      setLoginAuth(newLogin);
-      setUser(users.set(newLogin, {password: confirmPass, favorites: []}))
-      onIsAuth(true);
+      dispatch(onLoginAuth(newLogin));
+      dispatch(addNewUser(
+        newLogin, 
+        {password: confirmPass, favorites: [], basket: []}
+      ));
+      dispatch(onIsAuth(true));
       navigate('/');
     } else if(users.has(newLogin)) {
       setErrorLog(true);

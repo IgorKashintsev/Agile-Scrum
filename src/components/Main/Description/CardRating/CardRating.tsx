@@ -2,17 +2,20 @@ import { FC, useEffect, useState } from 'react';
 import { Box, Rating } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { items } from '../../../../constants';
-import { IdxSlide, ReviewObj } from '../../../../types';
+import { IdxSlide } from '../../../../types';
 
 import styleRating from './CardRating.module.scss';
+import { useSelector } from 'react-redux';
+import { StoreState } from '../../../../store';
 
 interface CardRatingProps {
   idxSlide: IdxSlide;
-  reviewArr: ReviewObj[];
 };
 
-export const CardRating: FC<CardRatingProps> = ({idxSlide, reviewArr}) => {
+export const CardRating: FC<CardRatingProps> = ({idxSlide}) => {
   const [ratingValue, setRatingValue] = useState((items.get(idxSlide))?.rating);
+
+  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
 
   useEffect(() => {
     if(reviewArr.findIndex(item => item.id === idxSlide) !== -1) {

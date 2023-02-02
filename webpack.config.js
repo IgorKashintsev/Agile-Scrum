@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+// const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -6,15 +6,15 @@ const path = require('path');
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: resolve(__dirname, './src/index.tsx'),
+  entry: path.resolve(__dirname, './src/index.tsx'),
   output: {
     clean: true,
     environment: {
       arrowFunction: false,
     },
-    path: resolve(__dirname, './build'),
-    filename: 'bundle.[contenthash].js',
-    assetModuleFilename: 'assets/images/[name][contenthash][ext]',
+    path: path.resolve(__dirname, './build'),
+    filename: '[name].bundle.[contenthash].js',
+    assetModuleFilename: 'assets/images/[name].[contenthash][ext]',
   },
   performance: {
     hints: false,

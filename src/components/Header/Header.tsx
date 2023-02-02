@@ -1,32 +1,21 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BasketArr, IsAuth, Login } from '../../types';
 import logo from '../../../image/logo.jpg';
 import userLogo from '../../../image/user.png';
-
 import style from '../../global.module.scss';
 import styleHeader from './Header.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { onIsAuth } from '../../store/auth/actions';
+import { StoreState } from '../../store';
 
-interface IsAuthProps {
-  isAuth: IsAuth;
-  loginAuth: Login;
-  onIsAuth: (param: boolean) => void;
-  basketArr: BasketArr;
-  setBasketArr: (newItemBasket: BasketArr) => void;
-};
-
-export const Header: FC<IsAuthProps> = (
-    {
-      isAuth, 
-      loginAuth, 
-      onIsAuth, 
-      basketArr,
-      setBasketArr,
-    }
-  ) => {
+export const Header: FC = () => {
   const [visible, setVisible] = useState(false);
   const [innerLogin, setInnerLogin] = useState(null);
 
+  const users = useSelector((state: StoreState) => state.users.users);
+  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
+  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loginRef = useRef<HTMLDivElement | any>(null);
@@ -43,8 +32,6 @@ export const Header: FC<IsAuthProps> = (
           'afterbegin', `<img src="${userLogo}"/> <span>${loginAuth}</span> `
         )
       )
-    } else {
-      setBasketArr([]);
     }
   }, [isAuth]);
 
@@ -76,7 +63,7 @@ export const Header: FC<IsAuthProps> = (
   };
 
   const handleClickLogout = () => {
-    onIsAuth(false);
+    dispatch(onIsAuth(false));
     setVisible(false);
   };
 
@@ -102,14 +89,14 @@ export const Header: FC<IsAuthProps> = (
               onClick={handleClickFavorites}
             >Избранное
             </p>
-            {basketArr.length > 0 &&
+            {(isAuth && users.get(loginAuth)!.basket.length > 0) &&
               <p
                 ref={basketRef}
                 style={{cursor: 'pointer'}}
                 onMouseEnter={() => basketRef.current.classList.add(styleHeader.active)}
                 onMouseLeave={() => basketRef.current.classList.remove(styleHeader.active)}
                 onClick={() => navigate('/basket')}
-              >Корзина ({basketArr.length})
+              >Корзина ({users.get(loginAuth)?.basket.length})
               </p>
             }
           </div>

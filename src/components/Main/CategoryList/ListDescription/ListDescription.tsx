@@ -6,24 +6,18 @@ import {
 } from "@mui/material";
 import { FC } from "react";
 import { CardRating } from "../../Description/CardRating/CardRating";
-import { ReviewObj } from "../../../../types";
 import { items } from "../../../../constants";
-
 import styleListCard from './ListDescription.module.scss';
 
 interface ListDescriptionProps {
   selectedIndex: number;
-  reviewArr: ReviewObj[];
 };
 
 export const ListDescription: FC<ListDescriptionProps> = (
     {
-      selectedIndex, 
-      reviewArr
+      selectedIndex,
     }
   ) => {
-  const ratingValue = (items.get(selectedIndex))!.rating;
-
   const name = (items.get(selectedIndex))?.name;
   const showName = () => {
     if(name === undefined) {
@@ -60,7 +54,7 @@ export const ListDescription: FC<ListDescriptionProps> = (
             >
               {showName()}
             </Typography>
-            <CardRating idxSlide={selectedIndex} reviewArr={reviewArr}/>
+            <CardRating idxSlide={selectedIndex}/>
             <Typography
               sx={{ 
                 fontSize: '12px',

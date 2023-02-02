@@ -5,41 +5,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Box, Button, Rating } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
-
 import style from '../../global.module.scss';
 import styleGamePage from './GamePage.module.scss';
-import { BasketArr, IsAuth, ReviewObj, Login, UsersMap } from "../../types";
 import { Review } from "./Review/Review";
 import { ReviewsList } from "./ReviewsList/ReviewsList";
+import { useDispatch, useSelector } from "react-redux";
+import { addBasket, addFavorites } from "../../store/users/actions";
+import { StoreState } from "../../store";
 
-interface GamePageProps {
-  isAuth: IsAuth;
-  basketArr: BasketArr;
-  onAddBasketArr: (newItemBasket: BasketArr) => void;
-  onAddReviewArr: (newReview: ReviewObj) => void;
-  loginAuth: Login;
-  reviewArr: ReviewObj[];
-  users: UsersMap,
-  onAddFavorites: (favorite: number) => void;
-};
-
-export const GamePage: FC<GamePageProps> = (
-    {
-      isAuth,
-      basketArr,
-      onAddBasketArr,
-      onAddReviewArr,
-      loginAuth,
-      reviewArr,
-      users,
-      onAddFavorites,
-    }
-  ) => {
-  const [visible, setVisible] = useState(false);
+export const GamePage: FC = () => {
   const {gameId} = useParams();
   const [ratingValue, setRatingValue] = useState((items.get(Number(gameId)))?.rating);
   const [sizeNavigation, setSizeNavigation] = useState(44);
-
+  
+  const users = useSelector((state: StoreState) => state.users.users);
+  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
+  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,21 +49,20 @@ export const GamePage: FC<GamePageProps> = (
     if(!isAuth) {
       navigate('/signin')
     } else if(favoriteIdx === -1) {
-      onAddFavorites(users.get(loginAuth)!.favorites!.push(gameId));
-      setVisible(visible => !visible);
+      dispatch(addFavorites(loginAuth, gameId));
     } else {
       return
     }
   };
 
   const handleClickBasket = (gameId: number) => {
-    if(isAuth) {
-      const basketItemIdx = basketArr.findIndex(item => item === gameId);
-      if(basketItemIdx === -1) {
-        onAddBasketArr([...basketArr, (Array.from(items.keys())[gameId])])
-      }
-    } else {
+    const basketItemIdx = users.get(loginAuth)?.basket?.indexOf(gameId);
+    if(!isAuth) {
       navigate('/signin');
+    } else if(basketItemIdx === -1) {
+      dispatch(addBasket(loginAuth, gameId));
+    } else {
+      return
     }
   };
   
@@ -218,7 +200,11 @@ export const GamePage: FC<GamePageProps> = (
                   },
                 }}
                 onClick={() => handleClickBasket(Number(gameId))}
-                >{basketArr.indexOf(Number(gameId)) !== -1 ? 'В корзине' : 'В корзину'}
+                >{isAuth && 
+                  users.get(loginAuth)?.basket?.indexOf(Number(gameId)) !== -1 ? 
+                  'В корзине' : 
+                  'В корзину'
+                }
               </Button>
             </div>
           </div>
@@ -227,14 +213,11 @@ export const GamePage: FC<GamePageProps> = (
             el => (el.id === Number(gameId) && el.login === loginAuth)
           )) && 
           <Review 
-            onAddReviewArr={onAddReviewArr}
             gameId={gameId ? gameId : ''}
-            loginAuth={loginAuth}
           />
         }
         {reviewArr.some(el => (el.id === Number(gameId))) && 
           <ReviewsList 
-            reviewArr={reviewArr}
             gameId={gameId ? gameId : ''}
           />
         }
