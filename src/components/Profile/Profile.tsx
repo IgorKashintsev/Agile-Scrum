@@ -1,21 +1,19 @@
 import { FC, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IsAuth, Login } from '../../types';
 import userLogo from '../../../image/user2.png';
-
 import style from '../../global.module.scss';
 import styleProfile from './Profile.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { onIsAuth } from '../../store/auth/actions';
+import { StoreState } from '../../store';
 
-interface IsAuthProps {
-  isAuth: IsAuth;
-  loginAuth: Login;
-  onIsAuth: (param: boolean) => void;
-};
-
-export const Profile: FC<IsAuthProps> = ({isAuth, loginAuth, onIsAuth}) => {
+export const Profile: FC = () => {
   const changePassRef = useRef<HTMLDivElement | any>(null);
   const logoutRef = useRef<HTMLDivElement | any>(null);
 
+  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
+  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,7 +43,7 @@ export const Profile: FC<IsAuthProps> = ({isAuth, loginAuth, onIsAuth}) => {
           ref={logoutRef}
           className={styleProfile.p_logout}
           style={{cursor: 'pointer'}} 
-          onClick={() => onIsAuth(false)}
+          onClick={() => dispatch(onIsAuth(false))}
           onMouseEnter={() => logoutRef.current.classList.add(styleProfile.active)}
           onMouseLeave={() => logoutRef.current.classList.remove(styleProfile.active)}
         >Выйти

@@ -4,18 +4,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { items } from '../../../constants';
 import { Description } from "../Description/Description";
-import { IdxSlide, ReviewObj } from '../../../types';
-
+import { IdxSlide } from '../../../types';
 import "swiper/scss";
 import "swiper/scss/pagination";
 import "swiper/scss/navigation";
 import styleSlider from './MainSlide.module.scss';
 
-interface MainProps {
-  reviewArr: ReviewObj[];
-};
-
-export const MainSlide: FC<MainProps> = ({reviewArr}) => {
+export const MainSlide: FC = () => {
   const [visible, setVisible] = useState(false);
   const [idxSlide, setIdxSlide] = useState<IdxSlide>();
   const [sizeNavigation, setSizeNavigation] = useState(44);
@@ -101,7 +96,7 @@ export const MainSlide: FC<MainProps> = ({reviewArr}) => {
         <div
           className={styleSlider.description}
         >
-          {visible && <Description idxSlide={idxSlide? idxSlide: 0} reviewArr={reviewArr}/>}
+          {visible && <Description idxSlide={idxSlide? idxSlide: 0}/>}
         </div>
       </div>
     </>

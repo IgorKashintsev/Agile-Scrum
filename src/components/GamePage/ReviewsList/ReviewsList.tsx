@@ -5,18 +5,21 @@ import userLogo from '../../../../image/user2.png';
 import StarIcon from '@mui/icons-material/Star';
 
 import styleReviewsList from './ReviewsList.module.scss'
+import { useSelector } from "react-redux";
+import { StoreState } from "../../../store";
 
 interface ReviewsListProps {
-  reviewArr: ReviewObj[];
   gameId: string;
 };
 
-export const ReviewsList: FC<ReviewsListProps> = ({reviewArr, gameId}) => {
+export const ReviewsList: FC<ReviewsListProps> = ({gameId}) => {
   const [reviewListArr, setReviewListArr] = useState<ReviewObj[]>([]);
+
+  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
 
   useEffect(() => {
     setReviewListArr(reviewArr.filter(item => item.id === Number(gameId)))
-  }, [reviewArr]);
+  }, [reviewArr, gameId]);
 
   return(
     <List>

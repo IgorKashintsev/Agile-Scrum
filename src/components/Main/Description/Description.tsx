@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay } from "swiper";
 import { items } from '../../../constants';
 import { CardRating } from './CardRating/CardRating';
-import { IdxSlide, ReviewObj } from '../../../types';
+import { IdxSlide } from '../../../types';
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -14,10 +14,9 @@ import styleCard from './Description.module.scss';
 
 interface DescriptionProps {
   idxSlide: IdxSlide;
-  reviewArr: ReviewObj[];
 };
 
-export const Description: FC<DescriptionProps> = ({idxSlide, reviewArr}) => {
+export const Description: FC<DescriptionProps> = ({idxSlide}) => {
   const [text, setText] = useState('');
   const navigate = useNavigate();
 
@@ -96,7 +95,7 @@ export const Description: FC<DescriptionProps> = ({idxSlide, reviewArr}) => {
             </CardContent>
           </CardActionArea>
           <div className={styleCard.card_rating}>
-            <CardRating idxSlide={idxSlide} reviewArr={reviewArr}/>
+            <CardRating idxSlide={idxSlide}/>
           </div>
         </Card>
       </div>

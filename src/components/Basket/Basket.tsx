@@ -1,27 +1,38 @@
-import { Box, Button, List, ListItemButton, ListItemText, useTheme } from "@mui/material";
+import { 
+  Box, 
+  Button, 
+  List, 
+  ListItemButton, 
+  ListItemText, 
+  useTheme,
+} from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BasketArr, IsAuth } from "../../types";
-
 import { items } from "../../constants";
-
 import style from '../../global.module.scss';
 import styleBasket from './Basket.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { deleteBasket } from "../../store/users/actions";
+import { StoreState } from "../../store";
 
-interface BasketProps {
-  basketArr: BasketArr;
-  onDelBasketItem: (param: BasketArr) => void;
-  isAuth: IsAuth;
-};
-
-export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) => {
+export const Basket: FC = () => {
   const [sumTotal, setSumTotal] = useState(0);
+
+  const users = useSelector((state: StoreState) => state.users.users);
+  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
+  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const handleClickDelete = (item: number) => {
-    onDelBasketItem(basketArr.filter((el) => el !== item))
+  const handleClickDelete = (gameId: number) => {
+    const basketArr = users.get(loginAuth)?.basket;
+    const basketIdx = users.get(loginAuth)?.basket?.indexOf(gameId);
+    if(basketIdx !== -1 && basketIdx !== undefined) {
+      basketArr?.splice(basketIdx, 1);
+      dispatch(deleteBasket(loginAuth, basketArr!));
+    }
   };
 
   const handleClickGame = (gameId: number) => {
@@ -36,13 +47,16 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
 
   useEffect(() => {
     let sumPrice = 0;
-    for(let item of basketArr) {
-      setSumTotal(sumPrice += (items.get(item))!.price)
+    const basketArr = users.get(loginAuth)?.basket;
+    if(basketArr !== undefined) {
+      for(let item of basketArr) {
+        setSumTotal(sumPrice += (items.get(item))!.price)
+      }
+      if(basketArr.length < 1) {
+        setSumTotal(0)
+      }
     }
-    if(basketArr.length < 1) {
-      setSumTotal(0)
-    }
-  }, [basketArr]);
+  }, [users.get(loginAuth)?.basket.length]);
 
   return(
     <>
@@ -72,7 +86,7 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
               component="nav"
               aria-label="secondary mailbox folder"
             >
-              {basketArr.map((item) => (
+              {users.get(loginAuth)?.basket.map((item) => (
                 <ListItemButton
                   className={styleBasket.img}
                   key={item}
@@ -148,7 +162,7 @@ export const Basket: FC<BasketProps> = ({basketArr, onDelBasketItem, isAuth}) =>
                   backgroundColor: "#d6d6d6",
                 },
               }}
-              disabled={basketArr.length < 1}
+              disabled={users.get(loginAuth)!.basket.length < 1}
               >Оформить заказ
             </Button>
           </div>
