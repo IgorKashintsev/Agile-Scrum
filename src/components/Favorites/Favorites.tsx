@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { 
   Box, 
   Button, 
+  Divider, 
   List, 
   ListItemButton, 
   ListItemText, 
@@ -90,118 +91,119 @@ export const Favorites: FC = () => {
             aria-label="secondary mailbox folder"
           >
             {users.get(loginAuth)?.favorites?.map((item) => (
-              <ListItemButton
-                key={item}
-              >
-                <div>
-                  <img 
-                    src={(items.get(item))?.images[0]}
-                    onClick={() => handleClickGame(item)}
-                  ></img>
-                </div>
-                <div className={styleFavorites.favorites_name}>
+              <div key={item}>
+                <ListItemButton>
+                  <div>
+                    <img 
+                      src={(items.get(item))?.images[0]}
+                      onClick={() => handleClickGame(item)}
+                    ></img>
+                  </div>
+                  <div className={styleFavorites.favorites_name}>
+                    <ListItemText
+                      sx={{ 
+                        marginLeft: '20px',
+                        [theme.breakpoints.down('sm')]: {
+                          marginLeft: '10px', 
+                        },
+                      }}
+                      primary={(items.get(item))?.name} 
+                      secondary={(items.get(item))?.genre.join(', ')}
+                    />
+                  </div>
                   <ListItemText
                     sx={{ 
-                      marginLeft: '20px',
-                      [theme.breakpoints.down('sm')]: {
-                        marginLeft: '10px', 
+                      textAlign: 'right', 
+                      mr: '50px',
+                      [theme.breakpoints.down('md')]: {
+                        display: 'none',
                       },
                     }}
-                    primary={(items.get(item))?.name} 
-                    secondary={(items.get(item))?.genre.join(', ')}
+                    secondary={(items.get(item))?.date.toLocaleDateString()}
                   />
-                </div>
-                <ListItemText
-                  sx={{ 
-                    textAlign: 'right', 
-                    mr: '50px',
-                    [theme.breakpoints.down('md')]: {
-                      display: 'none',
-                    },
-                  }}
-                  secondary={(items.get(item))?.date.toLocaleDateString()}
-                />
-                <Rating
-                  name="text-feedback"
-                  value={ratingValue.find(el => el.id === item)?.rating}
-                  readOnly
-                  precision={0.1}
-                  sx={{ 
-                    maxWidth: '100px', 
-                    fontSize: '15px',
-                    [theme.breakpoints.down('md')]: {
-                      display: 'none',
-                    },
-                  }}
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                />
-                <div className={styleFavorites.favorites_price}>
-                  <Button 
-                    type="button"
-                    sx={{
-                      width: "90px",
-                      height: "25px",
-                      fontSize: "11px",
-                      color: "#d6d6d6",
-                      float: 'right',
-                      top: "-5px",
-                      backgroundColor: "#3b3b3b",
-                      border: "1px solid #757575",
-                      "&:hover":{
-                        color: "rgba(0, 0, 0, 0.87)",
-                        backgroundColor: "#d6d6d6",
+                  <Rating
+                    name="text-feedback"
+                    value={ratingValue.find(el => el.id === item)?.rating}
+                    readOnly
+                    precision={0.1}
+                    sx={{ 
+                      maxWidth: '100px', 
+                      fontSize: '15px',
+                      [theme.breakpoints.down('md')]: {
+                        display: 'none',
                       },
-                      [theme.breakpoints.down('sm')]: {
-                        width: "64px",
-                        height: "18px",
-                        fontSize: "7px",
+                    }}
+                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                  />
+                  <div className={styleFavorites.favorites_price}>
+                    <Button 
+                      type="button"
+                      sx={{
+                        width: "90px",
+                        height: "25px",
+                        fontSize: "11px",
+                        color: "#d6d6d6",
+                        float: 'right',
                         top: "-5px",
-                      },
-                    }}
-                    onClick={() => handleClickDelete(item)}
-                    >удалить
-                  </Button>
-                  <ListItemText
-                    sx={{ 
-                      textAlign: "right",
-                      paddingTop: "25px",
-                      [theme.breakpoints.down('sm')]: {
-                        paddingTop: "0px",
-                        height: "26px",
-                      },
-                    }}
-                    primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
-                  />
-                  <Button 
-                    type="button"
-                    sx={{
-                      width: "90px",
-                      height: "25px",
-                      fontSize: "11px",
-                      color: "#d6d6d6",
-                      float: 'right',
-                      bottom: "-5px",
-                      backgroundColor: "#3b3b3b",
-                      border: "1px solid #757575",
-                      "&:hover":{
-                        color: "rgba(0, 0, 0, 0.87)",
-                        backgroundColor: "#d6d6d6",
-                      },
-                      [theme.breakpoints.down('sm')]: {
-                        width: "64px",
-                        height: "18px",
-                        fontSize: "7px",
-                        top: "5px",
-                      },
-                    }}
-                    onClick={() => handleClickBasket(item)}
-                    >{users.get(loginAuth)?.basket?.indexOf(item) !== -1 ?
-                      'В корзине' : 
-                      'В корзину'
-                    }
-                  </Button>
-                </div>
-              </ListItemButton>
+                        backgroundColor: "#3b3b3b",
+                        border: "1px solid #757575",
+                        "&:hover":{
+                          color: "rgba(0, 0, 0, 0.87)",
+                          backgroundColor: "#d6d6d6",
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                          width: "64px",
+                          height: "18px",
+                          fontSize: "7px",
+                          top: "-5px",
+                        },
+                      }}
+                      onClick={() => handleClickDelete(item)}
+                      >удалить
+                    </Button>
+                    <ListItemText
+                      sx={{ 
+                        textAlign: "right",
+                        paddingTop: "25px",
+                        [theme.breakpoints.down('sm')]: {
+                          paddingTop: "0px",
+                          height: "26px",
+                        },
+                      }}
+                      primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
+                    />
+                    <Button 
+                      type="button"
+                      sx={{
+                        width: "90px",
+                        height: "25px",
+                        fontSize: "11px",
+                        color: "#d6d6d6",
+                        float: 'right',
+                        bottom: "-5px",
+                        backgroundColor: "#3b3b3b",
+                        border: "1px solid #757575",
+                        "&:hover":{
+                          color: "rgba(0, 0, 0, 0.87)",
+                          backgroundColor: "#d6d6d6",
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                          width: "64px",
+                          height: "18px",
+                          fontSize: "7px",
+                          top: "5px",
+                        },
+                      }}
+                      onClick={() => handleClickBasket(item)}
+                      >{users.get(loginAuth)?.basket?.indexOf(item) !== -1 ?
+                        'В корзине' : 
+                        'В корзину'
+                      }
+                    </Button>
+                  </div>
+                </ListItemButton>
+                <Divider/>
+              </div>
             ))}
           </List>
         </Box>

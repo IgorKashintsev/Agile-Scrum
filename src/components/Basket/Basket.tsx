@@ -1,6 +1,7 @@
 import { 
   Box, 
   Button, 
+  Divider, 
   List, 
   ListItemButton, 
   ListItemText, 
@@ -88,59 +89,61 @@ export const Basket: FC = () => {
               aria-label="secondary mailbox folder"
             >
               {users.get(loginAuth)?.basket.map((item) => (
-                <ListItemButton
-                  className={styleBasket.img}
-                  key={item}
-                >
-                  <div>
-                    <img
-                      src={(items.get(item))?.images[0]}
-                      onClick={() => handleClickGame(item)}
-                    ></img>
-                  </div>
-                  <ListItemText
-                    sx={{ 
-                      marginLeft: '20px',
-                      [theme.breakpoints.down('sm')]: {
-                        marginLeft: '10px',
-                        maxWidth: '110px',
-                      },
-                    }}
-                    primary={(items.get(item))?.name} 
-                  />
-                  <div className={styleBasket.list_price}>
+                <div key={item}>
+                  <ListItemButton
+                    className={styleBasket.img}
+                  >
+                    <div>
+                      <img
+                        src={(items.get(item))?.images[0]}
+                        onClick={() => handleClickGame(item)}
+                      ></img>
+                    </div>
                     <ListItemText
                       sx={{ 
-                        textAlign: "right",
-                        maxWidth: '150px',
+                        marginLeft: '20px',
+                        [theme.breakpoints.down('sm')]: {
+                          marginLeft: '10px',
+                          maxWidth: '110px',
+                        },
                       }}
-                      primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
+                      primary={(items.get(item))?.name} 
                     />
-                    <Button 
-                    type="button"
-                    sx={{
-                      width: "90px",
-                      height: "26px",
-                      fontSize: "11px",
-                      color: "#d6d6d6",
-                      float: 'right',
-                      backgroundColor: "#3b3b3b",
-                      border: "1px solid #757575",
-                      "&:hover":{
-                        color: "rgba(0, 0, 0, 0.87)",
-                        backgroundColor: "#d6d6d6",
-                      },
-                      [theme.breakpoints.down('sm')]: {
-                        width: "64px",
-                        height: "18px",
-                        fontSize: "7px",
-                      },
-                    }}
-                    onClick={() => handleClickDelete(item)}
-                    >удалить
-                  </Button>
-                  </div>
-                </ListItemButton>
+                    <div className={styleBasket.list_price}>
+                      <ListItemText
+                        sx={{ 
+                          textAlign: "right",
+                          maxWidth: '150px',
+                        }}
+                        primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
+                      />
+                      <Button 
+                      type="button"
+                      sx={{
+                        width: "90px",
+                        height: "26px",
+                        fontSize: "11px",
+                        color: "#d6d6d6",
+                        float: 'right',
+                        backgroundColor: "#3b3b3b",
+                        border: "1px solid #757575",
+                        "&:hover":{
+                          color: "rgba(0, 0, 0, 0.87)",
+                          backgroundColor: "#d6d6d6",
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                          width: "64px",
+                          height: "18px",
+                          fontSize: "7px",
+                        },
+                      }}
+                      onClick={() => handleClickDelete(item)}
+                      >удалить
+                    </Button>
+                    </div>
+                  </ListItemButton>
+                  <Divider/>
+                </div>
               ))}
             </List>
           </Box>
