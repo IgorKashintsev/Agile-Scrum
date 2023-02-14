@@ -82,6 +82,7 @@ export const Wholelist: FC = () => {
 
   useEffect(() => {
     window.scrollTo(0,0);
+    dispatch(onIdxSlide(-1));
   }, [currentPage])
 
   useEffect(() => {
