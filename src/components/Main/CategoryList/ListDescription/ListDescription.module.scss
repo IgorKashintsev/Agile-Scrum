@@ -10,3 +10,11 @@
     display: none;
   }
 }
+.rating {
+  font-size: 14px;
+  color: 'rgba(0, 0, 0, 0.87)';
+  &_value {
+    margin-left: 10px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}

@@ -1,23 +1,22 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate   } from 'react-router-dom';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Rating, Typography } from '@mui/material';
 import { CardActionArea } from '@mui/material';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay } from "swiper";
 import { items } from '../../../constants';
-import { CardRating } from './CardRating/CardRating';
-import { IdxSlide } from '../../../types';
-
+import StarIcon from '@mui/icons-material/Star';
 import "swiper/css";
 import "swiper/css/effect-fade";
 import styleCard from './Description.module.scss';
+import { useSelector } from 'react-redux';
+import { selectIdxSlide } from 'src/store/main/selectors';
+import { selectAverageRating } from 'src/store/rating/selectors';
 
-interface DescriptionProps {
-  idxSlide: IdxSlide;
-};
-
-export const Description: FC<DescriptionProps> = ({idxSlide}) => {
+export const Description: FC = () => {
   const [text, setText] = useState('');
+  const idxSlide = useSelector(selectIdxSlide);
+  const ratingValue = useSelector(selectAverageRating);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,11 +27,7 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
   }, [idxSlide])
 
   const HandleClick = () => {
-    for (let [key] of items.entries()) {
-      if (key === idxSlide) {
-        navigate(`/${key.toString()}`)
-      }
-    }
+    navigate(`/${items.get(idxSlide)?.id}`)
   };
 
   return(
@@ -95,7 +90,26 @@ export const Description: FC<DescriptionProps> = ({idxSlide}) => {
             </CardContent>
           </CardActionArea>
           <div className={styleCard.card_rating}>
-            <CardRating idxSlide={idxSlide}/>
+            <div className={styleCard.rating}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >Рейтинг:
+                <Rating
+                  name="text-feedback"
+                  value={ratingValue.find(item => item.id === idxSlide)?.rating}
+                  readOnly
+                  precision={0.1}
+                  sx={{ ml: 0.5 }}
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                />
+                <p 
+                  className={styleCard.rating_value}
+                >{ratingValue.find(item => item.id === idxSlide)?.rating} из 5</p>
+              </Box>
+            </div>
           </div>
         </Card>
       </div>

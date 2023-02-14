@@ -14,17 +14,19 @@ import { items } from "../../constants";
 import styleFavorites from './Favorites.module.scss';
 import style from '../../global.module.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { addBasket, deleteFavorites } from "../../store/users/actions";
-import { StoreState } from "../../store";
+import { addBasket, deleteFavorites } from "src/store/users/actions";
+import { selectUsers } from "src/store/users/selectors";
+import { selectIsAuth, selectLoginAuth } from "src/store/auth/selectors";
+import { selectAverageRating } from "src/store/rating/selectors";
 
 export const Favorites: FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const users = useSelector((state: StoreState) => state.users.users);
-  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
-  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
-  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
+  const users = useSelector(selectUsers);
+  const isAuth = useSelector(selectIsAuth);
+  const loginAuth = useSelector(selectLoginAuth);
+  const ratingValue = useSelector(selectAverageRating);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,15 +34,6 @@ export const Favorites: FC = () => {
       navigate('/');
     }
   }, [isAuth]);
-
-  const changeRating = (gameId: number) => {
-    let arrFiltered = reviewArr
-      .filter(item => item.id === gameId)
-      .map(item => item.rating);
-    return Number((((items.get(gameId))!.rating + 
-      arrFiltered.reduce((sum, current) => sum! + 
-      current!, 0)!) / (arrFiltered.length + 1)).toFixed(1));
-  };
 
   const handleClickGame = (gameId: number) => {
     navigate(`/${gameId.toString()}`)
@@ -130,11 +123,7 @@ export const Favorites: FC = () => {
                 />
                 <Rating
                   name="text-feedback"
-                  value={
-                    reviewArr.findIndex(el => el.id === item) !== -1 ?
-                    changeRating(item) :
-                    (items.get(item))?.rating
-                  }
+                  value={ratingValue.find(el => el.id === item)?.rating}
                   readOnly
                   precision={0.1}
                   sx={{ 

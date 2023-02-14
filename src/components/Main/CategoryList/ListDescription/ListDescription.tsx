@@ -3,23 +3,23 @@ import {
   CardMedia,
   Card,
   Typography,
+  Box,
+  Rating,
 } from "@mui/material";
 import { FC } from "react";
-import { CardRating } from "../../Description/CardRating/CardRating";
+import StarIcon from '@mui/icons-material/Star';
 import { items } from "../../../../constants";
 import styleListCard from './ListDescription.module.scss';
+import { useSelector } from "react-redux";
+import { selectCategoryListIndex } from "src/store/main/selectors";
+import { selectAverageRating } from "src/store/rating/selectors";
 
-interface ListDescriptionProps {
-  selectedIndex: number;
-};
-
-export const ListDescription: FC<ListDescriptionProps> = (
-    {
-      selectedIndex,
-    }
-  ) => {
-  const name = (items.get(selectedIndex))?.name;
+export const ListDescription: FC = () => {
+  const selectedIndex = useSelector(selectCategoryListIndex);
+  const ratingValue = useSelector(selectAverageRating);
+  
   const showName = () => {
+    const name = (items.get(selectedIndex))?.name;
     if(name === undefined) {
       return
     }
@@ -54,7 +54,26 @@ export const ListDescription: FC<ListDescriptionProps> = (
             >
               {showName()}
             </Typography>
-            <CardRating idxSlide={selectedIndex}/>
+            <div className={styleListCard.rating}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >Рейтинг:
+                <Rating
+                  name="text-feedback"
+                  value={ratingValue.find(item => item.id === selectedIndex)?.rating}
+                  readOnly
+                  precision={0.1}
+                  sx={{ ml: 0.5 }}
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                />
+                <p 
+                  className={styleListCard.rating_value}
+                >{ratingValue.find(item => item.id === selectedIndex)?.rating} из 5</p>
+              </Box>
+            </div>
             <Typography
               sx={{ 
                 fontSize: '12px',

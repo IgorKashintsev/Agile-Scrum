@@ -1,52 +1,40 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import close from '../../../image/close.svg'
 import { items } from '../../constants';
-import { Items } from '../../types';
-
 import style from '../../global.module.scss';
 import styleSearch from './Search.module.scss';
-import { Box, List, ListItemButton, ListItemText, useTheme } from '@mui/material';
+import { Box, Divider, List, ListItemButton, ListItemText, useTheme } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilteredArr, selectOpenSearchList } from 'src/store/search/selectors';
+import { addFilteredArr, openSearchList } from 'src/store/search/slice';
 
-interface SearchProps {
-  filteredArr: Items[];
-  setFilteredArr: (param: Items[]) => void;
-  openedFiltered: boolean;
-  setOpenedFiltered: (param: boolean) => void;
-};
-
-export const Search: FC<SearchProps> = (
-    {
-      filteredArr, 
-      setFilteredArr, 
-      openedFiltered, 
-      setOpenedFiltered,
-    }
-  ) => {
+export const Search: FC = () => {
   const [inputValue, setInputValue] = useState('');
+
+  const filteredArr = useSelector(selectFilteredArr);
+  const openFiltered = useSelector(selectOpenSearchList);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const theme = useTheme();
-  
-  const filteredList = useRef<HTMLDivElement | any>(null);
-  const inputRef = useRef<HTMLDivElement | any>(null);
 
   useEffect(() => {
     if(inputValue.length > 1) {
       const regexp = new RegExp(inputValue, 'igm');
-      setFilteredArr([...items.values()].filter(item => regexp.test(item.name)));
-      setOpenedFiltered(true);
+      dispatch(addFilteredArr([...items.values()].filter(item => regexp.test(item.name))));
+      dispatch(openSearchList(true));
     } else {
-      setFilteredArr([]);
-      // setOpenedFiltered(false);
+      dispatch(addFilteredArr([]));
+      dispatch(openSearchList(false));
     }
   }, [inputValue]);
 
   useEffect(() => {
-    if(!openedFiltered) {
+    if(!openFiltered) {
       setInputValue('');
     }
-  }, [openedFiltered]);
+  }, [openFiltered]);
 
   const handleClickClose = () => {
     setInputValue('');
@@ -63,7 +51,6 @@ export const Search: FC<SearchProps> = (
         <form className={styleSearch.nav_search}>
           <div>
             <input
-              ref={inputRef}
               value={inputValue}
               type="text" 
               placeholder="поиск" 
@@ -94,9 +81,8 @@ export const Search: FC<SearchProps> = (
           </NavLink>
         </div>
       </div>
-      {filteredArr.length > 0 &&
+      {openFiltered &&
         <div
-          ref={filteredList}
           className={styleSearch.filteredList}
         >
           <Box
@@ -125,25 +111,27 @@ export const Search: FC<SearchProps> = (
               component="nav"
               aria-label="secondary mailbox folder"
             >
-              {filteredArr.map((item, idx) => (
-                <ListItemButton
-                  key={idx}
-                  onClick={() => handleClickGame(item.id)}
-                >
-                  <div>
-                    <img src={item.images[0]}></img>
-                  </div>
-                  <ListItemText
-                    sx={{ 
-                      marginLeft: '20px',
-                      [theme.breakpoints.down('sm')]: {
-                        marginLeft: '10px', 
-                      },
-                    }}
-                    primary={item.name}
-                    secondary={`${item.price.toFixed(2)} ₽`}
-                  />
-                </ListItemButton>
+              {filteredArr.map((item) => (
+                <div key={item.id}>
+                  <ListItemButton
+                    onClick={() => handleClickGame(item.id)}
+                  >
+                    <div>
+                      <img src={item.images[0]}></img>
+                    </div>
+                    <ListItemText
+                      sx={{ 
+                        marginLeft: '20px',
+                        [theme.breakpoints.down('sm')]: {
+                          marginLeft: '10px', 
+                        },
+                      }}
+                      primary={item.name}
+                      secondary={`${item.price.toFixed(2)} ₽`}
+                    />
+                  </ListItemButton>
+                  <Divider/>
+                </div>
               ))}
             </List>
           </Box>

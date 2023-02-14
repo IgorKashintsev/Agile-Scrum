@@ -12,15 +12,16 @@ import { items } from "../../constants";
 import style from '../../global.module.scss';
 import styleBasket from './Basket.module.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBasket } from "../../store/users/actions";
-import { StoreState } from "../../store";
+import { deleteBasket } from "src/store/users/actions";
+import { selectUsers } from "src/store/users/selectors";
+import { selectIsAuth, selectLoginAuth } from "src/store/auth/selectors";
 
 export const Basket: FC = () => {
   const [sumTotal, setSumTotal] = useState(0);
 
-  const users = useSelector((state: StoreState) => state.users.users);
-  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
-  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const users = useSelector(selectUsers);
+  const isAuth = useSelector(selectIsAuth);
+  const loginAuth = useSelector(selectLoginAuth);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

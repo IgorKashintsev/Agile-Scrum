@@ -5,16 +5,17 @@ import userLogo from '../../../image/user.png';
 import style from '../../global.module.scss';
 import styleHeader from './Header.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { onIsAuth } from '../../store/auth/actions';
-import { StoreState } from '../../store';
+import { onLoginAuth } from 'src/store/auth/slice';
+import { selectUsers } from 'src/store/users/selectors';
+import { selectIsAuth, selectLoginAuth } from 'src/store/auth/selectors';
 
 export const Header: FC = () => {
   const [visible, setVisible] = useState(false);
   const [innerLogin, setInnerLogin] = useState(null);
 
-  const users = useSelector((state: StoreState) => state.users.users);
-  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
-  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const users = useSelector(selectUsers);
+  const isAuth = useSelector(selectIsAuth);
+  const loginAuth = useSelector(selectLoginAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -63,7 +64,7 @@ export const Header: FC = () => {
   };
 
   const handleClickLogout = () => {
-    dispatch(onIsAuth(false));
+    dispatch(onLoginAuth({loginAuth: '', isAuth: false}));
     setVisible(false);
   };
 

@@ -1,9 +1,7 @@
-import { Reducer } from "redux";
-import { StateReviews } from "../../types";
-import { ADD_REVIEW } from "./actions";
-import { ReviewActions } from "./type";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ReviewObj, ReviewsState } from "src/types";
 
-const initialState: StateReviews = {
+const initialState: ReviewsState = {
   reviews: [
     {
       id: 0,
@@ -17,20 +15,17 @@ const initialState: StateReviews = {
       rating: 5,
     }
   ]
-}
+};
 
-export const reviewReducer: Reducer<StateReviews, ReviewActions> = (
-  state = initialState, 
-  action
-) => {
-  switch(action.type) {
-    case ADD_REVIEW: {
-      return {
-        ...state,
-        reviews: [...state.reviews, action.review],
-      }
-    }
-    default:
-      return state;
-  }
-}
+const reviewSlice = createSlice({
+  name: 'review',
+  initialState,
+  reducers: {
+    addReview: (state, action: PayloadAction<ReviewObj>) => {
+      state.reviews.push(action.payload);
+    },
+  },
+});
+
+export const { addReview } = reviewSlice.actions;
+export const reviewReducer = reviewSlice.reducer;

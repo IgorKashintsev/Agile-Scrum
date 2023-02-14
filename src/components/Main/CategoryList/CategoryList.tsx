@@ -1,31 +1,31 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate   } from 'react-router-dom';
-import { Box, List, ListItemButton, ListItemText, useTheme } from '@mui/material';
+import { Box, Divider, List, ListItemButton, ListItemText, useTheme } from '@mui/material';
 import { ListDescription } from './ListDescription/ListDescription';
 import { items } from '../../../constants';
-import { IdItems } from '../../../types';
-
 import styleList from './CategoryList.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectRandomIdItems } from 'src/store/main/selectors';
+import { onCategoryListIndex } from 'src/store/main/slice';
 
-interface CategoryListProps {
-  idItemsList: IdItems;
-};
-
-export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
-  const [selectedIndex, setSelectedIndex] = useState(idItemsList[0]);
+export const CategoryList: FC = () => {
+  const randomIdItemsArr = useSelector(selectRandomIdItems);
+  const [selectedIndex, setSelectedIndex] = useState<number>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useTheme();
+
+  useEffect(() => {
+    setSelectedIndex(randomIdItemsArr[0]);
+  }, [randomIdItemsArr])
   
   const handleListItemEnter = (index: number,) => {
     setSelectedIndex(index);
+    dispatch(onCategoryListIndex(index));
   };
 
   const HandleClick = (itemList: number) => {
-    for (let [key] of items.entries()) {
-      if (key === itemList) {
-        navigate(`/${key.toString()}`)
-      }
-    }
+    navigate(`/${items.get(itemList)?.id}`)
   };
 
   return(
@@ -67,41 +67,43 @@ export const CategoryList: FC<CategoryListProps> = ({idItemsList}) => {
             component="nav"
             aria-label="secondary mailbox folder"
           >
-            {idItemsList.map((itemList, id) => (
-              <ListItemButton
-                key={id}
-                selected={selectedIndex === itemList}
-                onMouseEnter ={() => handleListItemEnter(itemList)}
-                onClick={() => HandleClick(itemList)}
-              >
-                <div>
-                  <img 
-                    src={(items.get(itemList))?.images[0]}
-                    className={styleList.list_img}
-                  ></img>
-                </div>
-                <div className={styleList.list_text}>
+            {randomIdItemsArr.map((itemList, idx) => (
+              <div key={idx}>
+                <ListItemButton
+                  selected={selectedIndex === itemList}
+                  onMouseEnter ={() => handleListItemEnter(itemList)}
+                  onClick={() => HandleClick(itemList)}
+                >
+                  <div>
+                    <img 
+                      src={(items.get(itemList))?.images[0]}
+                      className={styleList.list_img}
+                    ></img>
+                  </div>
+                  <div className={styleList.list_text}>
+                    <ListItemText 
+                      sx={{ 
+                        marginLeft: '20px', 
+                        maxWidth: '225px', 
+                        [theme.breakpoints.down('sm')]: {
+                          marginLeft: '10px', 
+                        },
+                      }}
+                      primary={(items.get(itemList))?.name} 
+                      secondary={(items.get(itemList))?.genre.join(', ')}
+                    />
+                  </div>
                   <ListItemText 
-                    sx={{ 
-                      marginLeft: '20px', 
-                      maxWidth: '225px', 
-                      [theme.breakpoints.down('sm')]: {
-                        marginLeft: '10px', 
-                      },
-                    }}
-                    primary={(items.get(itemList))?.name} 
-                    secondary={(items.get(itemList))?.genre.join(', ')}
+                    sx={{ textAlign: 'right'}}
+                    primary={`${(items.get(itemList))?.price.toFixed(2)} ₽`}
                   />
-                </div>
-                <ListItemText 
-                  sx={{ textAlign: 'right'}}
-                  primary={`${(items.get(itemList))?.price.toFixed(2)} ₽`}
-                />
-              </ListItemButton>
+                </ListItemButton>
+                <Divider/>
+              </div>
             ))}
           </List>
         </Box>
-        <ListDescription selectedIndex={selectedIndex}/>
+        <ListDescription />
       </div>
     </>
   );

@@ -4,8 +4,9 @@ import { Button, TextField } from '@mui/material';
 import style from '../../global.module.scss';
 import styleChangePass from './ChangePass.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { changePass } from '../../store/users/actions';
-import { StoreState } from '../../store';
+import { changePass } from 'src/store/users/actions';
+import { selectUsers } from 'src/store/users/selectors';
+import { selectIsAuth, selectLoginAuth } from 'src/store/auth/selectors';
 
 export const ChangePass: FC = () => {
   const [password, setPassword] = useState('');
@@ -14,9 +15,9 @@ export const ChangePass: FC = () => {
   const [errorPass, setErrorPass] = useState(false);
   const [errorNewPass, setErrorNewPass] = useState(false);
 
-  const users = useSelector((state: StoreState) => state.users.users);
-  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
-  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const users = useSelector(selectUsers);
+  const isAuth = useSelector(selectIsAuth);
+  const loginAuth = useSelector(selectLoginAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

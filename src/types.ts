@@ -10,16 +10,14 @@ export interface Items {
   price: number,
 };
 
-export type IdItems = number[];
-
-export type IdxSlide = number;
+export interface MainState {
+  randomIdItemsArr: number[];
+  idxSlide: number;
+  categoryListIndex: number;
+};
 
 export type ListSortArr = number[][];
-export type PageCount = number;
 export type ListPageArr = number[][];
-
-export type IsAuth = boolean;
-export type Login = string;
 
 export interface ReviewObj {
   id: number;
@@ -29,7 +27,7 @@ export interface ReviewObj {
   rating: number | null;
 };
 
-export interface StateReviews {
+export interface ReviewsState {
   reviews: ReviewObj[];
 };
 
@@ -40,11 +38,30 @@ export interface User {
 };
 export type UsersMap = Map<string, User>;
 
-export interface StateUsers {
+export interface UsersState {
   users: UsersMap;
 };
 
 export interface AuthState {
   loginAuth: string;
   isAuth: boolean;
+};
+
+export interface SearchState {
+  openedFiltered: boolean;
+  filteredArr: Items[];
+};
+
+export interface RatingState {
+  averageRating: [
+    {
+      id: number;
+      rating: number;
+    }
+  ];
+};
+
+export interface RatingObj {
+  id: number;
+  rating: number;
 };
