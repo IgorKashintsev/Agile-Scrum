@@ -17,6 +17,7 @@ export const CategoryList: FC = () => {
 
   useEffect(() => {
     setSelectedIndex(randomIdItemsArr[0]);
+    dispatch(onCategoryListIndex(randomIdItemsArr[0]));
   }, [randomIdItemsArr])
   
   const handleListItemEnter = (index: number,) => {

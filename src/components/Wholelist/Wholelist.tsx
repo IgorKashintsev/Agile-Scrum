@@ -117,8 +117,6 @@ export const Wholelist: FC = () => {
         } else {
           setCordinatSelected((selectedRef.current.offsetTop) + 72);
         }
-        console.log(upLine);
-        
       } else if (screenRes > 1080 && screenRes < 1441) {
         if(upLine > 850 && upLine <= 983) {
           setCordinatSelected((selectedRef.current.offsetTop) - 61);
