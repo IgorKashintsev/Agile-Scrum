@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+Какие технологии использовались: HTML5, SCSS, JS, React, Webpack, TypeScript.
+Также использовались библиотеки: Material UI, SwiperJS, React Router, Redux Toolkit.
+Что было сделано:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Сгенерировал проект, начал реализацию разработки с главной страницы.
+Создал базу данных из нескольких видеоигр.
+Слайдеры и их перелистывание реализовал с помощью библиотеки SwiperJS.
 
-## Available Scripts
+Добавил на главной странице, при наведении курсора мыши на слайд,
+всплывающую карточку с описанием игры и меняющимися фото в автоматическом режиме (использовал комбинацию библиотек Material UI и SwiperJS).
+Добавил логику на события: при наведении на слайды (как на сам слайд, так и на карточку с описанием при всплытии) автоперелистывание фото приостанавливается.
+Когда курсор мыши уводишь со слайдов и карточки, автоперелистывание запускается вновь.
+Информация и изображения на карточке соответствуют текущему слайду. При переключении слайдов в любом направлении, меняется и информация на карточке соответственно.
 
-In the project directory, you can run:
+Добавил на главную страницу список игр с фото, названием и жанром. Справа от списка находится также название, дата выпуска, рейтинг и дополнительные фото.
+Добавил определенную логику: список игр формируется и отображается в случайном порядке (это видно при перезагрузке страницы или переходе по ссылкам).
+По умолчанию выделенный элемент в списке всегда первый. При наведении на любой элемент, меняются его цвет и информация справа, соответствующая элементу.
+Добавил проверку на длину текста названия и описания игры, если не влезает в карточку - текст обрезается и после добавляется троеточие.
 
-### `npm start`
+Переделал текущий проект с использованием Typescript, далее проект будет на Typescript. Оптимизировал хранение и запрос данный с помощью хэш-таблицы "Map".
+Сверстал новую страницу со списком всех игр, и возможность перехода между страницами с помощью панели навигации "Главное, Все игры".
+Все переходы по разделам сайта реализовал с использованием библиотеки React Router.
+Там же игры сортируются по рейтингу в порядке убывания. Вывод игр по 10 шт. на странице, сделал пагинацию (использовал библиотеку Material UI).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Доделал страницу со списком всех игр в разделе "Все игры". Добавил вкладки "Лучшее и Новинки", где игры сортируются по рейтингу и по дате, в порядке убывания.
+При переходе на одну из вкладок, список начинается с первой страницы. При наведении на игру, выводится карточка с описанием (если курсор убрать со списка, карточка исчезает и игра не выделяется). Карточка появляется напротив выделенного элемента, при этом не опускается за пределы экрана, даже если прокручивать список вниз и вверх (задействовал систему координат).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Добавил новые страницы: выбранная игра, вход в личный кабинет, регистрация, личный кабинет, смена пароля.
+Для input и button использовал библиотеку Material UI, и кастомизировал для них стили.
+При клике в шапке страницы "Вход", переходит на "Вход в личный кабинет", откуда можно перейти в регистрацию.
+При входе в учетную запись или регистрации, перенаправляет на главную страницу и отображается в шапке логин с аватаркой. Наводя на логин, можно либо перейти в личный кабинет, либо выйти из учетной записи.
+Через личный кабинет можно также выйти из учетной записи, либо сменить пароль.
+При вводе логина и пароля, а также его смене, есть проверка на ошибки (если при регистрации вводится уже существующий логин, логин или пароль не верный, проверка соответствия нового пароля подтверждающему).
+При клике на любую игру, перенаправляет на страницу с игрой и подробным ее описанием.
 
-### `npm test`
+Добавил новые страницы: корзина с товарами, список избранного.
+Также добавил возможность поиска игры по названию (начинается при вводе от двух символов, поиск по названию латинскими буквами).
+В всплывающем списке можно кликнуть на игру и перейти на страницу с ее описанием.
+С корзины и со списка избранного можно также перейти на соответствующую игру, кликнув по картинке.
+Список избранного и корзина доступны только авторизованным пользователям, при выходе из учетной записи, перенаправляет на главную.
+Добавить в корзину или избранное можно со страницы конкретной игры.
+Есть возможность удалить из списка корзины или избранного, сделав это в соответствующем разделе.
+В корзине подсчитывается общая сумма товаров.
+Добавил возможность написать обзор на конкретную игру (повторно тому же пользователю обзор нельзя написать).
+Если пользователь не авторизован, написать обзор ему не доступно. Но видит остальные обзоры, если они есть.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Добавил возможность хранения не ограниченное количество учетных записей.
 
-### `npm run build`
+Реализовал необходимость дать оценку видеоигре со стороны пользователя, при написании обзора на игру.
+После оценки, везде обновляется общий рейтинг.
+Список избранного и корзина сохранятся, при повторной авторизации пользователя.
+Сделал весь сайт адаптивным под мобильные устройства.
+Переписал код на Redux Toolkit, кроме хранения данных в Map.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Пока бэксервер отсутствует. Если страницу не перезагружать, переход по ссылкам, регистрация, смена ученой записи пользователя, добавление в избранное и корзину, удаление из них работает.
+Ссылка для ознакомления с проектом:
+https://igorkashintsev.github.io/Agile-Scrum/
