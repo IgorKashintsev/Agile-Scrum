@@ -30,6 +30,11 @@ export const GamePage: FC = () => {
 
   useEffect(() => {
     window.scrollTo(0,0);
+    if(window.screen.availWidth < 600) {
+      setSizeNavigation(22);
+    } else {
+      setSizeNavigation(44);
+    }
   }, []);
 
   const handleClickFavorites = (gameId: number) => {
@@ -53,14 +58,6 @@ export const GamePage: FC = () => {
       return
     }
   };
-  
-  useEffect(() => {
-    if(window.screen.availWidth < 600) {
-      setSizeNavigation(22);
-    } else {
-      setSizeNavigation(44);
-    }
-  }, []);
 
   if (gameId && !items.get(Number(gameId))) {
     return <Navigate to="/" replace />
@@ -151,7 +148,7 @@ export const GamePage: FC = () => {
             >Рейтинг:
               <Rating
                 name="text-feedback"
-                value={ratingValue.find(item => item.id === Number(gameId))?.rating}
+                value={ratingValue.find(item => item.id === Number(gameId))?.rating ?? null}
                 readOnly
                 precision={0.1}
                 sx={{ ml: 0.5 }}

@@ -45,6 +45,7 @@ export interface UsersState {
 export interface AuthState {
   loginAuth: string;
   isAuth: boolean;
+  loginMenu?: boolean;
 };
 
 export interface SearchState {

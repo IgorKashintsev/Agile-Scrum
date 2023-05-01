@@ -26,7 +26,7 @@ export const CategoryList: FC = () => {
   };
 
   const HandleClick = (itemList: number) => {
-    navigate(`/${items.get(itemList)?.id}`)
+    navigate(`/wholelist/${items.get(itemList)?.id}`)
   };
 
   return(

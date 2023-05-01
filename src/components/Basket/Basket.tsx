@@ -38,7 +38,7 @@ export const Basket: FC = () => {
   };
 
   const handleClickGame = (gameId: number) => {
-    navigate(`/${gameId.toString()}`)
+    navigate(`/wholelist/${gameId.toString()}`)
   };
 
   useEffect(() => {
@@ -166,7 +166,7 @@ export const Basket: FC = () => {
                   backgroundColor: "#d6d6d6",
                 },
               }}
-              disabled={users.get(loginAuth)!.basket.length < 1}
+              disabled={isAuth ? users.get(loginAuth)!.basket.length < 1 : false}
               >Оформить заказ
             </Button>
           </div>

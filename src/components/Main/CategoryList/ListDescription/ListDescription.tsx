@@ -63,7 +63,7 @@ export const ListDescription: FC = () => {
               >Рейтинг:
                 <Rating
                   name="text-feedback"
-                  value={ratingValue.find(item => item.id === selectedIndex)?.rating}
+                  value={ratingValue.find(item => item.id === selectedIndex)?.rating ?? null}
                   readOnly
                   precision={0.1}
                   sx={{ ml: 0.5 }}

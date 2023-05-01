@@ -30,5 +30,8 @@
   &_nav {
     color: #d6d6d6;
     text-decoration: none;
+    &:hover {
+      color: #ffffff;
+    }
   }
 }

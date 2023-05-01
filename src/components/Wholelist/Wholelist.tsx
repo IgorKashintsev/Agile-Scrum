@@ -31,6 +31,8 @@ export const Wholelist: FC = () => {
   const [pageCount, setPageCount] = useState<number>();
   const [listPageArr, setListPageArr] = useState<ListPageArr>([]);
   const [active, setActive] = useState(false);
+  const [activeBest, setActiveBest] = useState(true);
+  const [activeNew, setActiveNew] = useState(false);
   const [cordinatSelected, setCordinatSelected] = useState<number>();
 
   const reviewArr = useSelector(selectReviews);
@@ -40,28 +42,26 @@ export const Wholelist: FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const bestRef = useRef<HTMLDivElement | any>(null);
-  const newRef = useRef<HTMLDivElement | any>(null);
   const selectedRef = useRef<HTMLDivElement | any>(null);
 
   const handleClickBest = () => {
-    bestRef.current.classList.add(styleWholelist.active);
-    newRef.current.classList.remove(styleWholelist.active);
-    setActive(true);
+    setActiveNew(false);
+    setActiveBest(true);
     setCurrentPage(1);
+    setActive(true);
   };
 
   const handleClickNew = () => {
-    newRef.current.classList.add(styleWholelist.active);
-    bestRef.current.classList.remove(styleWholelist.active);
-    setActive(true);
+    setActiveNew(true);
+    setActiveBest(false);
     setCurrentPage(1);
+    setActive(true);
   };
 
-  const HandleClick = (itemList: number) => {
+  const HandleClick = (item: number) => {
     for (let [key] of items.entries()) {
-      if (key === itemList) {
-        navigate(`/${key.toString()}`)
+      if (key === item) {
+        navigate(`/wholelist/${key.toString()}`)
       }
     }
   };
@@ -86,9 +86,8 @@ export const Wholelist: FC = () => {
   }, [currentPage])
 
   useEffect(() => {
-    setActive(false)
-
-    if(bestRef.current.classList.contains(`${styleWholelist.active}`)) {
+    setActive(false);
+    if(activeBest) {
       setListSortArr([...mapList].sort((a, b) => b[1].rating - a[1].rating));
     } else {
       setListSortArr([...mapList].sort((a, b) => b[1].date - a[1].date));
@@ -153,17 +152,21 @@ export const Wholelist: FC = () => {
           <Stack spacing={2}>
             <div className={styleWholelist.wholelist_header}>
               <div
-                ref={bestRef}
                 onClick={handleClickBest}
                 style={{cursor: 'pointer'}}
-                className={`${styleWholelist.wholelist_header_group} ${styleWholelist.active}`}
+                className={`
+                  ${styleWholelist.wholelist_header_group} 
+                  ${activeBest ? styleWholelist.active : ''}
+                `}
               >Лучшее
               </div>
               <div
-                ref={newRef}
                 onClick={handleClickNew}
                 style={{cursor: 'pointer'}}
-                className={styleWholelist.wholelist_header_group}
+                className={`
+                  ${styleWholelist.wholelist_header_group} 
+                  ${activeNew ? styleWholelist.active : ''}
+                `}
               >Новинки
               </div>
             </div>
@@ -239,7 +242,7 @@ export const Wholelist: FC = () => {
                       />
                       <Rating
                         name="text-feedback"
-                        value={ratingValue.find(el => el.id === item[0])?.rating}
+                        value={ratingValue.find(el => el.id === item[0])?.rating ?? null}
                         readOnly
                         precision={0.1}
                         sx={{ 

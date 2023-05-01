@@ -37,7 +37,7 @@ export const Favorites: FC = () => {
   }, [isAuth]);
 
   const handleClickGame = (gameId: number) => {
-    navigate(`/${gameId.toString()}`)
+    navigate(`/wholelist/${gameId.toString()}`)
   };
 
   const handleClickDelete = (gameId: number) => {
@@ -123,7 +123,7 @@ export const Favorites: FC = () => {
                   />
                   <Rating
                     name="text-feedback"
-                    value={ratingValue.find(el => el.id === item)?.rating}
+                    value={ratingValue.find(el => el.id === item)?.rating ?? null}
                     readOnly
                     precision={0.1}
                     sx={{ 

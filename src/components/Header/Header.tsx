@@ -1,72 +1,39 @@
-import { FC, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../../image/logo.jpg';
-import userLogo from '../../../image/user.png';
+import userLogo from '../../../image/user2.png';
 import style from '../../global.module.scss';
 import styleHeader from './Header.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { onLoginAuth } from 'src/store/auth/slice';
+import { onLoginAuth, onLoginMenu } from 'src/store/auth/slice';
 import { selectUsers } from 'src/store/users/selectors';
-import { selectIsAuth, selectLoginAuth } from 'src/store/auth/selectors';
+import { selectIsAuth, selectLoginAuth, selectLoginMenu } from 'src/store/auth/selectors';
 
 export const Header: FC = () => {
-  const [visible, setVisible] = useState(false);
-  const [innerLogin, setInnerLogin] = useState(null);
-
   const users = useSelector(selectUsers);
   const isAuth = useSelector(selectIsAuth);
   const loginAuth = useSelector(selectLoginAuth);
+  const loginMenuActive = useSelector(selectLoginMenu);
+  let locationHash = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const loginRef = useRef<HTMLDivElement | any>(null);
-  const storeRef = useRef<HTMLDivElement | any>(null);
-  const favoritesRef = useRef<HTMLDivElement | any>(null);
-  const basketRef = useRef<HTMLDivElement | any>(null);
-  const profileRef = useRef<HTMLDivElement | any>(null);
-  const logoutRef = useRef<HTMLDivElement | any>(null);
-
-  useEffect(() => {
-    if(isAuth) {
-      setInnerLogin(
-        loginRef.current.insertAdjacentHTML(
-          'afterbegin', `<img src="${userLogo}"/> <span>${loginAuth}</span> `
-        )
-      )
-    }
-  }, [isAuth]);
-
-  const handleMouseEnter = () => {
-    loginRef.current.classList.add(styleHeader.active)
-    if(isAuth) {
-      setVisible(true)
-    }
-  };
-
-  const handleMouseLeave = () => {
-    loginRef.current.classList.remove(styleHeader.active)
-    setVisible(false);
-  };
-
-  const handleClickFavorites = () => {
-    if(!isAuth) {
-      navigate('/signin')
-    } else {
-      navigate('/favorites')
-    }
-  };
   
   const handleClickSignIn = () => {
     if (!isAuth) {
       navigate('/signin')
+    } else {
+      dispatch(onLoginMenu(!loginMenuActive));
     }
-    return
   };
 
   const handleClickLogout = () => {
     dispatch(onLoginAuth({loginAuth: '', isAuth: false}));
-    setVisible(false);
+    dispatch(onLoginMenu(false));
   };
+
+  useEffect(() => {
+    dispatch(onLoginMenu(false));
+  }, [locationHash]);
 
   return(
     <>
@@ -74,63 +41,57 @@ export const Header: FC = () => {
         <div className={`${style.container} ${styleHeader.display}`}>
           <div className={styleHeader.logo}>
             <img src={logo} alt="Logo"></img>
-            <p
-              ref={storeRef}
-              style={{cursor: 'pointer'}}
-              onMouseEnter={() => storeRef.current.classList.add(styleHeader.active)}
-              onMouseLeave={() => storeRef.current.classList.remove(styleHeader.active)}
-              onClick={() => navigate('/')}
-            >Магазин
-            </p>
-            <p
-              ref={favoritesRef}
-              style={{cursor: 'pointer'}}
-              onMouseEnter={() => favoritesRef.current.classList.add(styleHeader.active)}
-              onMouseLeave={() => favoritesRef.current.classList.remove(styleHeader.active)}
-              onClick={handleClickFavorites}
+            <NavLink
+              className={styleHeader.logo__navlink}
+              to="/"
+            >Главная
+            </NavLink>
+            <NavLink
+              className={styleHeader.logo__navlink}
+              to="/wholelist"
+            >Все игры
+            </NavLink>
+            <NavLink
+              className={styleHeader.logo__navlink}
+              to={isAuth ? '/favorites' : '/signin'}
             >Избранное
-            </p>
+            </NavLink>
             {(isAuth && users.get(loginAuth)!.basket.length > 0) &&
-              <p
-                ref={basketRef}
-                style={{cursor: 'pointer'}}
-                onMouseEnter={() => basketRef.current.classList.add(styleHeader.active)}
-                onMouseLeave={() => basketRef.current.classList.remove(styleHeader.active)}
-                onClick={() => navigate('/basket')}
+              <NavLink
+                className={styleHeader.logo__navlink}
+                to='/basket'
               >Корзина ({users.get(loginAuth)?.basket.length})
-              </p>
+              </NavLink>
             }
           </div>
           <div>
             <div
-              ref={loginRef}
               className={styleHeader.login}
-              style={{cursor: 'pointer'}}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
               onClick={handleClickSignIn}
-            >{isAuth ? innerLogin : 'Вход'}
+            >{
+              isAuth ? 
+              <img data-id="login" className={styleHeader.login__img} src={userLogo}/> : 
+              'Вход'
+            }
             </div>
-            {visible &&
+            {loginMenuActive &&
               <div 
-                className={styleHeader.login_menu}
-                onMouseEnter={() => isAuth ? setVisible(true) : null}
-                onMouseLeave={() => setVisible(false)}
+                data-id="login"
+                className={styleHeader.login__menu}
               >
                 <div 
-                  ref={profileRef}
-                  style={{cursor: 'pointer'}}
+                  data-id="login"
+                  className={styleHeader.login__menu__loginAuth}
+                >{loginAuth}
+                </div>
+                <div 
+                  className={styleHeader.login__menu__profile}
                   onClick={() => navigate('/profile')}
-                  onMouseEnter={() => profileRef.current.classList.add(styleHeader.active)}
-                  onMouseLeave={() => profileRef.current.classList.remove(styleHeader.active)}
                 >Личный кабинет
                 </div>
                 <div 
-                  ref={logoutRef}
-                  style={{cursor: 'pointer'}}
+                  className={styleHeader.login__menu__logout}
                   onClick={handleClickLogout}
-                  onMouseEnter={() => logoutRef.current.classList.add(styleHeader.active)}
-                  onMouseLeave={() => logoutRef.current.classList.remove(styleHeader.active)}
                 >Выйти
                 </div>
               </div>

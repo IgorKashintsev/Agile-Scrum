@@ -75,7 +75,7 @@ export const MainSlide: FC = () => {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className={styleSlider.swiper}
-          onClick={() => navigate(`/${idxSlide}`)}
+          onClick={() => navigate(`/wholelist/${idxSlide}`)}
         >
           <SwiperSlide className={styleSlider.swiper_slide}>
             <img src={items.get(0)?.images[1]} alt="Slide1" />

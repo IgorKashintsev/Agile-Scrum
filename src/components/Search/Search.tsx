@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import close from '../../../image/close.svg'
 import { items } from '../../constants';
 import style from '../../global.module.scss';
@@ -8,6 +8,7 @@ import { Box, Divider, List, ListItemButton, ListItemText, useTheme } from '@mui
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredArr, selectOpenSearchList } from 'src/store/search/selectors';
 import { addFilteredArr, openSearchList } from 'src/store/search/slice';
+import { CustomBreadcrumbs } from './breadcrumbs/breadcrumbs';
 
 export const Search: FC = () => {
   const [inputValue, setInputValue] = useState('');
@@ -17,6 +18,7 @@ export const Search: FC = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  let locationHash = useLocation();
   const theme = useTheme();
 
   useEffect(() => {
@@ -31,17 +33,15 @@ export const Search: FC = () => {
   }, [inputValue]);
 
   useEffect(() => {
-    if(!openFiltered) {
-      setInputValue('');
-    }
-  }, [openFiltered]);
+    setInputValue('');
+  }, [locationHash]);
 
   const handleClickClose = () => {
     setInputValue('');
   };
 
   const handleClickGame = (gameId: number) => {
-    navigate(`/${gameId}`);
+    navigate(`/wholelist/${gameId}`);
     setInputValue('');
   };
   
@@ -51,6 +51,7 @@ export const Search: FC = () => {
         <form className={styleSearch.nav_search}>
           <div>
             <input
+              id="search"
               value={inputValue}
               type="text" 
               placeholder="поиск" 
@@ -64,22 +65,7 @@ export const Search: FC = () => {
             />
           </div>
         </form>
-        <div className={styleSearch.nav_link}>
-          <NavLink 
-            className={({ isActive }) =>
-              isActive ? styleSearch.nav_active : styleSearch.nav_noactive
-            }
-            to="/"
-          >Главное
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? styleSearch.nav_active : styleSearch.nav_noactive
-            }
-            to="/wholelist"
-          >Все игры
-          </NavLink>
-        </div>
+        <CustomBreadcrumbs/>
       </div>
       {openFiltered &&
         <div

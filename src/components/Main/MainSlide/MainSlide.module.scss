@@ -9,14 +9,15 @@
   height: 100%;
   object-fit: cover;
   user-select: none;
+  cursor: pointer;
 }
 .description {
-  @media (max-width: 1000px) {
+  @media (max-width: 1725px) {
     display: none;
   }
-  @media (min-width: 1001px) and (max-width: 1725px) {
-    margin-left: 580px;
-  }
+  // @media (min-width: 1001px) and (max-width: 1725px) {
+  //   margin-left: 580px;
+  // }
   position: absolute;
   margin-left: 997px;
   margin-top: -545px;

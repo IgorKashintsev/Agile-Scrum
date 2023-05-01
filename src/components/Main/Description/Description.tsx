@@ -27,7 +27,7 @@ export const Description: FC = () => {
   }, [idxSlide])
 
   const HandleClick = () => {
-    navigate(`/${items.get(idxSlide)?.id}`)
+    navigate(`/wholelist/${items.get(idxSlide)?.id}`)
   };
 
   return(
@@ -99,7 +99,7 @@ export const Description: FC = () => {
               >Рейтинг:
                 <Rating
                   name="text-feedback"
-                  value={ratingValue.find(item => item.id === idxSlide)?.rating}
+                  value={ratingValue.find(item => item.id === idxSlide)?.rating ?? null}
                   readOnly
                   precision={0.1}
                   sx={{ ml: 0.5 }}
