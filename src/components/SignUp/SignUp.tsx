@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import style from '../../global.module.scss';
 import styleSignUp from './SignUp.module.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { addNewUser } from "../../store/users/actions";
-import { onIsAuth, onLoginAuth } from "../../store/auth/actions";
-import { StoreState } from "../../store";
+import { addNewUser } from "src/store/users/actions";
+import { onLoginAuth } from "src/store/auth/slice";
+import { selectUsers } from "src/store/users/selectors";
 
 export const SignUp: FC = () => {
   const [newLogin, setNewLogin] = useState('');
@@ -15,7 +15,7 @@ export const SignUp: FC = () => {
   const [errorLog, setErrorLog] = useState(false);
   const [errorPass, setErrorPass] = useState(false);
 
-  const users = useSelector((state: StoreState) => state.users.users);
+  const users = useSelector(selectUsers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,12 +24,11 @@ export const SignUp: FC = () => {
     setErrorLog(false);
     setErrorPass(false);
     if(!users.has(newLogin) && newPassword === confirmPass) {
-      dispatch(onLoginAuth(newLogin));
+      dispatch(onLoginAuth({loginAuth: newLogin, isAuth: true}));
       dispatch(addNewUser(
         newLogin, 
         {password: confirmPass, favorites: [], basket: []}
       ));
-      dispatch(onIsAuth(true));
       navigate('/');
     } else if(users.has(newLogin)) {
       setErrorLog(true);
@@ -165,8 +164,12 @@ export const SignUp: FC = () => {
             >Создать и войти
           </Button>
         </form>
-        {errorLog && <p className={styleSignUp.error}>Этот логин уже существует</p>}
-        {errorPass && <p className={styleSignUp.error}>Не правильно введен подтверждающий пароль</p>}
+        {errorLog && 
+        <p className={styleSignUp.error}>Этот логин уже существует</p>
+        }
+        {errorPass && 
+        <p className={styleSignUp.error}>Не правильно введен подтверждающий пароль</p>
+        }
       </div>
     </>
   );

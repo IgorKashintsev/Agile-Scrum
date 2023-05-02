@@ -2,8 +2,9 @@
   font-size: 18px;
   margin-top: 10px;
   display: flex;
-  @media (max-width: 599px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
+    margin-left: 12px;
   }
   &_search {
     display: flex;
@@ -18,28 +19,8 @@
     }
     &_close {
       margin-left: -17px;
+      width: 11px;
       cursor: pointer;
-    }
-    &_img {
-      width: 19px;
-      margin-top: 2px;
-      margin-left: 7px;
-      margin-right: 10px;
-    }
-  }
-  &_active {
-    color: #ffffff;
-    margin-left: 10px;
-    @media (max-width: 599px) {
-      margin-left: 0;
-    }
-  }
-  &_noactive {
-    color: #d6d6d6;
-    text-decoration: none;
-    margin-left: 10px;
-    @media (max-width: 599px) {
-      margin-left: 0;
     }
   }
   &_link {

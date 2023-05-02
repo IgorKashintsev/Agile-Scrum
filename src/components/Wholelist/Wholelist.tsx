@@ -1,5 +1,6 @@
 import { 
   Box, 
+  Divider, 
   List, 
   ListItemButton, 
   ListItemText, 
@@ -13,85 +14,80 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate   } from 'react-router-dom';
 import { items } from "../../constants";
 import { Description } from "../Main/Description/Description";
-import { ListPageArr, ListSortArr, PageCount } from "../../types";
+import { ListPageArr, ListSortArr } from "src/types";
 import styleWholelist from './Wholelist.module.scss';
 import style from '../../global.module.scss';
-import { useSelector } from "react-redux";
-import { StoreState } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { selectReviews } from "src/store/reviews/selectors";
+import { onIdxSlide } from "src/store/main/slice";
+import { selectIdxSlide } from "src/store/main/selectors";
+import { selectAverageRating } from "src/store/rating/selectors";
 
 export const Wholelist: FC = () => {
   const [mapList, setMapList] = useState(new Map());
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [listSortArr, setListSortArr] = useState<ListSortArr>([]);
   const pageSize = 10;
-  const [pageCount, setPageCount] = useState<PageCount>();
+  const [pageCount, setPageCount] = useState<number>();
   const [listPageArr, setListPageArr] = useState<ListPageArr>([]);
   const [active, setActive] = useState(false);
+  const [activeBest, setActiveBest] = useState(true);
+  const [activeNew, setActiveNew] = useState(false);
   const [cordinatSelected, setCordinatSelected] = useState<number>();
 
-  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
+  const reviewArr = useSelector(selectReviews);
+  const ratingValue = useSelector(selectAverageRating);
+  const selectedIndex = useSelector(selectIdxSlide);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const bestRef = useRef<HTMLDivElement | any>(null);
-  const newRef = useRef<HTMLDivElement | any>(null);
   const selectedRef = useRef<HTMLDivElement | any>(null);
 
   const handleClickBest = () => {
-    bestRef.current.classList.add(styleWholelist.active);
-    newRef.current.classList.remove(styleWholelist.active);
-    setActive(true);
+    setActiveNew(false);
+    setActiveBest(true);
     setCurrentPage(1);
+    setActive(true);
   };
 
   const handleClickNew = () => {
-    newRef.current.classList.add(styleWholelist.active);
-    bestRef.current.classList.remove(styleWholelist.active);
-    setActive(true);
+    setActiveNew(true);
+    setActiveBest(false);
     setCurrentPage(1);
+    setActive(true);
   };
 
-  const HandleClick = (itemList: number) => {
+  const HandleClick = (item: number) => {
     for (let [key] of items.entries()) {
-      if (key === itemList) {
-        navigate(`/${key.toString()}`)
+      if (key === item) {
+        navigate(`/wholelist/${key.toString()}`)
       }
     }
   };
 
   useEffect(() => {
     for(let i = 0; i < items.size; i++) {
-      if(reviewArr.findIndex(item => item.id === i) !== -1) {
-        let arrFiltered = reviewArr
-          .filter(item => item.id === i)
-          .map(item => item.rating);
-        setMapList(mapList.set
-          (
-            Array.from(items.keys())[i], {rating: Number(((items.get(i)?.rating! + 
-            arrFiltered.reduce((sum, current) => sum! + current!, 0)!) / 
-            (arrFiltered.length + 1)).toFixed(1)), date: items.get(i)?.date}
-          )
-        );
-      } else {
         setMapList(mapList.set
           (
             Array.from(items.keys())[i], 
-            {rating: items.get(i)?.rating, date: items.get(i)?.date}
+            {
+              rating: ratingValue.find(item => item.id === i)?.rating, 
+              date: items.get(i)?.date,
+            }
           )
         );
       }
-    }
   }, [reviewArr]);
 
   useEffect(() => {
     window.scrollTo(0,0);
+    dispatch(onIdxSlide(-1));
   }, [currentPage])
 
   useEffect(() => {
-    setActive(false)
-
-    if(bestRef.current.classList.contains(`${styleWholelist.active}`)) {
+    setActive(false);
+    if(activeBest) {
       setListSortArr([...mapList].sort((a, b) => b[1].rating - a[1].rating));
     } else {
       setListSortArr([...mapList].sort((a, b) => b[1].date - a[1].date));
@@ -109,26 +105,26 @@ export const Wholelist: FC = () => {
       let upLine = selectedRef.current.getBoundingClientRect().top;
       let screenRes = window.screen.availHeight;
       if(screenRes < 1081) {
-        if(upLine > 510 && upLine < 642) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 60);
-        } else if (upLine > 641 && upLine < 773) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 192);
-        } else if (upLine > 772 && upLine < 904) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 324);
-        } else if(upLine > 903 && upLine < 1035) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 456);
+        if(upLine > 510 && upLine <= 643) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 61);
+        } else if (upLine > 643 && upLine <= 776) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 194);
+        } else if (upLine > 776 && upLine <= 909) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 327);
+        } else if(upLine > 909 && upLine <= 1042) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 460);
         } else {
           setCordinatSelected((selectedRef.current.offsetTop) + 72);
         }
       } else if (screenRes > 1080 && screenRes < 1441) {
-        if(upLine > 850 && upLine < 982) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 60);
-        } else if (upLine > 981 && upLine < 1113) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 192);
-        } else if (upLine > 1112 && upLine < 1244) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 324);
-        } else if(upLine > 1243 && upLine < 1375) {
-          setCordinatSelected((selectedRef.current.offsetTop) - 456);
+        if(upLine > 850 && upLine <= 983) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 61);
+        } else if (upLine > 983 && upLine <= 1116) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 194);
+        } else if (upLine > 1116 && upLine <= 1249) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 327);
+        } else if(upLine > 1249 && upLine <= 1382) {
+          setCordinatSelected((selectedRef.current.offsetTop) - 460);
         } else {
           setCordinatSelected((selectedRef.current.offsetTop) + 72);
         }
@@ -150,25 +146,27 @@ export const Wholelist: FC = () => {
             }}
           >
             {(selectedIndex !==-1 && window.screen.availWidth > 1710) && 
-              <Description 
-                idxSlide={selectedIndex? selectedIndex: 0}
-              />
+              <Description />
             }
           </div>
           <Stack spacing={2}>
             <div className={styleWholelist.wholelist_header}>
               <div
-                ref={bestRef}
                 onClick={handleClickBest}
                 style={{cursor: 'pointer'}}
-                className={`${styleWholelist.wholelist_header_group} ${styleWholelist.active}`}
+                className={`
+                  ${styleWholelist.wholelist_header_group} 
+                  ${activeBest ? styleWholelist.active : ''}
+                `}
               >Лучшее
               </div>
               <div
-                ref={newRef}
                 onClick={handleClickNew}
                 style={{cursor: 'pointer'}}
-                className={styleWholelist.wholelist_header_group}
+                className={`
+                  ${styleWholelist.wholelist_header_group} 
+                  ${activeNew ? styleWholelist.active : ''}
+                `}
               >Новинки
               </div>
             </div>
@@ -206,67 +204,69 @@ export const Wholelist: FC = () => {
                 aria-label="secondary mailbox folder"
               >
                 {listPageArr.map((item) => (
-                  <ListItemButton
-                    ref={(selectedIndex === item[0])? selectedRef: null}
-                    selected={selectedIndex === item[0]}
-                    onMouseEnter ={() => setSelectedIndex(item[0])}
-                    onMouseLeave ={() => setSelectedIndex(-1)}
-                    onClick={() => HandleClick(item[0])}
-                    key={item[0]}
-                  >
-                    <div>
-                      <img 
-                        src={(items.get(item[0]))?.images[0]}
-                        className={styleWholelist.wholelist_img}
-                      ></img>
-                    </div>
-                    <div className={styleWholelist.wholelist_name}>
+                  <div key={item[0]}>
+                    <ListItemButton
+                      ref={(selectedIndex === item[0])? selectedRef: null}
+                      selected={selectedIndex === item[0]}
+                      onMouseEnter ={() => dispatch(onIdxSlide(item[0]))}
+                      onMouseLeave ={() => dispatch(onIdxSlide(-1))}
+                      onClick={() => HandleClick(item[0])}
+                    >
+                      <div>
+                        <img 
+                          src={(items.get(item[0]))?.images[0]}
+                          className={styleWholelist.wholelist_img}
+                        ></img>
+                      </div>
+                      <div className={styleWholelist.wholelist_name}>
+                        <ListItemText
+                          sx={{ 
+                            marginLeft: '20px',
+                            [theme.breakpoints.down('sm')]: {
+                              marginLeft: '10px', 
+                            },
+                          }}
+                          primary={(items.get(item[0]))?.name} 
+                          secondary={(items.get(item[0]))?.genre.join(', ')}
+                        />
+                      </div>
                       <ListItemText
                         sx={{ 
-                          marginLeft: '20px',
-                          [theme.breakpoints.down('sm')]: {
-                            marginLeft: '10px', 
+                          textAlign: 'right', 
+                          mr: '50px',
+                          [theme.breakpoints.down('md')]: {
+                            display: 'none',
                           },
                         }}
-                        primary={(items.get(item[0]))?.name} 
-                        secondary={(items.get(item[0]))?.genre.join(', ')}
+                        secondary={(items.get(item[0]))?.date.toLocaleDateString()}
                       />
-                    </div>
-                    <ListItemText
-                      sx={{ 
-                        textAlign: 'right', 
-                        mr: '50px',
-                        [theme.breakpoints.down('md')]: {
-                          display: 'none',
-                        },
-                      }}
-                      secondary={(items.get(item[0]))?.date.toLocaleDateString()}
-                    />
-                    <Rating
-                      name="text-feedback"
-                      value={(mapList.get(item[0]))?.rating}
-                      readOnly
-                      precision={0.1}
-                      sx={{ 
-                        maxWidth: '100px', 
-                        fontSize: '15px',
-                        [theme.breakpoints.down('md')]: {
-                          display: 'none',
-                        },
-                      }}
-                      emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                    />
-                    <ListItemText
-                      sx={{ 
-                        textAlign: 'right',
-                        maxWidth: '110px',
-                        [theme.breakpoints.down('md')]: {
-                          maxWidth: 'none',
-                        },
-                      }}
-                      primary={`${(items.get(item[0]))?.price.toFixed(2)} ₽`}
-                    />
-                  </ListItemButton>
+                      <Rating
+                        name="text-feedback"
+                        value={ratingValue.find(el => el.id === item[0])?.rating ?? null}
+                        readOnly
+                        precision={0.1}
+                        sx={{ 
+                          maxWidth: '100px', 
+                          fontSize: '15px',
+                          [theme.breakpoints.down('md')]: {
+                            display: 'none',
+                          },
+                        }}
+                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                      />
+                      <ListItemText
+                        sx={{ 
+                          textAlign: 'right',
+                          maxWidth: '110px',
+                          [theme.breakpoints.down('md')]: {
+                            maxWidth: 'none',
+                          },
+                        }}
+                        primary={`${(items.get(item[0]))?.price.toFixed(2)} ₽`}
+                      />
+                    </ListItemButton>
+                    <Divider/>
+                  </div>
                 ))}
               </List>
             </Box>

@@ -10,39 +10,32 @@ import styleGamePage from './GamePage.module.scss';
 import { Review } from "./Review/Review";
 import { ReviewsList } from "./ReviewsList/ReviewsList";
 import { useDispatch, useSelector } from "react-redux";
-import { addBasket, addFavorites } from "../../store/users/actions";
-import { StoreState } from "../../store";
+import { addBasket, addFavorites } from "src/store/users/actions";
+import { selectUsers } from "src/store/users/selectors";
+import { selectReviews } from "src/store/reviews/selectors";
+import { selectIsAuth, selectLoginAuth } from "src/store/auth/selectors";
+import { selectAverageRating } from "src/store/rating/selectors";
 
 export const GamePage: FC = () => {
   const {gameId} = useParams();
-  const [ratingValue, setRatingValue] = useState((items.get(Number(gameId)))?.rating);
   const [sizeNavigation, setSizeNavigation] = useState(44);
   
-  const users = useSelector((state: StoreState) => state.users.users);
-  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
-  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
-  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
+  const users = useSelector(selectUsers);
+  const isAuth = useSelector(selectIsAuth);
+  const loginAuth = useSelector(selectLoginAuth);
+  const reviewArr = useSelector(selectReviews);
+  const ratingValue = useSelector(selectAverageRating);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0,0);
-  }, []);
-
-  useEffect(() => {
-    if(reviewArr.findIndex(item => item.id === Number(gameId)) !== -1) {
-      let arrFiltered = reviewArr
-        .filter(item => item.id === Number(gameId))
-        .map(item => item.rating);
-      setRatingValue(
-        Number((((items.get(Number(gameId)))!.rating + 
-        arrFiltered.reduce((sum, current) => sum! + 
-        current!, 0)!) / (arrFiltered.length + 1)).toFixed(1))
-      );
-    }else {
-      setRatingValue((items.get(Number(gameId)))?.rating);
+    if(window.screen.availWidth < 600) {
+      setSizeNavigation(22);
+    } else {
+      setSizeNavigation(44);
     }
-  }, [reviewArr]);
+  }, []);
 
   const handleClickFavorites = (gameId: number) => {
     const favoriteIdx = users.get(loginAuth)?.favorites?.indexOf(gameId);
@@ -65,14 +58,6 @@ export const GamePage: FC = () => {
       return
     }
   };
-  
-  useEffect(() => {
-    if(window.screen.availWidth < 600) {
-      setSizeNavigation(22);
-    } else {
-      setSizeNavigation(44);
-    }
-  }, []);
 
   if (gameId && !items.get(Number(gameId))) {
     return <Navigate to="/" replace />
@@ -163,13 +148,15 @@ export const GamePage: FC = () => {
             >Рейтинг:
               <Rating
                 name="text-feedback"
-                value={ratingValue}
+                value={ratingValue.find(item => item.id === Number(gameId))?.rating ?? null}
                 readOnly
                 precision={0.1}
                 sx={{ ml: 0.5 }}
                 emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
               />
-              <p className={styleGamePage.info_secondary_rating}>{ratingValue} из 5</p>
+              <p 
+                className={styleGamePage.info_secondary_rating}
+              >{ratingValue.find(item => item.id === Number(gameId))?.rating} из 5</p>
             </Box>
             <div className={styleGamePage.info_secondary_div}>
               Жанр: 

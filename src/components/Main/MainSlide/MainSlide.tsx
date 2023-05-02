@@ -4,23 +4,26 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { items } from '../../../constants';
 import { Description } from "../Description/Description";
-import { IdxSlide } from '../../../types';
 import "swiper/scss";
 import "swiper/scss/pagination";
 import "swiper/scss/navigation";
 import styleSlider from './MainSlide.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { onIdxSlide } from 'src/store/main/slice';
+import { selectIdxSlide } from 'src/store/main/selectors';
 
 export const MainSlide: FC = () => {
   const [visible, setVisible] = useState(false);
-  const [idxSlide, setIdxSlide] = useState<IdxSlide>();
   const [sizeNavigation, setSizeNavigation] = useState(44);
 
+  const idxSlide = useSelector(selectIdxSlide);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   
   const swiperRef = useRef<HTMLDivElement | any>(null);
   const mouseEnter = () => {
     swiperRef.current.swiper.autoplay.stop();
-    setIdxSlide(() => swiperRef.current.swiper.realIndex);
+    dispatch(onIdxSlide(swiperRef.current.swiper.realIndex));
     if(window.screen.availWidth > 1000) {
       setVisible(true);
     } else {
@@ -34,7 +37,7 @@ export const MainSlide: FC = () => {
   };
 
   const changeSlide = () => {
-    setIdxSlide(() => swiperRef.current.swiper.realIndex);
+    dispatch(onIdxSlide(swiperRef.current.swiper.realIndex));
   };
 
   useEffect(() => {
@@ -72,7 +75,7 @@ export const MainSlide: FC = () => {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className={styleSlider.swiper}
-          onClick={() => navigate(`/${idxSlide}`)}
+          onClick={() => navigate(`/wholelist/${idxSlide}`)}
         >
           <SwiperSlide className={styleSlider.swiper_slide}>
             <img src={items.get(0)?.images[1]} alt="Slide1" />
@@ -96,7 +99,7 @@ export const MainSlide: FC = () => {
         <div
           className={styleSlider.description}
         >
-          {visible && <Description idxSlide={idxSlide? idxSlide: 0}/>}
+          {visible && <Description />}
         </div>
       </div>
     </>

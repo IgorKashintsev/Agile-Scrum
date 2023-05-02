@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { StateUsers } from "../../types";
+import { UsersState } from "../../types";
 import { 
   ADD_NEW_USER, 
   CHANGE_PASS, 
@@ -10,7 +10,7 @@ import {
 } from "./actions";
 import { UsersActions } from "./types";
 
-const initialState: StateUsers = {
+const initialState: UsersState = {
   users: new Map([
     ['Igor', {
         password: '123',
@@ -21,7 +21,7 @@ const initialState: StateUsers = {
   ])
 };
 
-export const usersReducer: Reducer<StateUsers, UsersActions> = (
+export const usersReducer: Reducer<UsersState, UsersActions> = (
   state = initialState, 
   action
 ) => {

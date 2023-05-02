@@ -1,12 +1,11 @@
 import { Box, List, ListItem, Rating } from "@mui/material"
 import { FC, useEffect, useState } from "react"
-import { ReviewObj } from "../../../types";
+import { ReviewObj } from "src/types";
 import userLogo from '../../../../image/user2.png';
 import StarIcon from '@mui/icons-material/Star';
-
 import styleReviewsList from './ReviewsList.module.scss'
 import { useSelector } from "react-redux";
-import { StoreState } from "../../../store";
+import { selectReviews } from "src/store/reviews/selectors";
 
 interface ReviewsListProps {
   gameId: string;
@@ -15,7 +14,7 @@ interface ReviewsListProps {
 export const ReviewsList: FC<ReviewsListProps> = ({gameId}) => {
   const [reviewListArr, setReviewListArr] = useState<ReviewObj[]>([]);
 
-  const reviewArr = useSelector((state: StoreState) => state.reviews.reviews);
+  const reviewArr = useSelector(selectReviews);
 
   useEffect(() => {
     setReviewListArr(reviewArr.filter(item => item.id === Number(gameId)))

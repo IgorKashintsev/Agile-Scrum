@@ -1,6 +1,7 @@
 import { 
   Box, 
   Button, 
+  Divider, 
   List, 
   ListItemButton, 
   ListItemText, 
@@ -12,15 +13,16 @@ import { items } from "../../constants";
 import style from '../../global.module.scss';
 import styleBasket from './Basket.module.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBasket } from "../../store/users/actions";
-import { StoreState } from "../../store";
+import { deleteBasket } from "src/store/users/actions";
+import { selectUsers } from "src/store/users/selectors";
+import { selectIsAuth, selectLoginAuth } from "src/store/auth/selectors";
 
 export const Basket: FC = () => {
   const [sumTotal, setSumTotal] = useState(0);
 
-  const users = useSelector((state: StoreState) => state.users.users);
-  const isAuth = useSelector((state: StoreState) => state.auth.isAuth);
-  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const users = useSelector(selectUsers);
+  const isAuth = useSelector(selectIsAuth);
+  const loginAuth = useSelector(selectLoginAuth);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ export const Basket: FC = () => {
   };
 
   const handleClickGame = (gameId: number) => {
-    navigate(`/${gameId.toString()}`)
+    navigate(`/wholelist/${gameId.toString()}`)
   };
 
   useEffect(() => {
@@ -87,59 +89,61 @@ export const Basket: FC = () => {
               aria-label="secondary mailbox folder"
             >
               {users.get(loginAuth)?.basket.map((item) => (
-                <ListItemButton
-                  className={styleBasket.img}
-                  key={item}
-                >
-                  <div>
-                    <img
-                      src={(items.get(item))?.images[0]}
-                      onClick={() => handleClickGame(item)}
-                    ></img>
-                  </div>
-                  <ListItemText
-                    sx={{ 
-                      marginLeft: '20px',
-                      [theme.breakpoints.down('sm')]: {
-                        marginLeft: '10px',
-                        maxWidth: '110px',
-                      },
-                    }}
-                    primary={(items.get(item))?.name} 
-                  />
-                  <div className={styleBasket.list_price}>
+                <div key={item}>
+                  <ListItemButton
+                    className={styleBasket.img}
+                  >
+                    <div>
+                      <img
+                        src={(items.get(item))?.images[0]}
+                        onClick={() => handleClickGame(item)}
+                      ></img>
+                    </div>
                     <ListItemText
                       sx={{ 
-                        textAlign: "right",
-                        maxWidth: '150px',
+                        marginLeft: '20px',
+                        [theme.breakpoints.down('sm')]: {
+                          marginLeft: '10px',
+                          maxWidth: '110px',
+                        },
                       }}
-                      primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
+                      primary={(items.get(item))?.name} 
                     />
-                    <Button 
-                    type="button"
-                    sx={{
-                      width: "90px",
-                      height: "26px",
-                      fontSize: "11px",
-                      color: "#d6d6d6",
-                      float: 'right',
-                      backgroundColor: "#3b3b3b",
-                      border: "1px solid #757575",
-                      "&:hover":{
-                        color: "rgba(0, 0, 0, 0.87)",
-                        backgroundColor: "#d6d6d6",
-                      },
-                      [theme.breakpoints.down('sm')]: {
-                        width: "64px",
-                        height: "18px",
-                        fontSize: "7px",
-                      },
-                    }}
-                    onClick={() => handleClickDelete(item)}
-                    >удалить
-                  </Button>
-                  </div>
-                </ListItemButton>
+                    <div className={styleBasket.list_price}>
+                      <ListItemText
+                        sx={{ 
+                          textAlign: "right",
+                          maxWidth: '150px',
+                        }}
+                        primary={`${(items.get(item))?.price.toFixed(2)} ₽`}
+                      />
+                      <Button 
+                      type="button"
+                      sx={{
+                        width: "90px",
+                        height: "26px",
+                        fontSize: "11px",
+                        color: "#d6d6d6",
+                        float: 'right',
+                        backgroundColor: "#3b3b3b",
+                        border: "1px solid #757575",
+                        "&:hover":{
+                          color: "rgba(0, 0, 0, 0.87)",
+                          backgroundColor: "#d6d6d6",
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                          width: "64px",
+                          height: "18px",
+                          fontSize: "7px",
+                        },
+                      }}
+                      onClick={() => handleClickDelete(item)}
+                      >удалить
+                    </Button>
+                    </div>
+                  </ListItemButton>
+                  <Divider/>
+                </div>
               ))}
             </List>
           </Box>
@@ -162,7 +166,7 @@ export const Basket: FC = () => {
                   backgroundColor: "#d6d6d6",
                 },
               }}
-              disabled={users.get(loginAuth)!.basket.length < 1}
+              disabled={isAuth ? users.get(loginAuth)!.basket.length < 1 : false}
               >Оформить заказ
             </Button>
           </div>

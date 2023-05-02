@@ -5,8 +5,8 @@ import userLogo from '../../../../image/user2.png';
 import styleReview from './Review.module.scss'
 import { items } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreState } from "../../../store";
-import { addReview } from "../../../store/reviews/actions";
+import { addReview } from "src/store/reviews/slice";
+import { selectLoginAuth } from "src/store/auth/selectors";
 
 interface ReviewProps {
   gameId: string;
@@ -14,10 +14,10 @@ interface ReviewProps {
 
 export const Review: FC<ReviewProps> = ({gameId}) => {
   const [textReview, setTextReview] = useState('');
-  const [value, setValue] = useState<number | null>(0);
+  const [rating, setRating] = useState<number | null>(0);
   const [hover, setHover] = useState(-1);
 
-  const loginAuth = useSelector((state: StoreState) => state.auth.loginAuth);
+  const loginAuth = useSelector(selectLoginAuth);
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -29,7 +29,7 @@ export const Review: FC<ReviewProps> = ({gameId}) => {
         login: loginAuth, 
         review: textReview,
         date: new Date(),
-        rating: value,
+        rating: rating,
       }
     ));
     setTextReview('');
@@ -62,18 +62,18 @@ export const Review: FC<ReviewProps> = ({gameId}) => {
             <div className={styleReview.form_bottom_rating}>
               <Rating
                 name="hover-feedback"
-                value={value}
+                value={rating}
                 precision={0.5}
                 onChange={(_, newValue) => {
-                  setValue(newValue);
+                  setRating(newValue);
                 }}
                 onChangeActive={(_, newHover) => {
                   setHover(newHover);
                 }}
                 emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
               />
-              {value !== null && (
-                <p>{hover !== -1 ? hover : value} из 5</p>
+              {rating !== null && (
+                <p>{hover !== -1 ? hover : rating} из 5</p>
               )}
             </div>
           </div>
@@ -93,7 +93,7 @@ export const Review: FC<ReviewProps> = ({gameId}) => {
                 mt: "12px",
               },
             }}
-            disabled={!(textReview && value !== null && value > 0)}
+            disabled={!(textReview && rating !== null && rating > 0)}
             >Опубликовать
           </Button>
         </div>

@@ -4,15 +4,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import style from '../../global.module.scss';
 import styleSignIn from './SignIn.module.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { onIsAuth, onLoginAuth } from "../../store/auth/actions";
-import { StoreState } from "../../store";
+import { onLoginAuth } from "src/store/auth/slice";
+import { selectUsers } from "src/store/users/selectors";
 
 export const SignIn: FC = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
-  const users = useSelector((state: StoreState) => state.users.users);
+  const users = useSelector(selectUsers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,8 +20,7 @@ export const SignIn: FC = () => {
     ev.preventDefault();
     setError(false);
     if(users.has(login) && users.get(login)?.password === password) {
-      dispatch(onIsAuth(true));
-      dispatch(onLoginAuth(login));
+      dispatch(onLoginAuth({loginAuth: login, isAuth: true}));
       navigate('/');
     } else {
       setError(true);
